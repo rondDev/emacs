@@ -20,3 +20,36 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
+;; Install use-package
+(straight-use-package 'use-package)
+
+(defun rond/load(filepath)
+  (load (expand-file-name
+          (concat user-emacs-directory filepath))))
+
+
+
+;; should only be used if init is longer than 3 lines
+(defun rond/initfile(name)
+  (rond/load (concat "init/" name)))
+
+;; should only be used if config is longer than 3 lines
+(defun rond/configfile(name)
+  (rond/load (concat "config/" name)))
+
+
+
+(use-package general
+             :straight t
+             :config
+             (rond/configfile "general"))
+
+
+(use-package evil
+             :general
+             (rond/leader-keys
+               "w" '(:keymap evil-window-map :wk "window"))
+             :straight t
+             :config
+             (rond/configfile "evil"))
