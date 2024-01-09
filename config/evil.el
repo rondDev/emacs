@@ -1,5 +1,0 @@
-(evil-mode 1)
-(evil-set-initial-state 'messages-buffer-mode 'normal)
-(evil-set-initial-state 'dashboard-mode 'normal)
-(evil-set-initial-state 'magit-diff-mode 'insert)
-(evil-set-initial-state 'eshell-mode 'insert)
