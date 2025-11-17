@@ -1,12 +1,7 @@
-(package! typescript-mode)
+(package! typescript-mode
+  :defer 10)
 
 (package! svelte-ts-mode
+  :defer 10
   :after eglot
   :ensure (:host github :repo "leafOfTree/svelte-ts-mode"))
-
-(package! flyover)
-
-(package! flycheck-eglot
-  :ensure nil
-  :hook (eglot-managed-mode . flycheck-eglot-mode)
-  :custom (flycheck-eglot-exclusive nil))
