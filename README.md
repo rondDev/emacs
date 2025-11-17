@@ -1,35 +1,35 @@
 
 # Table of Contents
 
-1.  [Roadmap](#org2ac8ad0)
-    1.  [Add tempel](#org6f3ec6b)
-        1.  [Figure out if empty file templates are a thing](#orga35c151)
-    2.  [Add more support for languages](#orgbe3bb9a)
-    3.  [Figure out new color scheme](#orgece644a)
+1.  [Roadmap](#org74615b6)
+    1.  [Add tempel](#orgcd73371)
+        1.  [Figure out if empty file templates are a thing](#orgceab2be)
+    2.  [Add more support for languages](#org3fecec7)
+    3.  [Figure out new color scheme](#orge1187ec)
 
 
 
-<a id="org2ac8ad0"></a>
+<a id="org74615b6"></a>
 
 # Roadmap
 
 
-<a id="org6f3ec6b"></a>
+<a id="orgcd73371"></a>
 
 ## DONE Add tempel
 
 
-<a id="orga35c151"></a>
+<a id="orgceab2be"></a>
 
 ### TODO Figure out if empty file templates are a thing
 
 
-<a id="orgbe3bb9a"></a>
+<a id="org3fecec7"></a>
 
 ## TODO Add more support for languages
 
 
-<a id="orgece644a"></a>
+<a id="orge1187ec"></a>
 
 ## TODO Figure out new color scheme
 
