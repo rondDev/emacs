@@ -12,14 +12,17 @@
   ;; ...
 
 
+(package! consult-eglot)
+(package! dumb-jump) ;; dumb-jump is jump to definition for 50+ languages
+(package! eglot)
+(elpaca (eglot-booster :host github :repo "jdtsmith/eglot-booster" :init (eglot-booster-mode 1)))
+(package! flycheck-eglot)
 (package! flymake)
 (package! jsonrpc)
-(package! eglot)
-;; (package! eglot-booster)
-(elpaca (eglot-booster :host github :repo "jdtsmith/eglot-booster" :init (eglot-booster-mode 1)))
-
-(package! flycheck-eglot)
-(package! consult-eglot)
-
 (package! parinfer-rust-mode
   :hook emacs-lisp-mode)
+(package! tempel ;; templates
+  :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
+         ("M-*" . tempel-insert)
+         ("S-C-y" . tempel-insert)))
+(package! tempel-collection)

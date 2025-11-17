@@ -1,9 +1,3 @@
-;; Enable auto completion, configure delay, trigger and quitting
-(after! lsp-mode
-        (add-hook 'web-mode-hook #'lsp))
-;; (after! lsp-ui)
-(after! flycheck)
-        ;; (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
         
 (after! company
         (add-hook 'after-init-hook 'global-company-mode))
@@ -28,9 +22,43 @@
         (add-hook 'completion-at-point-functions #'cape-file)
         (add-hook 'completion-at-point-functions #'cape-elisp-block))
 
+(after! dumb-jump
+        (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+
+(after! flycheck)
+        ;; (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
+
 (after! parinfer-rust-mode
         (setq parinfer-rust-check-before-enable nil
               parinfer-rust-preferred-mode "smart"))
+
+(after! tempel
+  ;; Setup completion at point
+  (defun tempel-setup-capf ()
+    ;; Add the Tempel Capf to `completion-at-point-functions'.  `tempel-expand'
+    ;; only triggers on exact matches. We add `tempel-expand' *before* the main
+    ;; programming mode Capf, such that it will be tried first.
+    (setq-local completion-at-point-functions
+                (cons #'tempel-expand completion-at-point-functions)))
+
+    ;; Alternatively use `tempel-complete' if you want to see all matches.  Use
+    ;; a trigger prefix character in order to prevent Tempel from triggering
+    ;; unexpectly.
+    ;; (setq-local corfu-auto-trigger "/"
+    ;;             completion-at-point-functions
+    ;;             (cons (cape-capf-trigger #'tempel-complete ?/)
+    ;;                   completion-at-point-functions))
+  
+
+  (add-hook 'conf-mode-hook 'tempel-setup-capf)
+  (add-hook 'prog-mode-hook 'tempel-setup-capf)
+  (add-hook 'text-mode-hook 'tempel-setup-capf))
+
+  ;; Optionally make the Tempel templates available to Abbrev,
+  ;; either locally or globally. `expand-abbrev' is bound to C-x '.
+  ;; (add-hook 'prog-mode-hook #'tempel-abbrev-mode)
+  ;; (global-tempel-abbrev-mode)
+        
 
 (load (locate-user-emacs-file "modules/lang/svelte/packages.el"))
 (load (locate-user-emacs-file "modules/lang/svelte/config.el"))

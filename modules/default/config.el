@@ -22,6 +22,12 @@
 (after! evil-surround
   (global-evil-surround-mode 1))
 
+(after! editorconfig
+        (editorconfig-mode 1))
+
+(after! exec-path-from-shell
+        (exec-path-from-shell-initialize))
+
 ;; (after! evil-snipe
 ;;         (evil-snipe-mode +1)
 ;;         (evil-snipe-override-mode +1)
@@ -45,15 +51,12 @@
   (setq completion-category-defaults nil)
   (setq completion-pcm-leading-wildcard t))
 
-(after! marginalia
-  (after! nerd-icons-completion
-    (nerd-icons-completion-mode)
-    (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup)))
-
 (after! projectile
         (projectile-load-known-projects)
         (add-hook 'after-init-hook #'projectile-discover-projects-in-search-path))
 
+(after! persistent-scratch
+        (persistent-scratch-setup-default))
 
 (after! persp-mode
         (setq persp-auto-resume-time 0)
@@ -68,16 +71,10 @@
                        (persp-mode-projectile-bridge-mode 1))
                    t)))
 
-(after! which-key
-        ;; shouldn't be necessary since it's called on first input anyway
-        (setq which-key-idle-delay 0.2)
-        (which-key-mode 1))
-
 (after! smartparens
         (require 'smartparens-config))
 
-(after! rainbow-delimiters
-        (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+(after! wakatime-mode)
 
 (after! avy
         (s-map!

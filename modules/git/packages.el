@@ -1,2 +1,3 @@
-(package! magit)
 (package! forge)
+(package! ghub)
+(package! magit)

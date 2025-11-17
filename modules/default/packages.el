@@ -1,44 +1,47 @@
 ;;; -*- lexical-binding: t -*-
 (package! async)
+
+(package! avy)
+
+(package! consult
+  :defer t)
+
+(package! editorconfig)
+
 (package! evil
  :init
  (setq evil-kill-on-visual-paste nil)
  (setq evil-want-C-u-scroll t)
  (setq evil-want-C-i-jump nil)
  (setq evil-undo-system 'undo-fu))
-(package! undo-fu)
 (package! evil-collection)
 (package! evil-goggles)
 (package! evil-nerd-commenter)
 (package! evil-surround)
 (package! evil-snipe)
+
+(package! exec-path-from-shell)
+
 (package! general)
-(package! vertico)
+
+(package! helpful
+  :defer t)
+
+(package! multi-vterm
+  :defer t)
+
+(package! on)
+
 (package! orderless)
-;; Enable rich annotations using the Marginalia package
-(package! marginalia
-  :init
-  ;; Needs to be called here for some reason
-  (marginalia-mode)
-  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
-  ;; available in the *Completions* buffer, add it to the
-  ;; `completion-list-mode-map'.
-  :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle)))
 
-(package! nerd-icons-completion)
-
-(package! nerd-icons-dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
-
-(package! nerd-icons-ibuffer
-  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
-
+(package! persistent-scratch)
 
 (package! persp-mode
   :init
   (persp-mode))
+
+;; NOTE: Could consider adding popper.
+;; https://github.com/karthink/popper
 
 (package! projectile
   :defer t
@@ -48,28 +51,21 @@
   (add-hook 'after-init-hook 'projectile-mode)
   (add-hook 'after-init-hook #'projectile-discover-projects-in-search-path))
 
-(package! on)
-
-(package! which-key)
-
-(package! transient
-  :defer t)
 (package! rg
   :defer t)
 
 (package! smartparens
   :defer t
   :hook (prog-mode text-mode markdown-mode)) ;; add `smartparens-mode` to these hooks
-  
-(package! rainbow-delimiters)
 
-(package! helpful
+(package! transient
   :defer t)
-(package! consult
-  :defer t)
+
+(package! vertico)
+
+(package! undo-fu)
+
 (package! vterm
   :defer t)
-(package! multi-vterm
-  :defer t)
 
-(package! avy)
+(package! wakatime-mode)
