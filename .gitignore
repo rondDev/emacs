@@ -12,7 +12,10 @@ undo-fu-session/
 var/
 
 .emacs-pid
+.persistent-scratch
+forge-database.sqlite
 history
+org-roam.db
 places
 projectile-bookmarks.eld
 projects
