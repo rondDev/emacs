@@ -50,7 +50,7 @@
 
         (general-define-key
           :states '(visual motion normal)
-          :keymaps 'magit-mode-map
+          :keymaps '(magit-mode-map magit-status-mode)
           "h" 'evil-backward-char
           "j" 'evil-next-visual-line
           "k" 'evil-previous-line
