@@ -192,3 +192,5 @@
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
+
+(set-frame-font "Iosevka Comfy 10" nil t)
