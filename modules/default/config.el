@@ -4,6 +4,15 @@
   ;; make dired async
   (dired-async-mode 1)
   (async-bytecomp-package-mode 1))
+
+(after! auto-sudoedit
+  (auto-sudoedit-mode 1))
+
+(after! avy
+        (s-map!
+         :keymaps '(normal visual motion)
+         "s" #'avy-goto-char))
+
 (setq evil-want-keybinding nil)
 (after! evil
   (evil-mode)
@@ -33,27 +42,11 @@
 ;;         (evil-snipe-override-mode +1)
 ;;         (setq evil-snipe-scope 'buffer))
 
-(after! vertico
-  (setq vertico-cycle t)
-  (setq vertico-count 20)
-  (setq vertico-resize nil)
-  (vertico-mode)
-  (savehist-mode)
-  (setq ido-mode nil)
-  (s-map!
-   :keymaps 'vertico-map
-   "C-h" #'vertico-previous-group
-   "C-l" #'vertico-next-group))
-
 (after! orderless
   (setq completion-styles '(orderless basic))
   (setq completion-category-overrides '((file (styles partial-completion))))
   (setq completion-category-defaults nil)
   (setq completion-pcm-leading-wildcard t))
-
-(after! projectile
-        (projectile-load-known-projects)
-        (add-hook 'after-init-hook #'projectile-discover-projects-in-search-path))
 
 (after! persistent-scratch
         (persistent-scratch-setup-default))
@@ -71,12 +64,27 @@
                        (persp-mode-projectile-bridge-mode 1))
                    t)))
 
+(after! projectile
+        (projectile-load-known-projects)
+        (add-hook 'after-init-hook #'projectile-discover-projects-in-search-path))
+
+
 (after! smartparens
         (require 'smartparens-config))
 
-(after! wakatime-mode)
+(after! vertico
+  (setq vertico-cycle t)
+  (setq vertico-count 20)
+  (setq vertico-resize nil)
+  (vertico-mode)
+  (savehist-mode)
+  (setq ido-mode nil)
+  (s-map!
+   :keymaps 'vertico-map
+   "C-h" #'vertico-previous-group
+   "C-l" #'vertico-next-group))
 
-(after! avy
-        (s-map!
-         :keymaps '(normal visual motion)
-         "s" #'avy-goto-char))
+
+(after! wakatime-mode
+  (global-wakatime-mode))
+
