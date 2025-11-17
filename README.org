@@ -1,5 +1,6 @@
 #+title: Emacs Config from scratch
 #+AUTHOR: rondDev
+#+eval: (add-hook 'after-save-hook #'org-md-export-to-markdown)
 
 * Roadmap
 ** DONE Add tempel
