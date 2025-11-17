@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 (package! async)
 
+(package! auto-sudoedit) ; automatically open with sudo
+
 (package! avy)
 
 (package! consult
@@ -61,9 +63,9 @@
 (package! transient
   :defer t)
 
-(package! vertico)
-
 (package! undo-fu)
+
+(package! vertico)
 
 (package! vterm
   :defer t)
