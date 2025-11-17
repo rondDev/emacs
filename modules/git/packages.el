@@ -1,0 +1,2 @@
+(package! magit)
+(package! forge)
