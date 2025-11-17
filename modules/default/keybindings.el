@@ -47,6 +47,14 @@
           :keymaps 'override
           :states '(normal motion)
           "K" 'eldoc-box-help-at-point))
+
+        (general-define-key
+          :states '(visual motion normal)
+          :keymaps 'magit-mode-map
+          "h" 'evil-backward-char
+          "j" 'evil-next-visual-line
+          "k" 'evil-previous-line
+          "l" 'evil-forward-char)
          
         
         (defvar rond/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
