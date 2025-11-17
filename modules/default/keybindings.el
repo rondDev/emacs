@@ -66,7 +66,8 @@
           "p" '(:keymap rond/projectile-map :wk "projectile")
           "sg" #'consult-ripgrep
           "u" '(:keymap rond/update-map :wk "update/change")
-          "w" '(:keymap evil-window-map :wk "window"))
+          "w" '(:keymap evil-window-map :wk "window")
+          "/" #'multi-vterm-dedicated-toggle) 
 
         (general-define-key
          :states '(normal)
