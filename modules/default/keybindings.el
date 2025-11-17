@@ -77,6 +77,10 @@
           :keymaps 'dired-mode-map
           "n" #'dired-create-empty-file)
 
+        (general-comma
+          :keymaps 'org-mode-map
+          "t" #'org-todo)
+
         (general-define-key
          :keymaps 'rond/buffer-map
          "b" #'switch-to-buffer
