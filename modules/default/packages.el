@@ -64,6 +64,8 @@
   :defer t)
 
 (package! undo-fu)
+(package! undo-fu-session)
+
 
 (package! vertico)
 

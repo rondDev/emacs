@@ -72,6 +72,9 @@
 (after! smartparens
         (require 'smartparens-config))
 
+(after! undo-fu-session
+  (undo-fu-session-global-mode))
+
 (after! vertico
   (setq vertico-cycle t)
   (setq vertico-count 20)
