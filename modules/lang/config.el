@@ -25,6 +25,9 @@
 (after! dumb-jump
         (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+(after! eglot-tempel
+  (eglot-tempel-mode t))
+
 (after! flycheck)
         ;; (add-hook 'flycheck-mode-hook #'flycheck-inline-mode)
 

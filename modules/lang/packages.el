@@ -16,6 +16,8 @@
 (package! dumb-jump) ;; dumb-jump is jump to definition for 50+ languages
 (package! eglot)
 (elpaca (eglot-booster :host github :repo "jdtsmith/eglot-booster" :init (eglot-booster-mode 1)))
+(use-package eglot-tempel)
+
 (package! flycheck-eglot)
 (package! flymake)
 (package! jsonrpc)
