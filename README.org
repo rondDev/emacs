@@ -1,0 +1,8 @@
+#+title: Emacs Config from scratch
+#+AUTHOR: rondDev
+
+* Roadmap
+** TODO Add tempel
+*** TODO Figure out if empty file templates are a thing
+** TODO Add more support for languages
+** TODO Figure out new color scheme
