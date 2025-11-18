@@ -238,6 +238,7 @@
             (set-frame-parameter (selected-frame) 'background-alpha 100)))
 
 ;; (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
+;; TODO: Improve this loading, it's really messy
 (load (expand-file-name "modules/default/keybindings.el" user-emacs-directory))
 (load (expand-file-name "modules/default/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/git/packages.el" user-emacs-directory))
