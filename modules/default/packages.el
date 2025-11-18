@@ -22,24 +22,21 @@
   :config
   (editorconfig-mode 1))
 
-(package! evil-collection
-  :defer 3)
 
-(package! evil-goggles
-  :defer 8)
+(package! evil-collection)
+
+(package! evil-goggles)
 
 (package! evil-nerd-commenter
-  :defer 8
   :config
  (evilnc-default-hotkeys))
 
 (package! evil-surround
-  :defer 8
   :config
  (global-evil-surround-mode 1))
 
-(package! evil-snipe
-  :defer 8)
+(package! evil-snipe)
+
 
 (package! exec-path-from-shell
   :config
