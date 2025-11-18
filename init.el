@@ -201,7 +201,7 @@
 
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
-(setq initial-scratch-message nil)
+;; (setq initial-scratch-message nil)
 
 (add-hook 'emacs-startup-hook (lambda ()
                                 (when (get-buffer-window "*Messages*")
