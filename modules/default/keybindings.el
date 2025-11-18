@@ -79,6 +79,7 @@
  (var! rond/projectile-map (make-sparse-keymap) "Custom keymap for projectile")
  (var! rond/update-map (make-sparse-keymap) "Custom keymap for changing/updating stuff")
 
+ ;; NOTE: Might want to change capitalization of the which-key labels
  (general-spc
    "SPC" #'projectile-find-file
    "b" '(:keymap rond/buffer-map :wk "buffer")
@@ -91,7 +92,8 @@
    "sg" #'consult-ripgrep
    "u" '(:keymap rond/update-map :wk "update/change")
    "w" '(:keymap evil-window-map :wk "window")
-   "/" #'multi-vterm-dedicated-toggle) 
+   "/" #'multi-vterm-dedicated-toggle
+   "," '(:ignore t :wk "local leader")) 
 
  (def!
    :states '(normal)
