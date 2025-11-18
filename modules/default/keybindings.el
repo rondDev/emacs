@@ -83,6 +83,7 @@
    "SPC" #'projectile-find-file
    "b" '(:keymap rond/buffer-map :wk "buffer")
    "f" '(:keymap rond/file-map :wk "file")
+   "g" '(:ignore t :wk "git")
    "gg" '(magit-status :wk "magit")
    "h" '(:keymap rond/helpful-map :wk "helpful")
    "oo" #'dired-jump
