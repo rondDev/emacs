@@ -2,6 +2,7 @@
   :config
   ;; TODO: Add more
   (def!
+    :states '(normal visual motion)
     :prefix ",r"
     "a" '(rustic-cargo-add :wk "cargo add")
     "b" '(rustic-cargo-build :wk "cargo build")
