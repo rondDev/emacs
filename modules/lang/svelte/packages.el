@@ -2,6 +2,5 @@
   :defer 10)
 
 (package! svelte-ts-mode
-  :defer 10
   :after eglot
   :ensure (:host github :repo "leafOfTree/svelte-ts-mode"))
