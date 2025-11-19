@@ -9,7 +9,9 @@
               corfu-auto-trigger "." ;; Custom trigger characters
               corfu-quit-no-match 'separator
               corfu-auto-prefix 2
-              corfu-popupinfo-delay '(0.5 . 0.5))
+              corfu-popupinfo-delay '(0.5 . 0.5)
+              ;; NOTE: Might re-enable soemtime in the future
+              text-mode-ispell-word-completion nil)
  (corfu-popupinfo-mode)
   
  (keymap-set corfu-map "TAB" nil)
