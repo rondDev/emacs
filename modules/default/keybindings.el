@@ -83,6 +83,7 @@
  (general-spc
    "SPC" #'projectile-find-file
    "b" '(:keymap rond/buffer-map :wk "buffer")
+   "e" '(revert-buffer-quick :wk "revert buffer")
    "f" '(:keymap rond/file-map :wk "file")
    "g" '(:ignore t :wk "git")
    "gg" '(magit-status :wk "magit")
