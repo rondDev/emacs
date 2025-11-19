@@ -1,11 +1,6 @@
-(after! web-mode
-        (define-derived-mode svelte-mode web-mode "Svelte")
-        (add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
-        (add-to-list 'eglot-server-programs '(svelte-mode "svelteserver"))
-        (add-hook 'web-mode-hook 'eglot-ensure))
-
-(after! svelte-ts-mode
-        (add-to-list 'eglot-server-programs '(svelte-ts-mode . ("svelteserver" "--stdio"))))
+;; (after! svelte-ts-mode
+;;   (add-to-list 'eglot-server-programs '(svelte-ts-mode . ("svelteserver" "--stdio")))
+;;   (add-hook 'svelte-ts-mode-hook #'web-mode))
 
 (custom-set-faces
  '(flyover-error
@@ -38,6 +33,15 @@
        flyover-debounce-interval 2.0
        flyover-background-lightness 20
        flyover-virtual-line-icon nil))
-        
-(add-hook 'svelte-ts-mode-hook #'eglot-ensure)
+
+;; (defun init-mode-svelte ()
+;;   (define-derived-mode svelte-mode web-mode "Svelte")
+;;   (add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
+;;   (add-to-list 'eglot-server-programs '(svelte-mode . ("typescript-language-server" "--stdio"))))
+
+;; (after! eglot
+;;   (init-mode-svelte))
+  
+
+;; (add-hook 'svelte-ts-mode-hook #'eglot-ensure)
 ;; (add-hook 'svelte-ts-mode-hook #'flycheck-mode)
