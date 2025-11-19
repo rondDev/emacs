@@ -43,8 +43,12 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+(defvar rond/prog-mode-hook nil
+  ;; TODO: Remember to add to this hook
+  "Custom prog mode hook to enable more granular control")
+
 (package! eglot
-  :hook (prog-mode-hook . eglot-ensure))
+  :hook (rond/prog-mode-hook . eglot-ensure))
 
 (elpaca (eglot-booster :host github :repo "jdtsmith/eglot-booster" :after eglot :init (add-hook 'emacs-startup-hook #'eglot-booster-mode)))
 
