@@ -173,4 +173,7 @@
 (package! tree-sitter-langs
   :defer t)
 
+(package! yasnippet
+  :defer t)
+
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/lang/*/*.el")))
