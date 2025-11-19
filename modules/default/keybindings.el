@@ -40,6 +40,7 @@
   (def!
     :states '(normal visual motion)
     "gcc" #'evilnc-comment-or-uncomment-lines
+    "K" #'lsp-ui-doc-glance
     "L" #'evil-end-of-line
     "H" #'evil-first-non-blank
     "C-i" #'evil-jump-forward)
