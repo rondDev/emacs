@@ -170,4 +170,7 @@
 (package! tempel-collection
   :after 'tempel)
 
+(package! tree-sitter-langs
+  :defer t)
+
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/lang/*/*.el")))
