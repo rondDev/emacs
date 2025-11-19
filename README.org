@@ -4,8 +4,14 @@
 # eval: (add-hook 'after-save-hook '(lambda () (when (eq major-mode 'org-mode)(org-md-export-to-markdown))) t t)
 # end:
 
-* Roadmap
-** DONE Add tempel
-*** TODO Figure out if empty file templates are a thing
-** TODO Add more support for languages
-** TODO Figure out new color scheme
+* Emacs config
+This repo serves as my own personal emacs configuration.
+Feel free to use it, but there is no guarantee of stability.
+
+To use:
+#+begin_src bash
+  git clone git@github.com:rondDev/emacs.git ~/.config/emacs
+#+end_src
+
+
+[[file:TODO.org][TODO]]
