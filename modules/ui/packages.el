@@ -19,6 +19,15 @@
 
 (package! eldoc-box)
 
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02
+    git-gutter:added-sign "  "
+    git-gutter:modified-sign "  "
+    git-gutter:deleted-sign "  "))
+
+
 (package! magit-todos
   :after magit
   :config
