@@ -250,3 +250,6 @@
 ;; (add-hook 'after-init-hook #'(set-frame-font "Iosevka Comfy 10" nil t))
 
 ;; (profiler-stop)
+(add-hook 'emacs-startup-hook (lambda ()
+                                (when (get-buffer-window "*scratch*")
+                                  (bury-buffer "*scratch*"))))
