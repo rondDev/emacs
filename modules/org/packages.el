@@ -27,9 +27,7 @@
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode)
   ;; If using org-roam-protocol
-  (require 'org-roam-protocol)
-  (after! general
-    (general)))
+  (require 'org-roam-protocol))
 
 (package! org-modern
   ;; :disabled t
@@ -46,7 +44,6 @@
   (org-agenda-finalize . org-modern-agenda))
 
 (package! org-bullets
-  :hook (org-mode . #'org-bullets-mode)
   :defer t)
 (package! org-ql
   :defer t)
