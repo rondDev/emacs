@@ -65,21 +65,67 @@
   :config
   (eglot-tempel-mode t))
 
+(package! flycheck-popup-tip)
+
 (package! flycheck-eglot
   :after eglot)
 
 (package! flymake
   :defer 10)
 
-(package! flyover)
+(package! flyover
+  :config
+  (setq flyover-debounce-interval 0.1
+    flyover-show-virtual-line nil
+    flyover-show-at-eol t))
 
 (package! flycheck-eglot
+  :after eglot
   :ensure nil
   :hook (eglot-managed-mode . flycheck-eglot-mode)
   :custom (flycheck-eglot-exclusive nil))
 
-(package! jsonrpc
-  :defer 10)
+(package! jsonrpc)
+
+(use-package lsp-mode
+  :ensure t
+  :hook ((js-mode . lsp-deferred)
+         (typescript-mode . lsp-deferred)
+         (svelte-mode . lsp-deferred))
+  :config
+  ;; NOTE: Deno client will fail to start alot of the time
+  ;;       so in that situation, reverting the buffer usually helps
+ (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("deno" "lsp"))
+                    :activation-fn (lsp-activate-on "svelte")
+                    :add-on? t  ; This is the crucial flag
+     :server-id 'deno-for-svelte))
+ (add-to-list 'warning-suppress-log-types '(lsp-mode))
+ (add-to-list 'warning-suppress-types '(lsp-mode))) 
+ 
+  
+(use-package lsp-ui
+  :ensure t
+  :after lsp-mode
+  :hook (lsp-mode . lsp-ui-mode)
+  :custom
+  ;; Sideline configuration
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-sideline-show-diagnostics nil)
+  (lsp-ui-sideline-show-hover t)
+
+  (lsp-ui-doc-position 'at-point)
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-include-signature t)
+  ;; Flycheck integration
+  (lsp-ui-flycheck-list-position 'bottom)
+  :bind
+  (:map lsp-ui-mode-map
+        ("C-c C-j" . lsp-ui-peek-find-definitions)
+    ("C-c i"   . lsp-ui-peek-find-implementation))
+  :config
+  (after! eldoc
+    (setq lsp-eldoc-enable-hover nil)))
   
 
 (package! parinfer-rust-mode
