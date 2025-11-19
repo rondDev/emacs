@@ -49,9 +49,15 @@
   "Custom prog mode hook to enable more granular control")
 
 (package! eglot
-  :hook (rond/prog-mode-hook . eglot-ensure))
+  :config
+  (add-to-list 'eglot-server-programs
+           '(svelte-mode . ("svelteserver" "--stdio"))))
 
-(elpaca (eglot-booster :host github :repo "jdtsmith/eglot-booster" :after eglot :init (add-hook 'emacs-startup-hook #'eglot-booster-mode)))
+(elpaca (eglot-booster
+          :host github
+          :repo "https://github.com/jdtsmith/eglot-booster"
+          :after eglot
+          :config (eglot-booster-mode)))
 
 
 (package! eglot-tempel
