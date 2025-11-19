@@ -1,5 +1,4 @@
 (package! company
-  :disabled t
   :hook (after-init . #'global-company-mode))
 (package! corfu
   :init
