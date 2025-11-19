@@ -59,7 +59,6 @@
   (setq completion-pcm-leading-wildcard t))
 
 (package! persistent-scratch
-  :defer 10
   :config
          (persistent-scratch-setup-default))
 
