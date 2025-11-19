@@ -1,5 +1,8 @@
 #+TITLE: Todo for emacs config
 #+AUTHOR: rondDev
+# Local variables:
+# eval: (add-hook 'after-save-hook '(lambda () (when (eq major-mode 'org-mode)(org-md-export-to-markdown))) t t)
+# end:
 
 * TODO Fix web-mode
 * TODO Add more support for languages
