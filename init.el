@@ -185,7 +185,8 @@
       backup-by-copying t
       frame-inhibit-implied-resize t
       ediff-window-setup-function 'ediff-setup-windows-plain
-      custom-file (expand-file-name "custom.el" user-emacs-directory))
+  custom-file (expand-file-name "custom.el" user-emacs-directory)
+  read-process-output-max (* 32 1024 1024))
 
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
