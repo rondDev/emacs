@@ -77,8 +77,7 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (package! page-break-lines
-  :init
-  (add-hook 'emacs-startup-hook #'page-break-lines-mode))
+  :hook (emacs-startup-hook . global-page-break-lines-mode))
 
 (package! pulsar
   :defer 6
