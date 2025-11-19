@@ -1,0 +1,8 @@
+#+TITLE: Todo for emacs config
+#+AUTHOR: rondDev
+
+* TODO Fix web-mode
+* TODO Add more support for languages
+* TODO Figure out new color scheme
+* TODO Evil
+** TODO Fix org mode keybind <RET> -> follow at point
