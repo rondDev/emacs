@@ -85,7 +85,8 @@ buffer called \"*scratch* (NAME)\"."
   ;; :defer 3
   :init
   (setq projectile-project-search-path '("~/external/" "~/internal/" "~/code" "~/.config" ("~/projects" . 2))
-        projectile-enable-caching t)
+        projectile-enable-caching t
+        projectile-sort-order 'recently-active)
   (add-hook 'emacs-startup-hook 'projectile-mode)
   (add-hook 'emacs-startup-hook #'projectile-discover-projects-in-search-path)
   :config
