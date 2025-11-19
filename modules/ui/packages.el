@@ -132,6 +132,10 @@
   ;; it is very flexible.
   (setq spacious-padding-subtle-mode-line '(:mode-line-active "#37f499" :mode-line-inactive shadow)))
 
+(package! unicode-fonts
+  :init
+  (add-hook 'emacs-startup-hook #'unicode-fonts-setup))
+
 (package! which-key
   :config
   (setq which-key-idle-delay 0.2)
