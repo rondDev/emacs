@@ -62,25 +62,24 @@
   :config
          (persistent-scratch-setup-default))
 
-(package! persp-mode
-  :defer 5
-  :init
-  (persp-mode)
-  :config
-  (setq persp-auto-resume-time 0)
-  (add-hook 'after-init-hook #'(load (expand-file-name "lisp/projectile-persp.el" user-emacs-directory))
-   (add-hook 'persp-mode-projectile-bridge-mode-hook
-             #'(lambda ()
-                 (if persp-mode-projectile-bridge-mode
-                     (persp-mode-projectile-bridge-find-perspectives-for-all-buffers)
-                   (persp-mode-projectile-bridge-kill-perspectives))))
-   (add-hook 'after-init-hook
-             #'(lambda ()
-                 (persp-mode-projectile-bridge-mode 1))
-             t)))
-
 ;; NOTE: Could consider adding popper.
 ;; https://github.com/karthink/popper
+
+(package! persp-projectile
+  :after (projectile)
+  :config
+  (setq persp-mode-prefix-key "SPC.")
+  (persp-mode))
+
+(package! perspective
+  :config
+ (defun persp-new (name)
+  "Return a perspective named NAME, or create a new one if missing.
+The new perspective will start with only an `initial-major-mode'
+buffer called \"*scratch* (NAME)\"."
+  (or (gethash name (perspectives-hash))
+      (make-persp :name name
+        (persp-reset-windows)))))
 
 (package! projectile
   ;; :defer 3
