@@ -53,8 +53,10 @@
                                           ; https://github.com/tarsius/hl-todo
 
 (package! magit-todos
-  :after 'magit
+  :after magit
   :config
+  (setq magit-todos-ignored-keywords
+   '("DONE"))
   (magit-todos-mode 1)) ; https://github.com/alphapapa/magit-todos
 
 ;; Enable rich annotations using the Marginalia package
