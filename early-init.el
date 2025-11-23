@@ -28,9 +28,9 @@
 ;; doesn't actually need to be set this early but it still makes sense to put it
 ;; here
 ;; TODO: uncomment
-; (unless after-init-time
-;   ;; prevent flash of unstyled modeline at startup
-;   (setq-default mode-line-format nil))
+(unless after-init-time
+  ;;prevent flash of unstyled modeline at startup
+  (setq-default mode-line-format nil))
 
 ;; * Silence lexical binding warning
 ;; don't show warning buffer for; tons of packages are missing it
