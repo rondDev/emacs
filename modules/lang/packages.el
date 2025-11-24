@@ -10,20 +10,10 @@
 (package! corfu
   :disabled t
   :init
-  (global-corfu-mode)
-  :config
- (setq corfu-auto t
-              corfu-auto-delay 0.1
-              corfu-auto-trigger "." ;; Custom trigger characters
-              corfu-quit-no-match 'separator
-              corfu-auto-prefix 2
-              corfu-popupinfo-delay '(0.5 . 0.5)
-              ;; NOTE: Might re-enable soemtime in the future
-              text-mode-ispell-word-completion nil)
- (corfu-popupinfo-mode)
-  
- (keymap-set corfu-map "TAB" nil)
- (keymap-set corfu-map "RET" nil))
+  (global-corfu-mode))
+
+(package! caddyfile-mode
+  :defer 12)
 
 (package! cape
   :init
