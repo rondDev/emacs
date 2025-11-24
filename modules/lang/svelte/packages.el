@@ -1,5 +1,11 @@
-(package! web-mode)
-  
+(package! lsp-tailwindcss
+  :after lsp-mode
+  :init
+  (setq lsp-tailwindcss-add-on-mode t))
+
+(package! web-mode
+  :defer t)
+
 
 (package! typescript-mode
   :defer 10)
