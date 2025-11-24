@@ -100,8 +100,6 @@ buffer called \"*scratch* (NAME)\"."
   (setopt projectile-git-autofetch-notify nil)
   (setopt projectile-git-autofetch-interval 60)
   (setopt projectile-git-autofetch-fetch-args '("--no-progress" "--prune" "--prune-tags")))
-  
-  
 
 
 
@@ -119,7 +117,8 @@ buffer called \"*scratch* (NAME)\"."
 
 (package! undo-fu)
 (package! undo-fu-session
-  :config
+  :hook (text-mode prog-mode)
+  :init
   (undo-fu-session-global-mode))
 
 
