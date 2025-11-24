@@ -3,6 +3,18 @@
   :config
   (global-anzu-mode +1))
 
+(package! colorful-mode
+  ;; :diminish
+  ;; :ensure t ; Optional
+  :defer 5
+  :custom
+  (colorful-use-prefix t)
+  (colorful-only-strings 'only-prog)
+  ;; (css-fontify-colors nil)
+  :config
+  (global-colorful-mode t)
+  (add-to-list 'global-colorful-modes 'helpful-mode))
+
 (package! consult-todo
   :after consult) ; https://github.com/eki3z/consult-todo
 
@@ -101,15 +113,15 @@
   :config
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 
-(package! rainbow-mode
-  :hook (emacs-lisp-mode text-mode lisp-mode)
-  :config
-  (defun prot/rainbow-mode-in-themes ()
-   (when-let ((file (buffer-file-name))
-              ((derived-mode-p 'emacs-lisp-mode))
-              ((string-match-p "-theme" file)))
-     (rainbow-mode 1))))
-   
+;; (package! rainbow-mode
+;;   :hook (emacs-lisp-mode text-mode lisp-mode)
+;;   :config
+;;   (defun prot/rainbow-mode-in-themes ()
+;;     (when-let ((file (buffer-file-name))
+;;                ((derived-mode-p 'emacs-lisp-mode))
+;;                ((string-match-p "-theme" file)))
+;;       (rainbow-mode 1))))
+
 
 
 (package! spacious-padding
