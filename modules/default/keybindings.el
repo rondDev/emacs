@@ -1,159 +1,171 @@
 (after! general
-  (general-evil-setup)
-  (general-auto-unbind-keys)
-  (defalias 'def! 'general-def)
+        (general-evil-setup)
+        (general-auto-unbind-keys)
+        (defalias 'def! 'general-def)
 
-  (general-create-definer general-spc
-    :states '(normal visual)
-    :keymaps 'override
-    :prefix "SPC")
+        (general-create-definer general-spc
+          :states '(normal visual)
+          :keymaps 'override
+          :prefix "SPC")
 
-  (general-create-definer general-cc
-    :states '(normal insert)
-    ;; don’t want prefix in e.g. vterm insert
-    ;; :keymaps 'override
-    :prefix "C-c")
+        (general-create-definer general-cc
+          :states '(normal insert)
+          ;; don’t want prefix in e.g. vterm insert
+          ;; :keymaps 'override
+          :prefix "C-c")
 
-  (general-create-definer general-t
-    :states 'normal
-    :keymaps 'override
-    :prefix "t")
+        (general-create-definer general-t
+          :states 'normal
+          :keymaps 'override
+          :prefix "t")
 
-  (general-create-definer general-r
-    :states 'motion
-    :prefix "r")
+        (general-create-definer general-r
+          :states 'motion
+          :prefix "r")
 
-  ;; TODO rename to something else
-  (general-create-definer general-s
-    :keymaps '(insert normal)
-    :keymaps 'override
-    :prefix "C-t")
+        ;; TODO rename to something else
+        (general-create-definer general-s
+          :keymaps '(insert normal)
+          :keymaps 'override
+          :prefix "C-t")
 
-  (general-create-definer general-m
-    :states 'normal
-    :prefix "m")
+        (general-create-definer general-m
+          :states 'normal
+          :prefix "m")
 
-  (general-create-definer local-def!
-    :states '(normal visual motion)
-    :prefix ",")
+        (general-create-definer comma-def!
+          :states '(normal visual motion)
+          :prefix ",")
 
-  (def!
-    :states '(normal visual motion)
-    "gcc" #'evilnc-comment-or-uncomment-lines
-    "K" #'lsp-ui-doc-glance
-    "L" #'evil-end-of-line
-    "H" #'evil-first-non-blank
-    "C-i" #'evil-jump-forward)
+        (def!
+          :states '(normal visual motion)
+          "gcc" #'evilnc-comment-or-uncomment-lines
+          "K" #'lsp-ui-doc-glance
+          "L" #'evil-end-of-line
+          "H" #'evil-first-non-blank
+          "C-i" #'evil-jump-forward)
 
-  (def!
-    :states '(visual motion)
-    "gc" #'evilnc-comment-or-uncomment-lines)
+        (def!
+          :states '(visual motion)
+          "gc" #'evilnc-comment-or-uncomment-lines)
 
-
-  ;; (after! eldoc
-  ;;   (def!
-  ;;     :keymaps 'override
-  ;;     :states '(normal motion)
-  ;;     "K" 'eldoc-box-help-at-point))
- (def!
-       :package 'corfu
-       :keymaps '(override corfu-map)
-       "C-y" #'corfu-complete)
-
- (def!
-   :keymaps '(magit-mode-map magit-status-mode)
-   "h" 'evil-backward-char
-   "j" 'evil-next-visual-line
-   "k" 'evil-previous-line
-   "l" 'evil-forward-char)
-  ;; (magit-diff-visit-worktree-file &optional OTHER-WINDOW)
-  ;; (magit-diff-visit-file &optional OTHER-WINDOW)
+        (def!
+          :states '(insert)
+          "C-S-v" #'yank)
 
 
-  
- (defalias 'var! 'defvar)
-  
- (var! rond/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
- (var! rond/file-map (make-sparse-keymap) "Custom keymap for file stuff")
- (var! rond/helpful-map (make-sparse-keymap) "Custom keymap for helpful")
- (var! rond/lsp-map (make-sparse-keymap) "Custom keymap for all things lsp")
- (var! rond/projectile-map (make-sparse-keymap) "Custom keymap for projectile")
- (var! rond/update-map (make-sparse-keymap) "Custom keymap for changing/updating stuff")
+        ;; (after! eldoc
+        ;;   (def!
+        ;;     :keymaps 'override
+        ;;     :states '(normal motion)
+        ;;     "K" 'eldoc-box-help-at-point))
+        (def!
+          :package 'corfu
+          :keymaps '(override corfu-map)
+          "C-y" #'corfu-complete)
 
- ;; NOTE: Might want to change capitalization of the which-key labels
- (general-spc
-   "SPC" #'projectile-find-file
-   "b" '(:keymap rond/buffer-map :wk "buffer")
-   "e" '(revert-buffer-quick :wk "revert buffer")
-   "f" '(:keymap rond/file-map :wk "file")
-   "g" '(:ignore t :wk "git")
-   "gg" '(magit-status :wk "magit")
-   "h" '(:keymap rond/helpful-map :wk "helpful")
-   "oo" #'dired-jump
-   "p" '(:keymap rond/projectile-map :wk "projectile")
-   "sg" #'consult-ripgrep
-   "u" '(:keymap rond/update-map :wk "update/change")
-   "w" '(:keymap evil-window-map :wk "window")
-   "/" #'multi-vterm-dedicated-toggle
-   "," '(:ignore t :wk "local leader")) 
-
- (def!
-   :states '(normal)
-   "N" #'dired-create-empty-file)
+        ;; (magit-diff-visit-worktree-file &optional OTHER-WINDOW)
+        ;; (magit-diff-visit-file &optional OTHER-WINDOW)
 
 
- (local-def!
-   :keymaps 'dired-mode-map
-   "n" #'dired-create-empty-file)
+        
+        (defalias 'var! 'defvar)
+        
+        (var! rond/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
+        (var! rond/code-map (make-sparse-keymap) "Custom keymap for code (LSP)")
+        (var! rond/file-map (make-sparse-keymap) "Custom keymap for file stuff")
+        (var! rond/helpful-map (make-sparse-keymap) "Custom keymap for helpful")
+        (var! rond/lsp-map (make-sparse-keymap) "Custom keymap for all things lsp")
+        (var! rond/open-map (make-sparse-keymap) "Custom keymap to open stuff")
+        (var! rond/projectile-map (make-sparse-keymap) "Custom keymap for projectile")
+        (var! rond/update-map (make-sparse-keymap) "Custom keymap for changing/updating stuff")
 
- (local-def!
-   :keymaps 'org-mode-map
-   "t" #'org-todo)
+        ;; NOTE: Might want to change capitalization of the which-key labels
+        (general-spc
+          "SPC" #'projectile-find-file
+          "b" '(:keymap rond/buffer-map :wk "buffer")
+          "c" '(:keymap rond/code-map :wk "buffer")
+          "e" '(revert-buffer-quick :wk "revert buffer")
+          "f" '(:keymap rond/file-map :wk "file")
+          "g" '(:ignore t :wk "git")
+          "gg" '(magit-status :wk "magit")
+          "h" '(:keymap rond/helpful-map :wk "helpful")
+          "o" '(:keymap rond/open-map :wk "open")
+          "oo" #'dired-jump
+          "p" '(:keymap rond/projectile-map :wk "projectile")
+          "sg" #'consult-ripgrep
+          "u" '(:keymap rond/update-map :wk "update/change")
+          "w" '(:keymap evil-window-map :package evil :wk "window")
+          "/" #'projectile-run-vterm
+          "," #'consult-buffer) 
 
- (def!
-   :keymaps 'rond/buffer-map
-   "b" #'switch-to-buffer
-   "i" #'ibuffer)
+        (def!
+          :keymaps 'rond/buffer-map
+          "b" #'switch-to-buffer
+          "i" #'ibuffer)
 
- (def!
-   :keymaps 'rond/file-map
-   "s" #'save-buffer)
+        (def!
+          :keymaps 'rond/code-map
+          "a" #'lsp-execute-code-action)
 
- (def!
-   :keymaps 'rond/helpful-map
-   "c" #'helpful-command
-   "f" #'helpful-function
-   "k" #'helpful-key
-   "m" #'describe-mode
-   "p" #'helpful-at-point
-   ;; Easy to remember since you start macro with q
-   "q" #'helpful-macro
-   "v" #'helpful-variable)
+        (def!
+          :keymaps 'rond/file-map
+          "f" #'find-file
+          "d" #'dired
+          "r" #'rename-file
+          "s" #'save-buffer)
 
- (local-def!
-   :states '(normal visual motion)
-   "l" '(:keymap rond/lsp-map :wk "lsp"))
+        (def!
+          :keymaps 'rond/helpful-map
+          "c" #'helpful-command
+          "f" #'helpful-function
+          "k" #'helpful-key
+          "m" #'describe-mode
+          "p" #'helpful-at-point
+          ;; Easy to remember since you start macro with q
+          "q" #'helpful-macro
+          "v" #'helpful-variable)
 
- (def!
-   :package 'avy
-   :keymaps '(normal visual motion)
-   "s" #'avy-goto-char)
+        (comma-def!
+          "l" '(:keymap rond/lsp-map :wk "lsp"))
 
- (def!
-   :package 'vertico
-   :keymaps 'vertico-map
-   "C-h" #'vertico-previous-group
-   "C-l" #'vertico-next-group)
+        (def!
+          :keymaps 'rond/update-map
+          "t" #'consult-theme)
 
- (def!
-   :keymaps 'rond/projectile-map
-   "a" #'projectile-add-known-project
-   "b" #'projectile-switch-to-buffer
-   "i" #'projectile-ibuffer
-   "p" #'projectile-switch-project)
+        (def!
+          :states '(normal)
+          "N" #'dired-create-empty-file)
 
 
+        (comma-def!
+          :keymaps 'dired-mode-map
+          "n" #'dired-create-empty-file)
 
- (def!
-   :keymaps 'override))
+        (comma-def!
+          :keymaps 'org-mode-map
+          "t" #'org-todo)
+
+        (def!
+          :package 'avy
+          :keymaps '(normal visual motion)
+          "s" #'avy-goto-char)
+
+        (def!
+          :package 'vertico
+          :keymaps 'vertico-map
+          "C-h" #'vertico-previous-group
+          "C-l" #'vertico-next-group)
+
+        (def!
+          :keymaps 'rond/projectile-map
+          "a" #'projectile-add-known-project
+          "b" #'projectile-switch-to-buffer
+          "i" #'projectile-ibuffer
+          "p" #'projectile-switch-project)
+
+
+
+        (def!
+          :keymaps 'override))
 
