@@ -11,8 +11,12 @@
 ;;;###autoload
 (defalias 'package! 'use-package)
 
-;; Needed for maxing contrast
-(package! ct)
+;; Thanks https://blog.meain.io/2020/emacs-highlight-yanked/
+(defun rond/evil-yank-advice (orig-fn beg end &rest args)
+  (pulse-momentary-highlight-region beg end)
+  (apply orig-fn beg end args))
+
+(advice-add 'evil-yank :around 'rond/evil-yank-advice)
 
 (defvar rond/todo-patterns nil)
 
