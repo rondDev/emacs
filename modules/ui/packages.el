@@ -96,7 +96,7 @@
   (add-to-list 'page-break-lines-modes 'special-mode))
 
 (package! pulsar
-  :defer 6
+  :hook (after-init)
   :config
   (setq pulsar-pulse t)
   (setq pulsar-delay 0.055)
@@ -157,6 +157,7 @@
   (setq spacious-padding-subtle-mode-line '(:mode-line-active "#37f499" :mode-line-inactive shadow)))
 
 (package! unicode-fonts
+  :defer 8
   :init
   (add-hook 'emacs-startup-hook #'unicode-fonts-setup))
 
