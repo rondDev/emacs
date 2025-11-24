@@ -29,6 +29,14 @@
   :config
   (doom-modeline-mode 1))
 
+(package! eldoc
+  :ensure nil
+  :config
+  (add-to-list 'display-buffer-alist
+               '("^\\*eldoc" ; Match the buffer name, which changes based on context
+                 display-buffer-at-bottom
+                 (window-height . 6)))) ; Optionally set width (as a fraction of frame or specific number of columns)
+
 (package! eldoc-box)
 
 (use-package git-gutter
