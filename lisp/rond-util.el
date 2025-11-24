@@ -108,4 +108,13 @@
 (advice-add 'enable-theme :after #'rond/todo-update-highlights)
 
 
+;;;###autoload
+(defun sudo-remote-find-file (file)
+  "Opens repote FILE with root privileges."
+  (interactive "FFind file: ")
+  (setq begin (replace-regexp-in-string  "scp" "ssh" (car (split-string file ":/"))))
+  (setq end (car (cdr (split-string file "@"))))
+  (set-buffer
+   (find-file (format "%s" (concat begin "|sudo:root@" end)))))
+
 (provide 'rond/util)
