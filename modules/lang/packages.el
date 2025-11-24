@@ -33,8 +33,8 @@
 
 (package! direnv
   :defer 10
- :config
- (direnv-mode))
+  :config
+  (direnv-mode))
 
 ;; dumb-jump is jump to definition for 50+ languages
 (package! dumb-jump
@@ -51,10 +51,11 @@
            '(svelte-mode . ("svelteserver" "--stdio"))))
 
 (elpaca (eglot-booster
-          :host github
-          :repo "https://github.com/jdtsmith/eglot-booster"
-          :after eglot
-          :config (eglot-booster-mode)))
+         :host github
+         :repo "https://github.com/jdtsmith/eglot-booster"
+         :after eglot
+         :defer 3
+         :config (eglot-booster-mode)))
 
 
 (package! eglot-tempel
