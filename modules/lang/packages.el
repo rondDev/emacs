@@ -114,22 +114,19 @@
   :custom
   ;; Sideline configuration
   (lsp-ui-sideline-enable t)
-  (lsp-ui-sideline-show-diagnostics nil)
+  (lsp-ui-sideline-show-diagnostics t)
   (lsp-ui-sideline-show-hover t)
 
-  (lsp-ui-doc-position 'at-point)
+  ;; (lsp-ui-doc-position 'at-point)
   (lsp-ui-doc-enable t)
   (lsp-ui-doc-include-signature t)
   ;; Flycheck integration
-  (lsp-ui-flycheck-list-position 'bottom)
+  ;; (lsp-ui-flycheck-list-position 'bottom)
   :bind
   (:map lsp-ui-mode-map
         ("C-c C-j" . lsp-ui-peek-find-definitions)
-    ("C-c i"   . lsp-ui-peek-find-implementation))
-  :config
-  (after! eldoc
-    (setq lsp-eldoc-enable-hover nil)))
-  
+        ("C-c i"   . lsp-ui-peek-find-implementation)))
+
 
 (package! parinfer-rust-mode
   :hook emacs-lisp-mode
