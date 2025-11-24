@@ -1,5 +1,10 @@
-(package! company
-  :hook (after-init . #'global-company-mode))
+;; TODO: Make apheleia use deno for svelte
+(package! apheleia
+  :init
+  (apheleia-global-mode +1))
+
+
+
 (package! company)
 
 (package! corfu
