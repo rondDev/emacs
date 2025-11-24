@@ -169,6 +169,10 @@
 ;;           '(lambda () (interactive)(defadvice split-window (after move-point-to-new-window activate)
 ;;                                      "Moves the point to the newly created window after splitting."
 ;;                                      (other-window 1))))
+
+
+(savehist-mode t)
+
 ;; (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 ;; TODO: Improve this loading, it's really messy
 (load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
