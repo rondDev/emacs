@@ -46,33 +46,6 @@
             (run-with-timer 1 nil (lambda ()
                                     (setq inhibit-message nil)))))
 
-(use-package evil
-  :ensure (:wait t)
- :init
- (setq evil-want-keybinding nil)
- (setq evil-kill-on-visual-paste nil)
- (setq evil-want-C-u-scroll t)
- (setq evil-want-C-i-jump nil)
- (setq evil-undo-system 'undo-fu)
- :config
- (evil-mode)
-   ;; Place the cursor in the new window after a horizontal split
- (setq evil-split-window-below t)
-  ;; Place the cursor in the new window after a vertical split
- (setq evil-vsplit-window-right t)
-
- (after! evil-collection
-   (evil-collection-init)
-   (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes))))
-
-(use-package general
-  :ensure (:wait t))
-
-;;Turns off elpaca-use-package-mode current declaration
-;; NOTE this will cause evaluate the declaration immediately. It is not deferred.
-;;Useful for configuring built-in emacs features.
-(use-package emacs :ensure nil :config (setq ring-bell-function #'ignore))
-
 (add-hook 'emacs-startup-hook #'global-auto-revert-mode)
 (add-hook 'emacs-startup-hook #'global-hl-line-mode) ;; Highlight the current line in all buffers
 (add-hook 'emacs-startup-hook #'save-place-mode)
