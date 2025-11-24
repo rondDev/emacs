@@ -161,6 +161,9 @@
       (format "\\(%s\\)\\|\\(%s\\)"
               vc-ignore-dir-regexp
               tramp-file-name-regexp))
+
+(setq projectile-mode-line "Projectile")
+
 ;; (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 ;; TODO: Improve this loading, it's really messy
 (load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
