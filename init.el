@@ -173,6 +173,9 @@
 
 (savehist-mode t)
 
+(use-package no-littering
+  :after 'savehist)
+
 ;; (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 ;; TODO: Improve this loading, it's really messy
 (load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
