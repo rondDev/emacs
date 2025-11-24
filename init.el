@@ -1,15 +1,17 @@
 ;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
 ;; huge impact to profile-dotemacs results; GC takes up a lot of init time
-;; (profiler-start 'cpu+mem)
-(setq use-package-compute-statistics t)
-(setq custom-safe-themes t)
-(load-theme 'modus-vivendi t)
-(add-to-list 'default-frame-alist '(font . "Iosevka Comfy 10"))
-(setq gc-cons-threshold most-positive-fixnum)
-
 (defvar rond/debug nil
   "Custom debug mode")
   
+;; (trace-function 'run-hooks)
+(defvar rond/after-init-hook nil)
+
+(load-theme 'modus-vivendi t) ; prevent flashbang
+(when rond/debug (profiler-start 'cpu+mem))
+(setq use-package-compute-statistics t) ; analyzes package load times
+(setq custom-safe-themes t)
+(add-to-list 'default-frame-alist '(font . "Iosevka Comfy 14"))
+(setq gc-cons-threshold most-positive-fixnum) ; pls no garbage collection in init
 
 ;; reset gc-cons-threshold
 ;; idle timer suggested by vermiculus
