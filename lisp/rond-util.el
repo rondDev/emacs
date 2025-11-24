@@ -40,6 +40,7 @@
 ;; BUG: It's unreadable in most themes when current line is highlighted
 ;; NOTE: Could this be a macro?
 ;; NOTE: Colors could be updated
+;;;###autoload
 (defun rond/todo-update-patterns ()
   (let ((bg-color (face-attribute 'default :background))
         (todo-color (face-foreground 'warning))
@@ -76,6 +77,7 @@
              (1 '(:background ,warning-color :foreground ,bg-color :weight bold) t)
              (3 '(:background ,warning-color :foreground ,warning-color :weight bold) t))))))
 
+;;;###autoload
 (defun rond/todo-update-highlights (&rest args)
   (dolist (buffer (buffer-list))
     (with-current-buffer buffer
