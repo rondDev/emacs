@@ -96,10 +96,9 @@ buffer called \"*scratch* (NAME)\"."
   (setq projectile-project-search-path '("~/external/" "~/internal/" "~/code" "~/.config" ("~/projects" . 2))
         projectile-enable-caching t
         projectile-sort-order 'recently-active)
-  (add-hook 'emacs-startup-hook 'projectile-mode)
-  (add-hook 'emacs-startup-hook #'projectile-discover-projects-in-search-path)
-  :config
-  (projectile-load-known-projects))
+  (projectile-mode +1)
+  (add-hook 'after-init-hook #'projectile-discover-projects-in-search-path)
+  (add-hook 'after-init-hook #'projectile-load-known-projects))
 
 (package! projectile-git-autofetch
   :after projectile
