@@ -1,15 +1,15 @@
 ;;; -*- lexical-binding: t -*-
 (package! async
   :config
- (autoload 'dired-async-mode "dired-async.el" nil t)
+  (autoload 'dired-async-mode "dired-async.el" nil t)
   ;; make dired async
- (dired-async-mode 1)
- (async-bytecomp-package-mode 1))
+  (dired-async-mode 1)
+  (async-bytecomp-package-mode 1))
 
 (package! auto-sudoedit
   :defer 3
   :config
- (auto-sudoedit-mode 1)) ; automatically open with sudo
+  (auto-sudoedit-mode 1)) ; automatically open with sudo
 
 (package! avy
   :defer 3)
@@ -29,11 +29,11 @@
 
 (package! evil-nerd-commenter
   :config
- (evilnc-default-hotkeys))
+  (evilnc-default-hotkeys))
 
 (package! evil-surround
   :config
- (global-evil-surround-mode 1))
+  (global-evil-surround-mode 1))
 
 (package! evil-snipe)
 
@@ -60,7 +60,7 @@
 
 (package! persistent-scratch
   :config
-         (persistent-scratch-setup-default))
+  (persistent-scratch-setup-default))
 
 ;; NOTE: Could consider adding popper.
 ;; https://github.com/karthink/popper
@@ -73,13 +73,13 @@
 
 (package! perspective
   :config
- (defun persp-new (name)
-  "Return a perspective named NAME, or create a new one if missing.
+  (defun persp-new (name)
+    "Return a perspective named NAME, or create a new one if missing.
 The new perspective will start with only an `initial-major-mode'
 buffer called \"*scratch* (NAME)\"."
-  (or (gethash name (perspectives-hash))
-      (make-persp :name name
-        (persp-reset-windows)))))
+    (or (gethash name (perspectives-hash))
+        (make-persp :name name
+          (persp-reset-windows)))))
 
 (package! projectile
   ;; :defer 3
@@ -102,6 +102,8 @@ buffer called \"*scratch* (NAME)\"."
   (setopt projectile-git-autofetch-fetch-args '("--no-progress" "--prune" "--prune-tags")))
   
   
+
+
 
 (package! rg
   :defer 20)
