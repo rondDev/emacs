@@ -129,12 +129,14 @@ buffer called \"*scratch* (NAME)\"."
   (setq vertico-resize nil)
   (vertico-mode)
   (setq ido-mode nil))
-  
+
 
 (package! vterm
   :defer 15
   :config
- (setq explicit-shell-file-name "/usr/bin/fish"))
+  (setq vterm-timer-delay nil
+        vterm-max-scrollback 50000)) 
+
 
 (package! wakatime-mode
   :config
