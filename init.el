@@ -209,3 +209,9 @@
 
 (when rond/debug (profiler-stop))
 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (package-initialize)
+
+(run-with-idle-timer 5 nil '(lambda () (run-hooks 'rond/after-init-hook)))
