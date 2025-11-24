@@ -30,9 +30,7 @@
 
 
 ;; new way to type y instead of yes
-;; not recommended, but I've never accidentally triggered one-letter
-;; confirmation
-(add-hook 'emacs-startup-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
+(add-hook 'after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
 
 (setq load-prefer-newer t
       ;; TODO check if `vc-follow-symlinks' is needed and works without this
