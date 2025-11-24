@@ -86,13 +86,9 @@
 (add-hook 'emacs-startup-hook (lambda ()
                                 (when (get-buffer-window "*Messages*")
                                   (bury-buffer "*Messages*"))))
-
-; (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name)))
-
-; (load (locate-user-emacs-file "config.el"))
-; (load (locate-user-emacs-file "modules/default/config"))
-; (load (locate-user-emacs-file "modules/default/packages"))
-
+(add-hook 'emacs-startup-hook (lambda ()
+                                (when (get-buffer-window "*scratch*")
+                                  (bury-buffer "*scratch*"))))
 (unless backup-directory-alist
   (defvar rond/tmpdir "/tmp/backup"
     "Temp directory to use")
