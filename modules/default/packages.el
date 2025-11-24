@@ -46,6 +46,8 @@
 
 
 (package! exec-path-from-shell
+  :init
+  (setq exec-path-from-shell-arguments "")
   :config
   (add-hook 'emacs-startup-hook #'exec-path-from-shell-initialize))
 
