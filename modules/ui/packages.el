@@ -20,10 +20,10 @@
 
 (package! dashboard
   :config
- (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
- (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
- (dashboard-setup-startup-hook)
- (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))))
+  (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
+  (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
+  (dashboard-setup-startup-hook)
+  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))))
 
 (package! doom-modeline
   :config
@@ -35,16 +35,16 @@
   :hook (prog-mode . git-gutter-mode)
   :config
   (setq git-gutter:update-interval 0.02
-    git-gutter:added-sign "  "
-    git-gutter:modified-sign "  "
-    git-gutter:deleted-sign "  "))
+        git-gutter:added-sign "  "
+        git-gutter:modified-sign "  "
+        git-gutter:deleted-sign "  "))
 
 
 (package! magit-todos
   :after magit
   :config
   (setq magit-todos-ignored-keywords
-   '("DONE"))
+        '("DONE"))
   (magit-todos-mode 1)) ; https://github.com/alphapapa/magit-todos
 
 ;; Enable rich annotations using the Marginalia package
@@ -53,13 +53,13 @@
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
   :bind (:map minibuffer-local-map
-          ("M-A" . marginalia-cycle))
+              ("M-A" . marginalia-cycle))
   :hook (emacs-startup . marginalia-mode)
   :init)
-  ;; Marginalia must be activated in the :init section of use-package such that
-  ;; the mode gets enabled right away. Note that this forces loading the
-  ;; package.
-  
+;; Marginalia must be activated in the :init section of use-package such that
+;; the mode gets enabled right away. Note that this forces loading the
+;; package.
+
 
 (package! nerd-icons)
 
@@ -72,14 +72,14 @@
 (package! nerd-icons-corfu
   :after corfu
   :init
- (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter
+  (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter
 
-  ;; Optionally:
-  (setq nerd-icons-corfu-mapping
-        '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
-          (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
-          ;; ...
-          (t :style "cod" :icon "code" :face font-lock-warning-face)))))
+               ;; Optionally:
+               (setq nerd-icons-corfu-mapping
+                     '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
+                       (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+                       ;; ...
+                       (t :style "cod" :icon "code" :face font-lock-warning-face)))))
 
 (package! nerd-icons-dired
   :hook
@@ -94,20 +94,20 @@
 (package! pulsar
   :defer 6
   :config
- (setq pulsar-pulse t)
- (setq pulsar-delay 0.055)
- (setq pulsar-iterations 10)
- (setq pulsar-face 'pulsar-magenta)
- (setq pulsar-highlight-face 'pulsar-yellow)
- (add-hook 'minibuffer-setup-hook #'pulsar-pulse-line)
- ;; integration with the `consult' package:
- (add-hook 'consult-after-jump-hook #'pulsar-recenter-top)
- (add-hook 'consult-after-jump-hook #'pulsar-reveal-entry)
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'pulsar-magenta)
+  (setq pulsar-highlight-face 'pulsar-yellow)
+  (add-hook 'minibuffer-setup-hook #'pulsar-pulse-line)
+  ;; integration with the `consult' package:
+  (add-hook 'consult-after-jump-hook #'pulsar-recenter-top)
+  (add-hook 'consult-after-jump-hook #'pulsar-reveal-entry)
 
- ;; integration with the built-in `imenu':
- (add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
- (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
- (pulsar-global-mode 1))
+  ;; integration with the built-in `imenu':
+  (add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
+  (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
+  (pulsar-global-mode 1))
 
 (package! rainbow-delimiters
   :config
