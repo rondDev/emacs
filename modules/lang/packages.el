@@ -59,13 +59,14 @@
 
 
 (package! eglot-tempel
-  :after eglot
-  :config
-  (eglot-tempel-mode t))
+  :defer 3
+  :after eglot)
 
-(package! flycheck-popup-tip)
+(package! flycheck-popup-tip
+  :defer 10)
 
 (package! flycheck-eglot
+  :defer 3
   :after eglot)
 
 (package! flymake
@@ -76,14 +77,18 @@
   (setq flyover-debounce-interval 0.1
     flyover-show-virtual-line nil
     flyover-show-at-eol t))
+  :disabled t
+  :hook (prog-mode))
 
 (package! flycheck-eglot
   :after eglot
+  :defer 3
   :ensure nil
   :hook (eglot-managed-mode . flycheck-eglot-mode)
   :custom (flycheck-eglot-exclusive nil))
 
-(package! jsonrpc)
+(package! jsonrpc
+  :defer 3)
 
 (use-package lsp-mode
   :ensure t
