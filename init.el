@@ -77,6 +77,7 @@
 
 (column-number-mode)
 (setq recentf-auto-cleanup 'never) ;; disable before we start recentf!
+(setq recentf-keep '(file-remote-p file-readable-p))
 (recentf-mode)
 
 (setq inhibit-startup-screen t)
