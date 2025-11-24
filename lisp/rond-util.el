@@ -88,7 +88,13 @@
         (font-lock-flush)))))
 
 ;; Initialize patterns
-(rond/todo-update-patterns)
+(defun rond/todo-initialize ()
+  ;; Needed for maxing contrast
+  (package! ct)
+
+  (rond/todo-update-patterns))
+
+
 
 (define-minor-mode rond/todo-outline-mode
   "Highlight TODOs with theme background for colon."
