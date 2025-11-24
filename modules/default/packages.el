@@ -109,6 +109,7 @@ buffer called \"*scratch* (NAME)\"."
   :defer 20)
 
 (package! smartparens
+  :defer 1
   :hook (prog-mode text-mode markdown-mode)
   :config
   (require 'smartparens-config)) ;; add `smartparens-mode` to these hooks
