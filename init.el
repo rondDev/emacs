@@ -50,18 +50,9 @@
 (add-hook 'emacs-startup-hook #'global-auto-revert-mode)
 (add-hook 'emacs-startup-hook #'global-hl-line-mode) ;; Highlight the current line in all buffers
 (add-hook 'emacs-startup-hook #'save-place-mode)
-;; (save-place-mode 1)
-(push '(menu-bar-lines . 0) default-frame-alist)
-(push '(tool-bar-lines . 0) default-frame-alist)
-(push '(vertical-scroll-bars . nil) default-frame-alist)
-;; (menu-bar-mode -1)
-;; (tool-bar-mode -1)
-;; (scroll-bar-mode -1)
-;; (show-paren-mode 1)
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'show-paren-local-mode))
 
-;; (tooltip-mode -1) ;; Don't display tooltips as popups, use the echo area instead
 (setq-default indent-tabs-mode nil)
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward
