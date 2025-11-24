@@ -41,14 +41,8 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
-(defvar rond/prog-mode-hook nil
-  ;; TODO: Remember to add to this hook
-  "Custom prog mode hook to enable more granular control")
-
 (package! eglot
-  :config
-  (add-to-list 'eglot-server-programs
-           '(svelte-mode . ("svelteserver" "--stdio"))))
+  :defer 3)
 
 (elpaca (eglot-booster
          :host github
@@ -73,10 +67,6 @@
   :defer 10)
 
 (package! flyover
-  :config
-  (setq flyover-debounce-interval 0.1
-    flyover-show-virtual-line nil
-    flyover-show-at-eol t))
   :disabled t
   :hook (prog-mode))
 
@@ -94,19 +84,17 @@
   :ensure t
   :hook ((js-mode . lsp-deferred)
          (typescript-mode . lsp-deferred)
-         (svelte-mode . lsp-deferred))
-  :config
-  ;; NOTE: Deno client will fail to start alot of the time
-  ;;       so in that situation, reverting the buffer usually helps
- (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("deno" "lsp"))
-                    :activation-fn (lsp-activate-on "svelte")
-                    :add-on? t  ; This is the crucial flag
-     :server-id 'deno-for-svelte))
- (add-to-list 'warning-suppress-log-types '(lsp-mode))
- (add-to-list 'warning-suppress-types '(lsp-mode))) 
- 
-  
+         (svelte-mode . lsp-deferred)))
+
+;; TODO: Move or refactor this
+;;;###autoload
+(defun rond/deno-add ()
+  "Run `compile' in the project root with `command'."
+  (interactive)
+  (let ((default-directory (project-root (project-current t))))
+    (let ((r (read-string "Command to run: " "deno add ")))
+      (compile r))))
+
 (use-package lsp-ui
   :ensure t
   :after lsp-mode
@@ -143,6 +131,8 @@
   :defer t)
 
 (package! yasnippet
+  :disabled t
   :defer t)
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/lang/*/*.el")))
+(load (expand-file-name "modules/lang/config.el" user-emacs-directory))
