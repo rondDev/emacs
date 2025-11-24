@@ -207,9 +207,5 @@
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 
-;; (add-hook 'after-init-hook #'(set-frame-font "Iosevka Comfy 10" nil t))
+(when rond/debug (profiler-stop))
 
-;; (profiler-stop)
-(add-hook 'emacs-startup-hook (lambda ()
-                                (when (get-buffer-window "*scratch*")
-                                  (bury-buffer "*scratch*"))))
