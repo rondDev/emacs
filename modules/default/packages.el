@@ -82,7 +82,7 @@ buffer called \"*scratch* (NAME)\"."
           (persp-reset-windows)))))
 
 (package! projectile
-  ;; :defer 3
+  :hook (after-init)
   :init
   (setq projectile-project-search-path '("~/external/" "~/internal/" "~/code" "~/.config" ("~/projects" . 2))
         projectile-enable-caching t
