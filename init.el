@@ -14,7 +14,6 @@
 (setq gc-cons-threshold most-positive-fixnum) ; pls no garbage collection in init
 
 ;; reset gc-cons-threshold
-;; idle timer suggested by vermiculus
 (run-with-idle-timer
  10 nil
  (lambda ()
@@ -23,10 +22,6 @@
    ;; TODO try out different values
    (setq gc-cons-threshold 100000000)
    (when rond/debug (message "gc-cons-threshold restored to %S" gc-cons-threshold))))
-   
-
-(require 'cl-lib)
-
 (cl-pushnew (expand-file-name "lisp" user-emacs-directory)
             load-path :test #'string=)
 
