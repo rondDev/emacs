@@ -24,9 +24,6 @@
    ;; TODO try out different values
    (setq gc-cons-threshold 100000000)
    (when rond/debug (message "gc-cons-threshold restored to %S" gc-cons-threshold))))
-(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "lisp/rond-util.el")))
-(autoload 'after! (expand-file-name "lisp/rond-util.el" user-emacs-directory))
-
 
 ;; new way to type y instead of yes
 (add-hook 'after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
@@ -234,12 +231,17 @@
 
 ;; (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 ;; TODO: Improve this loading, it's really messy
+(load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
+(load (expand-file-name "modules/initial-packages.el" user-emacs-directory))
 (load (expand-file-name "modules/default/keybindings.el" user-emacs-directory))
 (load (expand-file-name "modules/default/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/git/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/lang/packages.el" user-emacs-directory))
-(load (expand-file-name "modules/org/packages.el" user-emacs-directory))
+;; (load (expand-file-name "modules/org/packages.el" user-emacs-directory))
+                                        ; (load (expand-file-name "modules/org.el" user-emacs-directory))
 (load (expand-file-name "modules/ui/packages.el" user-emacs-directory))
+
+
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 
 ;; (add-hook 'after-init-hook #'(set-frame-font "Iosevka Comfy 10" nil t))
