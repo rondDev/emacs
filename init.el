@@ -24,9 +24,6 @@
    ;; TODO try out different values
    (setq gc-cons-threshold 100000000)
    (when rond/debug (message "gc-cons-threshold restored to %S" gc-cons-threshold))))
-(cl-pushnew (expand-file-name "lisp" user-emacs-directory)
-            load-path :test #'string=)
-
 (add-to-list 'load-path (expand-file-name (concat user-emacs-directory "lisp/rond-util.el")))
 (autoload 'after! (expand-file-name "lisp/rond-util.el" user-emacs-directory))
 
