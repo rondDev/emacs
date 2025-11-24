@@ -1,11 +1,12 @@
+
 ;;;###autoload
 (defmacro after! (package &rest body)
-   `(with-eval-after-load ',package ,@body))
+  `(with-eval-after-load ',package ,@body))
 
 ;;;###autoload
 (defmacro s-map! (&rest body)
   "Safe mapping for keybinds"
-   `(after! general (general-define-key ,@body)))
+  `(after! general (general-define-key ,@body)))
 
 ;;;###autoload
 (defalias 'package! 'use-package)
@@ -14,9 +15,11 @@
 (package! ct)
 
 (defvar rond/todo-patterns nil)
-(defun rond/todo-max-contrast (face &optional ratio &rest args)
+
+;;;###autoload
+(defun rond//todo-max-contrast (face &optional ratio &rest args)
   (let ((r (or ratio 4)))
-       (ct-contrast-max (face-foreground face) (face-attribute 'default :background) r))) 
+    (ct-contrast-max (face-foreground face) (face-attribute 'default :background) r))) 
 
 
 ;; TODO: test todo

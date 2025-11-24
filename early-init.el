@@ -35,3 +35,7 @@
 ;; * Silence lexical binding warning
 ;; don't show warning buffer for; tons of packages are missing it
 (setq warning-suppress-types '((files)))
+
+(let (file-name-handler-alist)  ; Temporarily nil
+  ;; startup code runs here
+  ) ; Original value restored when block ends
