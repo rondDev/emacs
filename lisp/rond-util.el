@@ -117,4 +117,13 @@
   (set-buffer
    (find-file (format "%s" (concat begin "|sudo:root@" end)))))
 
+
+(defun rond/compile-from-clipboard ()
+  "Compile from clipboard"
+  (interactive)
+  (let ((command-text (car kill-ring)))
+    (when command-text
+      (setq compile-command command-text)
+      (compile compile-command))))
+
 (provide 'rond/util)
