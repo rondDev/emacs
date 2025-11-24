@@ -45,6 +45,7 @@
           (lambda ()
             (run-with-timer 1 nil (lambda ()
                                     (setq inhibit-message nil)))))
+(setq ring-bell-function #'ignore)
 
 (add-hook 'emacs-startup-hook #'global-auto-revert-mode)
 (add-hook 'emacs-startup-hook #'global-hl-line-mode) ;; Highlight the current line in all buffers
