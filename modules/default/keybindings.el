@@ -59,10 +59,15 @@
         ;;     :keymaps 'override
         ;;     :states '(normal motion)
         ;;     "K" 'eldoc-box-help-at-point))
-        (def!
-          :package 'corfu
-          :keymaps '(override corfu-map)
-          "C-y" #'corfu-complete)
+        ;; (def!
+        ;;   :package 'corfu
+        ;;   :keymaps '(override corfu-map)
+        ;;   "C-y" #'corfu-complete)
+
+        ;; (def!
+        ;;   :package 'company
+        ;;   :keymaps '(override company-map)
+        ;;   "C-y" #'company-complete)
 
         ;; (magit-diff-visit-worktree-file &optional OTHER-WINDOW)
         ;; (magit-diff-visit-file &optional OTHER-WINDOW)
@@ -84,7 +89,7 @@
         (general-spc
           "SPC" #'projectile-find-file
           "b" '(:keymap rond/buffer-map :wk "buffer")
-          "c" '(:keymap rond/code-map :wk "buffer")
+          "c" '(:keymap rond/code-map :wk "code map")
           "e" '(revert-buffer-quick :wk "revert buffer")
           "f" '(:keymap rond/file-map :wk "file")
           "g" '(:ignore t :wk "git")
@@ -106,7 +111,7 @@
 
         (def!
           :keymaps 'rond/code-map
-          "a" #'lsp-execute-code-action)
+          "a" #'lsp-bridge-code-action)
 
         (def!
           :keymaps 'rond/file-map
