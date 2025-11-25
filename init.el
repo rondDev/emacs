@@ -148,17 +148,20 @@
     (remove-hook 'compilation-mode-hook #'tramp-compile-disable-ssh-controlmaster-options)))
 
 
-(setq shell-file-name (executable-find
-                       "fish"))
+(when (file-executable-p "fish")
+  (setq shell-file-name (executable-find
+                         "fish"))
+  (setq-default vterm-shell
+                "/usr/bin/fish")
+  (setq-default explicit-shell-file-name
+                "/usr/bin/fish"))
 
-(setq-default vterm-shell
-              "/usr/bin/fish") (setq-default explicit-shell-file-name)
+
 (setq vterm-eval-cmds '(("find-file" find-file)
                         ("message" message)
                         ("vterm-clear-scrollback" vterm-clear-scrollback)
                         ("dired" dired)
                         ("ediff-files" ediff-files)))
-"/usr/bin/fish"
 (setq vc-ignore-dir-regexp
       (format "\\(%s\\)\\|\\(%s\\)"
               vc-ignore-dir-regexp
