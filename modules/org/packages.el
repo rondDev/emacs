@@ -48,7 +48,7 @@
              ;;(ledger . t)
              (js . t)
              (haskell . t)
-             (http . t)
+             ;; (http . t)
              (perl . t)
              (python . t)
              ;; (gnuplot . t)
@@ -56,7 +56,7 @@
              ;;(php . t)
              (R . t)
              (scheme . t)
-             (sh . t)
+             ;; (sh . t)
              (sql . t)
              (sqlite . t)))))
 
