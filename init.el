@@ -1,7 +1,5 @@
 ;;; init.el -*- lexical-binding: t -*-
 
-;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
-;; huge impact to profile-dotemacs results; GC takes up a lot of init time
 (defvar rond/debug nil
   "Custom debug mode")
   
@@ -12,7 +10,10 @@
 (when rond/debug (profiler-start 'cpu+mem))
 (setq use-package-compute-statistics t) ; analyzes package load times
 (setq custom-safe-themes t)
-(add-to-list 'default-frame-alist '(font . "Iosevka Comfy 14"))
+(add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
+
+;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+;; huge impact to profile-dotemacs results; GC takes up a lot of init time
 (setq gc-cons-threshold most-positive-fixnum) ; pls no garbage collection in init
 
 ;; reset gc-cons-threshold
