@@ -201,7 +201,8 @@
 (load (expand-file-name "modules/default/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/git/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/lang/packages.el" user-emacs-directory))
-;; (load (expand-file-name "modules/org/packages.el" user-emacs-directory))
+(load (expand-file-name "modules/lang/lsp.el" user-emacs-directory))
+(load (expand-file-name "modules/org/packages.el" user-emacs-directory))
                                         ; (load (expand-file-name "modules/org.el" user-emacs-directory))
 (load (expand-file-name "modules/ui/packages.el" user-emacs-directory))
 
