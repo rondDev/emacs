@@ -120,6 +120,7 @@
      ;; do not perform byte compilation or native compilation for lsp-bridge
      :build (:not compile))
   :init
+  (setq lsp-bridge-python-command "python3")
   (global-lsp-bridge-mode)
   (setq lsp-bridge-user-langserver-dir (expand-file-name "modules/lang/lsp-bridge/langserver" user-emacs-directory))
   (setq lsp-bridge-user-multiserver-dir (expand-file-name "modules/lang/lsp-bridge/multiserver" user-emacs-directory)))
@@ -161,6 +162,7 @@
               (cl-remove-if (lambda (item)
                               (equal (car item) '("ts" "tsx")))
                             lsp-bridge-multi-lang-server-extension-list))
+        ;; (setf (alist-get 'typescript-ts-mode 'lsp-bridge-single-lang-server-mode-list)  "deno")
         (add-to-list 'lsp-bridge-single-lang-server-mode-list '((typescript-ts-mode) . "deno"))
         (add-to-list 'lsp-bridge-multi-lang-server-mode-list '((svelte-mode) . "svelte_deno_tailwind"))
         (add-to-list 'lsp-bridge-multi-lang-server-extension-list '(("svelte") . "svelte_deno_tailwind"))
