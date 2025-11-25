@@ -1,9 +1,12 @@
 {
   "name": "javascript",
   "languageId": "javascript",
-  "command": [
-    "typescript-language-server",
-    "--stdio"
-  ],
-  "settings": {}
+  "command": ["deno", "lsp"],
+  "settings": {
+    "deno": {
+      "enable": true,
+      "lint": true,
+      "unstable": true
+    }
+  }
 }
