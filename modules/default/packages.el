@@ -148,4 +148,5 @@ buffer called \"*scratch* (NAME)\"."
 
 (package! wakatime-mode
   :config
-  (global-wakatime-mode))
+  (when (file-executable-p "/usr/sbin/wakatime")
+    (global-wakatime-mode)))
