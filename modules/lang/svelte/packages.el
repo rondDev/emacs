@@ -8,9 +8,11 @@
 
 
 (package! typescript-mode
+  :disabled t
   :defer 10)
 
 (package! svelte-mode
+  :disabled t
   ;; :after eglot
   :mode "\\.svelte\\'"
   :config
