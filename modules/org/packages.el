@@ -1,18 +1,71 @@
 ;;; -*- lexical-binding: t -*-
+(package! evil-org
+  :ensure t
+  :after org
+  :hook (org-mode . (lambda () evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 (package! org
   :defer 4
   :config
+  (comma-def!
+    :keymaps 'org-mode-map
+    :states '(normal visual motion)
+    ",o" #'org-insert-structure-template)
+  (general-spc
+    "oa" #'org-agenda)
   (add-hook 'after-init-hook 'org-mode)
   (add-hook 'after-init-hook #'org-indent-mode)
-  (add-hook 'after-init-hook '(setq org-agenda-files (seq-filter (lambda(x) (not (string-match "\\/.#" x)))
-                                                                 (directory-files-recursively "~/org" "\\.org$"))
-                                    org-directory "~/org")))
+  (setq org-agenda-files (directory-files-recursively "~/org" "\\.org$")
+        org-directory "~/org")
+  (setq org-structure-template-alist
+        '(("s" . "src")
+          ("e" . "src emacs-lisp")
+          ("E" . "src emacs-lisp :results value code :lexical t")
+          ("t" . "src emacs-lisp :tangle FILENAME")
+          ("T" . "src emacs-lisp :tangle FILENAME :mkdirp yes")
+          ("x" . "example")
+          ("X" . "export")
+          ("q" . "quote")))
+  ;; NOTE: Taken from Doom Emacs
+  (setq org-todo-keywords
+        '((sequence "TODO(t!)" "PROJ(p!)" "LOOP(r!)" "STRT(s!)" "WAIT(w!)" "HOLD(h!)" "IDEA(i!)" "|" "DONE(d!)" "KILL(k!)")
+          (sequence "[ ](T!)" "[-](S!)" "[?](W!)" "|" "[X](D!)")
+          (sequence "|" "OKAY(o!)" "YES(y!)" "NO(n!)")))
+  (after! org
+          (org-babel-do-load-languages
+           'org-babel-load-languages
+           '(
+             (awk . t)
+             (calc .t)
+             (C . t)
+             (emacs-lisp . t)
+             (haskell . t)
+             (gnuplot . t)
+             (latex . t)
+             ;;(ledger . t)
+             (js . t)
+             (haskell . t)
+             (http . t)
+             (perl . t)
+             (python . t)
+             ;; (gnuplot . t)
+             ;; org-babel does not currently support php.  That is really sad.
+             ;;(php . t)
+             (R . t)
+             (scheme . t)
+             (sh . t)
+             (sql . t)
+             (sqlite . t)))))
+
 
 (package! org-super-agenda
   :defer t)
 
 (package! org-roam
-  :defer t
+  :after org
   :custom
   (org-roam-directory (file-truename "~/org/roam/"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
@@ -47,3 +100,9 @@
   :defer t)
 (package! org-ql
   :defer t)
+
+(package! org-auto-tangle
+  :after org
+  :defer 3
+  :config
+  (org-auto-tangle-mode))
