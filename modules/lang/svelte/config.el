@@ -35,9 +35,25 @@
 ;;        flyover-virtual-line-icon nil))
 
 ;; (defun init-mode-svelte ()
-;;   (define-derived-mode svelte-mode web-mode "Svelte")
 ;;   (add-to-list 'auto-mode-alist '("\\.svelte\\'" . svelte-mode))
 ;;   (add-to-list 'eglot-server-programs '(svelte-mode . ("typescript-language-server" "--stdio"))))
+
+(rassq-delete-all 'js-mode auto-mode-alist)
+;; (defun init-mode-svelte ())
+(define-derived-mode svelte-mode web-mode "Svelte")
+
+
+(defun rond/file-mode-hook ()
+  (when (stringp buffer-file-name)
+    (progn
+      (when (string-match "\\.svelte\\'" buffer-file-name)
+        ;; (init-mode-svelte)
+        (svelte-mode))
+      ;; TODO: Remove this
+      (when (string-match "\\.ts\\'" buffer-file-name)
+        (typescript-ts-mode)))))
+
+(add-hook 'find-file-hook #'rond/file-mode-hook)
 
 ;; (after! eglot
 ;;   (init-mode-svelte))
