@@ -2,7 +2,6 @@
 
 (defvar rond/debug nil
   "Custom debug mode")
-  
 ;; (trace-function 'run-hooks)
 (defvar rond/after-init-hook nil)
 
@@ -51,6 +50,8 @@
 (add-hook 'emacs-startup-hook #'global-auto-revert-mode)
 (add-hook 'emacs-startup-hook #'global-hl-line-mode) ;; Highlight the current line in all buffers
 (add-hook 'emacs-startup-hook #'save-place-mode)
+
+
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'show-paren-local-mode))
 
@@ -217,3 +218,4 @@
 ;; (package-initialize)
 
 (run-with-idle-timer 5 nil '(lambda () (run-hooks 'rond/after-init-hook)))
+
