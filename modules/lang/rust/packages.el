@@ -1,4 +1,5 @@
 (package! rustic
+  :disabled t
   :mode "\\.rs\\'"
   :config
   ;; TODO: Add more
