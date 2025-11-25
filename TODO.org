@@ -4,8 +4,11 @@
 # eval: (add-hook 'after-save-hook '(lambda () (when (eq major-mode 'org-mode)(org-md-export-to-markdown))) t t)
 # end:
 
-* TODO Fix web-mode
-* TODO Add more support for languages
-* TODO Figure out new color scheme
-* TODO Evil
-** TODO Fix org mode keybind <RET> -> follow at point
+* TODO [1/5] [20%]
+** TODO Fix web-mode
+** TODO Add more support for languages
+** TODO Figure out new color scheme
+** TODO Evil
+*** TODO Fix org mode keybind <RET> -> follow at point
+** KILL Figure out `j` keybind when hovered over flyover error line
+- State "KILL"       from "DONE"       [2025-11-21 Fri 16:45]
