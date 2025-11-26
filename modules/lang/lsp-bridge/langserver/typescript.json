@@ -1,12 +1,9 @@
 {
   "name": "typescript",
   "languageId": "typescript",
-  "command": [
-    "typescript-language-server",
-    "--stdio"
-  ],
+  "command": ["deno", "lsp"],
   "settings": {
-    "typescript":{
+    "typescript": {
       "inlayHints": {
         "includeInlayParameterNameHints": "all",
         "includeInlayParameterNameHintsWhenArgumentMatchesName": true,
@@ -21,7 +18,7 @@
   },
   "initializationOptions": {
     "preferences": {
-	  "includeCompletionsForModuleExports": false
-	}
+      "includeCompletionsForModuleExports": false
+    }
   }
 }
