@@ -121,7 +121,7 @@
      :branch "master"
      :files ("*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
      ;; do not perform byte compilation or native compilation for lsp-bridge
-     :build (:not compile))
+     :build (:not '(elpaca--byte-compile compile)))
   :init
   (setq lsp-bridge-python-command "python3")
   (global-lsp-bridge-mode)
