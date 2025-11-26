@@ -154,3 +154,4 @@
 
 (run-with-idle-timer 5 nil '(lambda () (run-hooks 'rond/after-init-hook)))
 
+;;; init.el ends here
