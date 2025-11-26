@@ -119,66 +119,6 @@
             (set-frame-parameter (selected-frame) 'alpha 100) "100 for fully opaque"
             (set-frame-parameter (selected-frame) 'background-alpha 100)))
 
-
-
-                        ;;; Tramp
-;; TRAMP performance settings
-(setq tramp-use-ssh-controlmaster-options nil) ; Use your SSH config instead
-(setq tramp-default-method "scp")             ; Force SSH method
-(setq password-cache-expiry 3600)             ; Cache passwords longer
-
-;; For faster connection establishment
-(setq tramp-connection-timeout 10)
-(setq tramp-verbose 3) ; Reduce if too verbose, increase for debugging
-(setq remote-file-name-inhibit-locks t
-      tramp-use-scp-direct-remote-copying t
-      remote-file-name-inhibit-auto-save-visited t)
-(setq tramp-copy-size-limit (* 8 1024 1024) ;; 8MB
-      tramp-verbose 2)
-
-(connection-local-set-profile-variables
- 'remote-direct-async-process
- '((tramp-direct-async-process . t)))
-
-(connection-local-set-profiles
- '(:application tramp :protocol "scp")
- 'remote-direct-async-process)
-
-(setq magit-tramp-pipe-stty-settings 'pty)
-
-(with-eval-after-load 'tramp
-  (with-eval-after-load 'compile
-    (remove-hook 'compilation-mode-hook #'tramp-compile-disable-ssh-controlmaster-options)))
-
-
-(when (file-executable-p "/usr/sbin/fish")
-  (setq shell-file-name (executable-find
-                         "fish"))
-  (setq-default vterm-shell
-                "/usr/sbin/fish")
-  (setq-default explicit-shell-file-name
-                "/usr/sbin/fish"))
-
-
-(setq vterm-eval-cmds '(("find-file" find-file)
-                        ("message" message)
-                        ("vterm-clear-scrollback" vterm-clear-scrollback)
-                        ("dired" dired)
-                        ("ediff-files" ediff-files)))
-(setq vc-ignore-dir-regexp
-      (format "\\(%s\\)\\|\\(%s\\)"
-              vc-ignore-dir-regexp
-              tramp-file-name-regexp))
-
-(setq projectile-mode-line "Projectile")
-
-;; ;; NOTE: Does not work for compile mode
-;; (add-hook 'prog-mode-hook 
-;;           '(lambda () (interactive)(defadvice split-window (after move-point-to-new-window activate)
-;;                                      "Moves the point to the newly created window after splitting."
-;;                                      (other-window 1))))
-
-
 (savehist-mode t)
 
 (use-package no-littering
@@ -213,6 +153,7 @@
                                         ; (load (expand-file-name "modules/org.el" user-emacs-directory))
 (load (expand-file-name "modules/ui/packages.el" user-emacs-directory))
 
+(load (expand-file-name "lisp/tramp.el" user-emacs-directory))
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 
