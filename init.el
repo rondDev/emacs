@@ -135,7 +135,6 @@
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; TODO: Improve this loading, it's really messy
-(load (expand-file-name "lisp/doom-dashboard.el" user-emacs-directory))
 (load (expand-file-name "modules/default/keybindings.el" user-emacs-directory))
 (load (expand-file-name "modules/default/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/git/packages.el" user-emacs-directory))
