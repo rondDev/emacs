@@ -8,11 +8,11 @@
           :keymaps 'override
           :prefix "SPC")
 
-        (general-create-definer general-cc
-          :states '(normal insert)
-          ;; don’t want prefix in e.g. vterm insert
-          ;; :keymaps 'override
-          :prefix "C-c")
+        ;; (general-create-definer general-cc
+        ;;   :states '(normal insert)
+        ;;   ;; don’t want prefix in e.g. vterm insert
+        ;;   ;; :keymaps 'override
+        ;;   :prefix "C-c")
 
         (general-create-definer general-t
           :states 'normal
