@@ -3,13 +3,21 @@
 
 (defvar rond/debug nil
   "Custom debug mode")
+(defvar rond//debug-report nil)
 ;; (trace-function 'run-hooks)
 (defvar rond/after-init-hook nil)
 
 (load-theme 'modus-vivendi t) ; prevent flashbang
-(when rond/debug (profiler-start 'cpu+mem))
 (setq use-package-compute-statistics t) ; analyzes package load times
 (setq custom-safe-themes t)
+
+(when rond//debug
+  (profiler-start 'cpu+mem)
+  (add-hook 'elpaca-after-init-hook
+            (lambda () (profiler-stop)
+              (when rond//debug-report (profiler-report))))
+  (toggle-debug-on-error))
+
 (add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
 
 ;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
@@ -24,7 +32,7 @@
    ;; https://github.com/emacs-lsp/lsp-mode#performance
    ;; TODO try out different values
    (setq gc-cons-threshold 100000000)
-   (when rond/debug (message "gc-cons-threshold restored to %S" gc-cons-threshold))))
+     (when rond//debug (message "gc-cons-threshold restored to %S" gc-cons-threshold)))))
 
 ;; new way to type y instead of yes
 (add-hook 'after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
@@ -213,8 +221,6 @@
 
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
-
-(when rond/debug (profiler-stop))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
