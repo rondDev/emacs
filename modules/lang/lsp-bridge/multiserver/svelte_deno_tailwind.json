@@ -2,7 +2,7 @@
   "completion": ["deno", "svelteserver", "tailwindcss"],
   "completion_item_resolve": ["deno", "svelteserver", "tailwindcss"],
   "code_action": ["deno", "svelteserver"],
-  "diagnostics": ["deno", "svelteserver"],
+  "diagnostics": "svelteserver",
   "execute_command": "deno",
   "find_define": ["deno", "svelteserver"],
   "find_type_define": ["deno", "svelteserver"],
@@ -11,14 +11,14 @@
   "peek_find_definition": ["deno", "svelteserver"],
   "peek_find_references": ["deno", "svelteserver"],
   "formatting": ["deno", "svelteserver"],
-  "hover": ["deno", "svelteserver"],
+  "hover": "svelteserver",
   "signature_help": ["deno", "svelteserver"],
   "prepare_rename": ["deno", "svelteserver"],
   "rename": ["deno", "svelteserver"],
-  "document_symbol": ["deno", "svelteserver"],
+  "document_symbol": "svelteserver",
   "workspace_symbol": ["deno", "svelteserver"],
   "semantic_tokens": ["deno", "svelteserver"],
   "inlay_hint": ["deno", "svelteserver"],
   "imenu": ["deno", "svelteserver"],
-  "breadcrumb": ["deno", "svelteserver"]
+  "breadcrumb": "svelteserver"
 }
