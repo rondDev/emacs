@@ -150,8 +150,7 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-;; (package-initialize)
+(advice-add 'package-install :before '(package-initialize))
 
 (run-with-idle-timer 5 nil '(lambda () (run-hooks 'rond/after-init-hook)))
-
 ;;; init.el ends here
