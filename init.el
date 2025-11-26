@@ -148,13 +148,13 @@
     (remove-hook 'compilation-mode-hook #'tramp-compile-disable-ssh-controlmaster-options)))
 
 
-(when (file-executable-p "fish")
+(when (file-executable-p "/usr/sbin/fish")
   (setq shell-file-name (executable-find
                          "fish"))
   (setq-default vterm-shell
-                "/usr/bin/fish")
+                "/usr/sbin/fish")
   (setq-default explicit-shell-file-name
-                "/usr/bin/fish"))
+                "/usr/sbin/fish"))
 
 
 (setq vterm-eval-cmds '(("find-file" find-file)
