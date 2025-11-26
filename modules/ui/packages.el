@@ -20,6 +20,7 @@
 
 ;; NOTE: This is buggy on install for some reason. (recursive call on bookmarks)
 (package! dashboard
+  :disabled t
   :config
   (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
   (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
