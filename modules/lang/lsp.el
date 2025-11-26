@@ -1,3 +1,6 @@
+;;; modules/lang/lsp.el --- Common LSP setup
+;;; Commentary:
+
 ;; ;;;###autoload
 ;; (defun lsp-booster--advice-json-parse (old-fn &rest args)
 ;;   "Try to parse bytecode instead of json."
