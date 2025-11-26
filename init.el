@@ -8,8 +8,6 @@
 (defvar rond/after-init-hook nil)
 
 (load-theme 'modus-vivendi t) ; prevent flashbang
-(setq use-package-compute-statistics t) ; analyzes package load times
-(setq custom-safe-themes t)
 
 (when rond//debug
   (profiler-start 'cpu+mem)
@@ -38,16 +36,10 @@
 (add-hook 'after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
 
 (setq load-prefer-newer t
-      ;; TODO check if `vc-follow-symlinks' is needed and works without this
-      ;; I don't use vc
-      ;; https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
-      ;; https://magit.vc/manual/magit/Performance.html
-      ;; required for `diff-hl'
-      ;; vc-handled-backends nil
-      ;; don't want emacs touching this file
       custom-file (expand-file-name "custom.el" user-emacs-directory)
-      ;; no GUI prompts
-      use-dialog-box nil)
+      use-dialog-box nil ; no gui prompts
+      use-package-compute-statistics t ; analyzes package load times
+      custom-safe-themes t)
 
 ;; get doom mode line flicker and "nil" message otherwise
 (add-hook 'after-init-hook
