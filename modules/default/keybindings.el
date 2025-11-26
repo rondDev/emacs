@@ -175,6 +175,7 @@
         ;;       `evil-collection-magit-use-z-for-folds' is set.
         (def!
           :keymaps '(magit-status-mode override)
+          :states '(normal visual motion)
           "zm" #'evil-close-folds
           "zr" #'evil-open-folds
           "zz" #'evil-scroll-line-to-center)
