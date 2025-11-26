@@ -161,6 +161,16 @@
           :package 'lsp-bridge
           :keymaps '(acm-mode-map)
           "RET" nil)
+
+
+        ;; HACK: this has to be set explicitly even when
+        ;;       `evil-collection-magit-use-z-for-folds' is set.
+        (def!
+          :keymaps '(magit-status-mode override)
+          "zm" #'evil-close-folds
+          "zr" #'evil-open-folds
+          "zz" #'evil-scroll-line-to-center)
+
         (def!
           :package 'vertico
           :keymaps 'vertico-map
