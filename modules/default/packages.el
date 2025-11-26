@@ -24,10 +24,10 @@
 
 
 (package! evil-collection
-  :custom
-  (evil-collection-magit-use-z-for-folds t
-                                         evil-collection-magit-use-y-for-yank t
-                                         evil-collection-setup-minibuffer t)
+  :config
+  (setq evil-collection-magit-use-z-for-folds t
+        evil-collection-magit-use-y-for-yank t
+        evil-collection-setup-minibuffer t)
   :config
   (evil-collection-init)
   (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes)))
