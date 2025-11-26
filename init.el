@@ -121,20 +121,11 @@
 
 (savehist-mode t)
 
+(load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
+(load (expand-file-name "modules/initial-packages.el" user-emacs-directory))
+
 (use-package no-littering
   :after 'savehist)
-
-;; NOTE: Fixes ansi colors in compilation mode
-(ignore-errors
-  (require 'ansi-color)
-  (defun my-colorize-compilation-buffer ()
-    (when (eq major-mode 'compilation-mode)
-      (ansi-color-apply-on-region compilation-filter-start (point-max))))
-  (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
-
-;; (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
-;; TODO: Improve this loading, it's really messy
-(load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
 
 ;; No real effect on startup time
 (use-package benchmark-init
@@ -143,16 +134,15 @@
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-(load (expand-file-name "modules/initial-packages.el" user-emacs-directory))
+;; TODO: Improve this loading, it's really messy
+(load (expand-file-name "lisp/doom-dashboard.el" user-emacs-directory))
 (load (expand-file-name "modules/default/keybindings.el" user-emacs-directory))
 (load (expand-file-name "modules/default/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/git/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/lang/packages.el" user-emacs-directory))
 (load (expand-file-name "modules/lang/lsp.el" user-emacs-directory))
 (load (expand-file-name "modules/org/packages.el" user-emacs-directory))
-                                        ; (load (expand-file-name "modules/org.el" user-emacs-directory))
 (load (expand-file-name "modules/ui/packages.el" user-emacs-directory))
-
 (load (expand-file-name "lisp/tramp.el" user-emacs-directory))
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
