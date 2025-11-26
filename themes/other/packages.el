@@ -8,4 +8,3 @@
 (package! sakura-theme
   :config
   (load-theme 'sakura t))
-
