@@ -158,6 +158,10 @@
           "s" #'avy-goto-char)
 
         (def!
+          :package 'lsp-bridge
+          :keymaps '(acm-mode-map)
+          "RET" nil)
+        (def!
           :package 'vertico
           :keymaps 'vertico-map
           "C-h" #'vertico-previous-group
