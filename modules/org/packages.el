@@ -109,7 +109,8 @@
   (org-agenda-finalize . org-modern-agenda))
 
 (package! org-bullets
-  :defer t)
+  :defer t
+  :hook (org-mode . org-bullets-mode))
 (package! org-ql
   :defer t)
 
