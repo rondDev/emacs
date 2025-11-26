@@ -7,8 +7,17 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
+(package! ob-deno)
+(package! ob-go
+  :ensure (ob-go
+           :host github
+           :repo "pope/ob-go"))
+(package! ob-http)
+(package! ob-rust)
+
 (package! org
   :defer 4
+  :hook (org-mode . org-indent-mode)
   :config
   (comma-def!
     :keymaps 'org-mode-map
@@ -41,20 +50,23 @@
              (awk . t)
              (calc .t)
              (C . t)
+             (deno . ts)
              (emacs-lisp . t)
              (haskell . t)
              (gnuplot . t)
              (latex . t)
              ;;(ledger . t)
              (js . t)
+             (go . t)
              (haskell . t)
-             ;; (http . t)
+             (http . t)
              (perl . t)
              (python . t)
              ;; (gnuplot . t)
              ;; org-babel does not currently support php.  That is really sad.
              ;;(php . t)
              (R . t)
+             (rust . t)
              (scheme . t)
              ;; (sh . t)
              (sql . t)
