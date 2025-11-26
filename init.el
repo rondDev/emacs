@@ -1,4 +1,5 @@
-;;; init.el -*- lexical-binding: t -*-
+;;; init.el --- Initial config -*- lexical-binding: t -*-
+;;; Version: 1.0.0
 
 (defvar rond/debug nil
   "Custom debug mode")
