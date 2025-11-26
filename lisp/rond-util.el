@@ -118,6 +118,7 @@
    (find-file (format "%s" (concat begin "|sudo:root@" end)))))
 
 
+;;;###autoload
 (defun rond/compile-from-clipboard ()
   "Compile from clipboard"
   (interactive)
