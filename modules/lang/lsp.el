@@ -37,12 +37,12 @@
 (package! eglot
   :defer 3)
 
-(elpaca (eglot-booster
-         :host github
-         :repo "https://github.com/jdtsmith/eglot-booster"
-         :after eglot
-         :defer 3
-         :config (eglot-booster-mode)))
+(package! eglot-booster
+  :ensure (eglot-booster :host github
+                         :repo "https://github.com/jdtsmith/eglot-booster")
+  :after eglot
+  :defer 3
+  :config (eglot-booster-mode))
 
 
 (package! eglot-tempel
