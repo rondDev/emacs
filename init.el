@@ -23,14 +23,16 @@
 (setq gc-cons-threshold most-positive-fixnum) ; pls no garbage collection in init
 
 ;; reset gc-cons-threshold
-(run-with-idle-timer
- 10 nil
- (lambda ()
-   ;; (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value)))
-   ;; https://github.com/emacs-lsp/lsp-mode#performance
-   ;; TODO try out different values
-   (setq gc-cons-threshold 100000000)
+(defun rond/reset-gc-value ()
+  (run-with-idle-timer
+   1 nil
+   (lambda ()
+     ;; (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value)))
+     ;; https://github.com/emacs-lsp/lsp-mode#performance
+     ;; TODO try out different values
+     (setq gc-cons-threshold 100000000)
      (when rond//debug (message "gc-cons-threshold restored to %S" gc-cons-threshold)))))
+(add-hook 'elpaca-after-init-hook #'rond/reset-gc-value)
 
 ;; new way to type y instead of yes
 (add-hook 'after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
