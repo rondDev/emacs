@@ -63,7 +63,7 @@
   ;; `completion-list-mode-map'.
   :bind (:map minibuffer-local-map
               ("M-A" . marginalia-cycle))
-  :hook (emacs-startup . marginalia-mode)
+  :hook (elpaca-after-init-hook . marginalia-mode)
   :init)
 ;; Marginalia must be activated in the :init section of use-package such that
 ;; the mode gets enabled right away. Note that this forces loading the
