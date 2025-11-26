@@ -4,16 +4,22 @@ elpa/
 elpaca/
 eshell/
 etc/
+multisession/
 parinfer-rust/
 persp-confs/
 tmp/
 transient/
 tree-sitter/
 undo-fu-session/
+url/
 var/
 
 .emacs-pid
+.lsp-session-v1
+.org-id-locations
 .persistent-scratch
+bookmarks
+custom.el
 forge-database.sqlite
 history
 org-roam.db
