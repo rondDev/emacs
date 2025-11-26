@@ -8,10 +8,26 @@
 This repo serves as my own personal emacs configuration.
 Feel free to use it, but there is no guarantee of stability.
 
+Requirements:
+- Cmake to compile [[https://github.com/akermu/emacs-libvterm][VTerm]]
+- Requirements for [[https://github.com/manateelazycat/lsp-bridge#installation][lsp-bridge]]
+
 To use:
 #+begin_src bash
   git clone git@github.com:rondDev/emacs.git ~/.config/emacs
 #+end_src
 
 
-[[file:TODO.org][TODO]]
+** Resources
+*** Performance
+https://www.reddit.com/r/emacs/comments/4c0mi3/the_biggest_performance_improvement_to_emacs_ive/
+https://magit.vc/manual/magit/Performance.html
+
+
+** Guidelines:
+- Try to utilize elpaca (use-package) to do most of the things.
+- Custom variables and functions will be prefixed with ~rond/~ while internal
+  functions and variables will be prefixed with ~rond//~.
+
+
+** [[file:TODO.org][TODO]]
