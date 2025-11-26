@@ -1,7 +1,7 @@
 ;;; init.el --- Initial config -*- lexical-binding: t -*-
 ;;; Version: 1.0.0
 
-(defvar rond/debug nil
+(defvar rond//debug nil
   "Custom debug mode")
 (defvar rond//debug-report nil)
 ;; (trace-function 'run-hooks)
