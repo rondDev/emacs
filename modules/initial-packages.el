@@ -22,6 +22,7 @@
 (package! general
   :ensure (:wait t))
 
+
 ;;Turns off elpaca-use-package-mode current declaration
 ;; NOTE this will cause evaluate the declaration immediately. It is not deferred.
 ;;Useful for configuring built-in emacs features.
