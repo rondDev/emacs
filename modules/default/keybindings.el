@@ -40,7 +40,7 @@
         (def!
           :states '(normal visual motion)
           "gcc" #'evilnc-comment-or-uncomment-lines
-          "K" #'lsp-ui-doc-glance
+          "K" #'lsp-bridge-popup-documentation
           "L" #'evil-end-of-line
           "H" #'evil-first-non-blank
           "C-i" #'evil-jump-forward)
@@ -111,7 +111,8 @@
 
         (def!
           :keymaps 'rond/code-map
-          "a" #'lsp-bridge-code-action)
+          "a" #'lsp-bridge-code-action
+          "d" #'lsp-bridge-popup-documentation)
 
         (def!
           :keymaps 'rond/file-map
