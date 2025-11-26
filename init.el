@@ -138,14 +138,15 @@
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
 ;; TODO: Improve this loading, it's really messy
-(load (expand-file-name "modules/default/keybindings.el" user-emacs-directory))
-(load (expand-file-name "modules/default/packages.el" user-emacs-directory))
-(load (expand-file-name "modules/git/packages.el" user-emacs-directory))
-(load (expand-file-name "modules/lang/packages.el" user-emacs-directory))
-(load (expand-file-name "modules/lang/lsp.el" user-emacs-directory))
-(load (expand-file-name "modules/org/packages.el" user-emacs-directory))
-(load (expand-file-name "modules/ui/packages.el" user-emacs-directory))
-(load (expand-file-name "lisp/tramp.el" user-emacs-directory))
+(mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
+;; (load (expand-file-name "modules/default/keybindings.el" user-emacs-directory))
+;; (load (expand-file-name "modules/default/packages.el" user-emacs-directory))
+;; (load (expand-file-name "modules/git/packages.el" user-emacs-directory))
+;; (load (expand-file-name "modules/lang/packages.el" user-emacs-directory))
+;; (load (expand-file-name "modules/lang/lsp.el" user-emacs-directory))
+;; (load (expand-file-name "modules/org/packages.el" user-emacs-directory))
+;; (load (expand-file-name "modules/ui/packages.el" user-emacs-directory))
+;; (load (expand-file-name "lisp/tramp.el" user-emacs-directory))
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 
