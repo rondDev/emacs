@@ -18,6 +18,7 @@
 (package! consult-todo
   :after consult) ; https://github.com/eki3z/consult-todo
 
+;; NOTE: This is buggy on install for some reason. (recursive call on bookmarks)
 (package! dashboard
   :config
   (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
