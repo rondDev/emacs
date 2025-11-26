@@ -140,11 +140,31 @@ buffer called \"*scratch* (NAME)\"."
   (setq ido-mode nil))
 
 
+
 (package! vterm
   :defer 15
+  :ensure (vterm :post-build
+                 (progn
+                   (setq vterm-always-compile-module t)
+                   (require 'vterm)
+                   ;;print compilation info for elpaca
+                   (with-current-buffer (get-buffer-create vterm-install-buffer-name)
+                     (goto-char (point-min))
+                     (while (not (eobp))
+                       (message "%S"
+                                (buffer-substring (line-beginning-position)
+                                                  (line-end-position)))
+                       (forward-line)))
+                   (when-let* ((so (expand-file-name "./vterm-module.so"))
+                               ((file-exists-p so)))
+                     (make-symbolic-link
+                      so (expand-file-name (file-name-nondirectory so)
+                                           "../../builds/vterm")
+                      'ok-if-already-exists))))
   :config
   (setq vterm-timer-delay nil
-        vterm-max-scrollback 50000)) 
+        vterm-max-scrollback 50000))
+
 
 
 (package! wakatime-mode
