@@ -34,42 +34,42 @@
 ;;       orig-result)))
 ;; (advice-add 'lsp-resolve-final-command :around #'lsp-booster--advice-final-command)
 
-(package! eglot
-  :defer 3)
+;; (package! eglot
+;;   :defer 3)
 
-(package! eglot-booster
-  :ensure (eglot-booster :host github
-                         :repo "https://github.com/jdtsmith/eglot-booster")
-  :after eglot
-  :defer 3
-  :config (eglot-booster-mode))
+;; (package! eglot-booster
+;;   :ensure (eglot-booster :host github
+;;                          :repo "https://github.com/jdtsmith/eglot-booster")
+;;   :after eglot
+;;   :defer 3
+;;   :config (eglot-booster-mode))
 
 
-(package! eglot-tempel
-  :disabled t
-  :defer 3
-  :after eglot)
+;; (package! eglot-tempel
+;;   :disabled t
+;;   :defer 3
+;;   :after eglot)
 
-(package! flycheck-popup-tip
-  :defer 10)
+;; (package! flycheck-popup-tip
+;;   :defer 10)
 
-(package! flycheck-eglot
-  :defer 3
-  :after eglot)
+;; (package! flycheck-eglot
+;;   :defer 3
+;;   :after eglot)
 
 (package! flymake
   :defer 10)
 
-(package! flyover
-  :disabled t
-  :hook (prog-mode))
+;; (package! flyover
+;;   :disabled t
+;;   :hook (prog-mode))
 
-(package! flycheck-eglot
-  :after eglot
-  :defer 3
-  :ensure nil
-  :hook (eglot-managed-mode . flycheck-eglot-mode)
-  :custom (flycheck-eglot-exclusive nil))
+;; (package! flycheck-eglot
+;;   :after eglot
+;;   :defer 3
+;;   :ensure nil
+;;   :hook (eglot-managed-mode . flycheck-eglot-mode)
+;;   :custom (flycheck-eglot-exclusive nil))
 
 (package! parinfer-rust-mode
   :hook emacs-lisp-mode)
@@ -170,7 +170,7 @@
   ;; (setf (alist-get 'typescript-ts-mode 'lsp-bridge-single-lang-server-mode-list)  "deno")
   (add-to-list 'lsp-bridge-single-lang-server-mode-list '((typescript-ts-mode) . "deno"))
   (add-to-list 'lsp-bridge-single-lang-server-mode-list '((svelte-mode) . "svelteserver"))
-  ;; (add-to-list 'lsp-bridge-single-lang-server-mode-list '((emacs-lisp-mode) . "eask"))
+  (add-to-list 'lsp-bridge-single-lang-server-mode-list '((emacs-lisp-mode) . "ellsp"))
 
   ;; (add-to-list 'lsp-bridge-multi-lang-server-mode-list '((svelte-mode) . "svelte_deno_tailwind"))
   ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list '(("svelte") . "svelte_deno_tailwind"))
