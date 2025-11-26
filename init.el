@@ -127,11 +127,11 @@
 (load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
 (load (expand-file-name "modules/initial-packages.el" user-emacs-directory))
 
-(use-package no-littering
+(package! no-littering
   :after 'savehist)
 
 ;; No real effect on startup time
-(use-package benchmark-init
+(package! benchmark-init
   :ensure t
   :config
   ;; To disable collection of benchmark data after init is done.
@@ -155,7 +155,7 @@
 (advice-add 'package-install :before '(package-initialize))
 
 
-(use-package welcome-dashboard
+(package! welcome-dashboard
   ;; TODO: Change repo URL to upstream once this is merged: https://github.com/konrad1977/welcome-dashboard/pull/14
   :ensure (welcome-dashboard :host github :repo "rondDev/welcome-dashboard")
   :config
