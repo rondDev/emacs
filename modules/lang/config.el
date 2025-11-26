@@ -30,7 +30,8 @@
         (keymap-set corfu-map "RET" nil))
 
 (after! direnv
-        (direnv-mode))
+        (when (executable-find "direnv")
+          (direnv-mode)))
 
 (after! eglot
         (add-to-list 'eglot-server-programs
