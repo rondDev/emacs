@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: rondDev (rond.cc)
+# name: pkg
+# key: package!
+# key: pkg
+# --
+(package! $0)
