@@ -16,7 +16,10 @@
               (when rond//debug-report (profiler-report))))
   (toggle-debug-on-error))
 
-(add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
+(if (string= "rond" (user-login-name))
+    (add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
+  (add-to-list 'default-frame-alist '(font . "Iosevka Comfy 18")))
+
 
 ;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
 ;; huge impact to profile-dotemacs results; GC takes up a lot of init time
