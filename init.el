@@ -151,5 +151,36 @@
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (advice-add 'package-install :before '(package-initialize))
 
-(run-with-idle-timer 5 nil '(lambda () (run-hooks 'rond/after-init-hook)))
+
+(use-package welcome-dashboard
+  ;; TODO: Change repo URL to upstream once this is merged: https://github.com/konrad1977/welcome-dashboard/pull/14
+  :ensure (welcome-dashboard :host github :repo "rondDev/welcome-dashboard")
+  :config
+  (setq welcome-dashboard-latitude 56.7365
+        welcome-dashboard-longitude 16.2981     ;; latitude and longitude must be set to show weather information
+        welcome-dashboard-use-nerd-icons t      ;; Use nerd icons instead of all-the-icons
+        welcome-dashboard-path-max-length 75
+        welcome-dashboard-show-file-path t      ;; Hide or show filepath
+        welcome-dashboard-use-fahrenheit nil    ;; show in celcius or fahrenheit.
+        welcome-dashboard-min-left-padding 10
+        welcome-dashboard-image-file "~/path/yourimage.png"
+        welcome-dashboard-image-width 200
+        welcome-dashboard-image-height 169
+        welcome-dashboard-max-number-of-todos 5
+        welcome-dashboard-title (concat "Welcome " user-full-name))
+  (add-hook 'window-configuration-change-hook #'welcome-dashboard--redisplay-buffer-on-resize)
+  (add-hook 'emacs-startup-hook (lambda ()
+                                  ;; Show dashboard immediately
+                                  (welcome-dashboard--refresh-screen)
+                                  ;; Defer loading of additional data - only weather, no TODOs
+                                  (run-with-idle-timer 2.0 nil #'welcome-dashboard--fetch-weather-data t)
+                                  ;; Update time every minute when dashboard is active
+                                  (run-with-timer 60 60 (lambda () 
+                                                          (when (welcome-dashboard--isActive)
+                                                            (welcome-dashboard--refresh-screen)))))))
+
+
+
+
+(run-hooks 'rond/after-init-hook)
 ;;; init.el ends here
