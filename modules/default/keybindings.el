@@ -150,12 +150,20 @@
 
         (comma-def!
           :keymaps 'org-mode-map
+          "i" #'org-indent-mode
+          "r" '(font-lock-mode :wk "view raw")
           "t" #'org-todo)
 
         (def!
           :package 'avy
           :keymaps '(normal visual motion)
           "s" #'avy-goto-char)
+
+        (def!
+          :package 'org
+          :keymaps '(org-mode-map)
+          :states '(normal)
+          "RET" #'org-goto)
 
         (def!
           :package 'lsp-bridge
