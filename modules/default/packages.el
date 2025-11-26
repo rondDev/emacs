@@ -92,14 +92,14 @@ buffer called \"*scratch* (NAME)\"."
           (persp-reset-windows)))))
 
 (package! projectile
-  :hook (after-init)
+  :hook (emacs-statup)
   :init
   (setq projectile-project-search-path '("~/external/" "~/internal/" "~/code" "~/.config" ("~/projects" . 2))
         projectile-enable-caching t
         projectile-sort-order 'recently-active)
   (projectile-mode +1)
-  (add-hook 'after-init-hook #'projectile-discover-projects-in-search-path)
-  (add-hook 'after-init-hook #'projectile-load-known-projects))
+  (add-hook 'elpaca-after-init-hook #'projectile-discover-projects-in-search-path)
+  (add-hook 'elpaca-after-init-hook #'projectile-load-known-projects))
 
 (package! projectile-git-autofetch
   :after projectile
