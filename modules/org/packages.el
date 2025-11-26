@@ -27,8 +27,9 @@
     "oa" #'org-agenda)
   (add-hook 'after-init-hook 'org-mode)
   (add-hook 'after-init-hook #'org-indent-mode)
-  (setq org-agenda-files (directory-files-recursively "~/org" "\\.org$")
-        org-directory "~/org")
+  (when (file-exists-p "~/org")
+    (setq org-agenda-files (directory-files-recursively "~/org" "\\.org$")
+          org-directory "~/org"))
   (setq org-structure-template-alist
         '(("s" . "src")
           ("e" . "src emacs-lisp")
