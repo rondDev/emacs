@@ -13,6 +13,7 @@ tree-sitter/
 undo-fu-session/
 url/
 var/
+modules/custom/
 
 .emacs-pid
 .lsp-session-v1
