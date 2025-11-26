@@ -166,9 +166,9 @@
         welcome-dashboard-show-file-path t      ;; Hide or show filepath
         welcome-dashboard-use-fahrenheit nil    ;; show in celcius or fahrenheit.
         welcome-dashboard-min-left-padding 10
-        welcome-dashboard-image-file "~/path/yourimage.png"
-        welcome-dashboard-image-width 200
-        welcome-dashboard-image-height 169
+        welcome-dashboard-image-file (expand-file-name "vapor.png" user-emacs-directory)
+        welcome-dashboard-image-width 450
+        welcome-dashboard-image-height 250
         welcome-dashboard-max-number-of-todos 5
         welcome-dashboard-title (concat "Welcome " user-full-name))
   (add-hook 'window-configuration-change-hook #'welcome-dashboard--redisplay-buffer-on-resize)
