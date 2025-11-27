@@ -92,7 +92,7 @@ buffer called \"*scratch* (NAME)\"."
           (persp-reset-windows)))))
 
 (package! projectile
-  :hook (emacs-statup)
+  :hook (elpaca-after-init)
   :init
   (setq projectile-project-search-path '("~/external/" "~/internal/" "~/code" "~/.config" ("~/projects" . 2))
         projectile-enable-caching t
