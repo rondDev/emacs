@@ -27,6 +27,7 @@
      :files ("*.el" "*.py" "acm" "core" "langserver" "multiserver" "resources")
      ;; do not perform byte compilation or native compilation for lsp-bridge
      :build (:not '(elpaca--byte-compile compile)))
+  :hook (prog-mode)
   :init
   (setq lsp-bridge-python-command "python3")
   (setq lsp-bridge-user-langserver-dir (expand-file-name "modules/lang/lsp-bridge/langserver" user-emacs-directory))
