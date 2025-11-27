@@ -18,7 +18,8 @@
   (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
                 evil-collection-magit-use-z-for-folds t
                 evil-collection-magit-section-use-z-for-folds t
-                evil-collection-magit-use-y-for-yank t))
+                evil-collection-magit-use-y-for-yank t)
+  (setq magit-clone-default-directory "~/code/"))
 
 (package! tramp
   :ensure nil
