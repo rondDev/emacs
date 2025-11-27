@@ -59,7 +59,8 @@
 
 (package! yasnippet
   :init
-  (yas-global-mode)
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
   :config
   (def!
     :states '(insert)
