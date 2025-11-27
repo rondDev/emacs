@@ -55,8 +55,8 @@
 (package! helpful
   :defer 10)
 
-(package! multi-vterm
-  :defer 15)
+;; (package! multi-vterm
+;;   :defer 15)
 
 (package! on
   :defer 3)
