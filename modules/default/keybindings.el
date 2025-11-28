@@ -102,11 +102,13 @@
           "u" '(:keymap rond/update-map :wk "update/change")
           "w" '(:keymap evil-window-map :package evil :wk "window")
           "/" #'projectile-run-vterm
-          "," #'consult-buffer) 
+          "," #'consult-buffer)
 
         (def!
           :keymaps 'rond/buffer-map
           "b" #'switch-to-buffer
+          "k" #'kill-buffer
+          "s" #'scratch-buffer
           "i" #'ibuffer)
 
         (def!
@@ -197,4 +199,3 @@
 
         (def!
           :keymaps 'override))
-
