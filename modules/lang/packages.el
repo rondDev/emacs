@@ -76,6 +76,8 @@
 
 (package! nix-mode)
 
+(package! qml-mode)
+
 (package! tempel ;; templates
   :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
          ("M-*" . tempel-insert)
