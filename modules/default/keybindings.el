@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (after! general
         (general-evil-setup)
         (general-auto-unbind-keys)
@@ -42,8 +43,7 @@
           "gcc" #'evilnc-comment-or-uncomment-lines
           "K" #'lsp-bridge-popup-documentation
           "L" #'evil-end-of-line
-          "H" #'evil-first-non-blank
-          "C-i" #'evil-jump-forward)
+          "H" #'evil-first-non-blank)
 
         (def!
           :states '(visual motion)
@@ -88,6 +88,7 @@
         ;; NOTE: Might want to change capitalization of the which-key labels
         (general-spc
           "SPC" #'projectile-find-file
+          "TAB" #'execute-extended-command
           "b" '(:keymap rond/buffer-map :wk "buffer")
           "c" '(:keymap rond/code-map :wk "code map")
           "e" '(revert-buffer-quick :wk "revert buffer")
@@ -114,6 +115,7 @@
         (def!
           :keymaps 'rond/code-map
           "a" #'lsp-bridge-code-action
+          "c" #'compile
           "d" #'lsp-bridge-popup-documentation)
 
         (def!
@@ -136,6 +138,7 @@
 
         (comma-def!
           "l" '(:keymap rond/lsp-map :wk "lsp"))
+
 
         (def!
           :keymaps 'rond/update-map

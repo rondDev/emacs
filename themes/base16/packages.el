@@ -1,2 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (package! base16-theme
-  :hook (after-init))
+  :config
+  (load-theme 'base16-rose-pine t))

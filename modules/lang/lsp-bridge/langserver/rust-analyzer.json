@@ -3,6 +3,7 @@
   "languageId": "rust",
   "command": ["rust-analyzer"],
   "settings": {},
+  "supportSingleFile": true,
   "projectFiles": ["Cargo.toml"],
   "capabilities": {
     "textDocument": {
@@ -29,8 +30,8 @@
         "invocationLocation": "root",
         "invocationStrategy": "once",
         "overrideCommand": null
-        }
-      },
+      }
+    },
     "checkOnSave": {
       "enable": true,
       "allTargets": true,

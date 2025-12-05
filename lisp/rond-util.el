@@ -1,4 +1,4 @@
-
+;;; -*- lexical-binding: t -*-
 ;;;###autoload
 (defmacro after! (package &rest body)
   `(with-eval-after-load ',package ,@body))
@@ -51,6 +51,14 @@
         (note-color (face-foreground 'success))
         (bug-color (face-foreground 'error))
         (warning-color (face-foreground 'font-lock-constant-face)))
+    ;; (todo-color (rond//max-contrast (or term-color-cyan error)))
+    ;; (fixme-color (rond//max-contrast 'term-color-red))
+    ;; (review-color (rond//max-contrast 'term-color-yellow))
+    ;; (hack-color (rond//max-contrast 'font-lock-constant-face))
+    ;; (deprecated-color (rond//max-contrast 'font-lock-doc-face))
+    ;; (note-color (rond//max-contrast 'success))
+    ;; (bug-color (rond//max-contrast 'error))
+    ;; (warning-color (rond//max-contrast 'font-lock-constant-face)))
     (setq rond/todo-patterns 
           `(("\\(\\s-*\\(TODO\\)\\(\s\\|:\\)\\)" 
              (1 '(:background ,todo-color :foreground ,bg-color :weight bold) t)
@@ -151,8 +159,6 @@
                  (recentf-add-file new-name)
                  (recentf-remove-if-non-kept filename))
                (message "File '%s' successfully renamed to '%s'" name (file-name-nondirectory new-name))))))))
-
-
 
 
 ;; NOTE: Fixes ansi colors in compilation mode

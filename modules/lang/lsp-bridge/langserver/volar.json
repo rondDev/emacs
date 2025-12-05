@@ -1,10 +1,7 @@
 {
   "name": "volar",
-  "languageId": "vue",
-  "command": [
-    "vue-language-server",
-    "--stdio"
-  ],
+  "languageId": "vue-html-mode",
+  "command": ["vue-language-server", "--stdio"],
   "projectFiles": ["package.json"],
   "settings": {},
   "initializationOptions": {

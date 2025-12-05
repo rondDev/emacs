@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (package! rustic
   :disabled t
   :mode "\\.rs\\'"

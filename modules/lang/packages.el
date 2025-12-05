@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; TODO: Make apheleia use deno for svelte
 (package! apheleia
   :init
@@ -31,6 +32,24 @@
   :defer 10
   :after consult)
 
+(package! devdocs
+  ;; devdocs-update-all
+  ;; devdocs-install
+  :config
+  (def!
+    :keymaps 'rond/code-map
+    "l" #'devdocs-lookup)
+  (defun devdocs-ensure (&rest slugs)
+    "Ensure that all documents listed in SLUGS are installed."
+    (dolist (slug slugs)
+      (unless (file-exists-p (expand-file-name (format "devdocs/%s/metadata" slug)
+                                               user-emacs-directory)) ;; This assumes you didn't customize `devdocs-data-dir'.
+        (devdocs-install slug))))
+  (eval-when-compile
+    (apply #'devdocs-ensure '(astro bun c cpp css elisp git go haxe html http nix php rust sass vite zig zsh))))
+
+
+
 (package! direnv
   :defer 10
   :config
@@ -41,6 +60,21 @@
   :config
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
+(package! elisp-mode
+  :ensure nil
+  :config
+  (general-spc
+    :major-modes '(emacs-lisp-mode lisp-interaction-mode t)
+    :keymaps     '(emacs-lisp-mode-map lisp-interaction-mode-map)
+    "e"  '(:ignore t :which-key "eval")
+    "eb" 'eval-buffer
+    "ed" 'eval-defun
+    "ee" 'eval-expression
+    "ep" 'pp-eval-last-sexp
+    "es" 'eval-last-sexp
+    "i"  'elisp-index-search))
+
+(package! nix-mode)
 
 (package! tempel ;; templates
   :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
@@ -50,25 +84,32 @@
 (package! tempel-collection
   :after 'tempel)
 
-(use-package treesit-auto
+(package! treesit-auto
   :config
   (global-treesit-auto-mode))
+
+;; (package! treesit-fold
+;;   :config
+;;   (global-treesit-fold-mode))
 
 (package! tree-sitter-langs
   :defer t)
 
+;; (package! vimish-fold)
+
 (package! yasnippet
-  :init
-  (yas-reload-all)
-  (add-hook 'prog-mode-hook #'yas-minor-mode)
+  :commands (yas-global-mode)
   :config
   (def!
     :states '(insert)
     "C-S-i" #'yas-insert-snippet)
   (general-spc
     "is" #'yas-insert-snippet))
-(package! yasnippet-snippets)
-(package! auto-yasnippet)
+
+(package! yasnippet-snippets
+  :after (yasnippet))
+(package! auto-yasnippet
+  :after (yasnippet))
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/lang/*/*.el")))
 (load (expand-file-name "modules/lang/config.el" user-emacs-directory))

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 ;; (after! svelte-ts-mode
 ;;   (add-to-list 'eglot-server-programs '(svelte-ts-mode . ("svelteserver" "--stdio")))
 ;;   (add-hook 'svelte-ts-mode-hook #'web-mode))

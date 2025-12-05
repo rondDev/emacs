@@ -1,3 +1,7 @@
+;;; -*- lexical-binding: t -*-
+;; HACK: Building from master necessitates this
+(defvar elpaca-core-date 20250814)
+
 (defvar elpaca-installer-version 0.11)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
 (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
@@ -36,6 +40,8 @@
     (let ((load-source-file-function nil)) (load "./elpaca-autoloads"))))
 (add-hook 'after-init-hook #'elpaca-process-queues)
 (elpaca `(,@elpaca-order))
+(setq elpaca-queue-limit 30)
+(elpaca-wait)
 
 ;; Uncomment for systems which cannot create symlinks:
 ;; (elpaca-no-symlink-mode)
@@ -48,9 +54,8 @@
 
 ;; Install use-package support
 (elpaca elpaca-use-package
-  ;; Enable use-package :ensure support for Elpaca.
+  (require 'elpaca-use-package)
   (elpaca-use-package-mode)
   (setq use-package-always-ensure t))
-(elpaca-wait)
 
-;; (setq use-package-always-defer t)
+(setq elpaca-menu-org-make-manual nil)

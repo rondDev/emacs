@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (package! forge
   :defer 12)
 (package! ghub

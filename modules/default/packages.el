@@ -6,52 +6,120 @@
   (dired-async-mode 1)
   (async-bytecomp-package-mode 1))
 
+(package! auth-source
+  :ensure nil
+  :defer t
+  :custom (auth-sources '("~/.authinfo.gpg")))
+
+(package! autorevert
+  :ensure nil
+  :defer 2
+  :custom
+  (auto-revert-interval 0.01 "Instantaneously revert")
+  :config
+  (global-auto-revert-mode t))
+
 (package! auto-sudoedit
   :defer 3
   :config
   (auto-sudoedit-mode 1)) ; automatically open with sudo
 
-(package! avy
-  :defer 3)
+(package! avy)
+
+(package! complile
+  :ensure nil
+  :commands (compile recompile)
+  :config
+  (defun +compilation-colorize ()
+    "Colorize from `compilation-filter-start' to `point'."
+    (require 'ansi-color)
+    (let ((inhibit-read-only t))
+      (ansi-color-apply-on-region (point-min) (point-max))))
+  (add-hook 'compilation-filter-hook #'+compilation-colorize))
 
 (package! consult
   :defer 4)
+
+
+(package! dired
+  :ensure nil
+  :commands (dired)
+  :custom
+  (dired-mouse-drag-files t)
+  (dired-listing-switches "-alh" "Human friendly file sizes.")
+  (dired-kill-when-opening-new-dired-buffer t)
+  (dired-omit-files "\\(?:\\.+[^z-a]*\\)")
+  :hook (dired-mode-hook . dired-omit-mode)
+  :general
+  (+general-global-application "d" 'dired))
 
 (package! editorconfig
   :defer 6
   :config
   (editorconfig-mode 1))
 
+(package! emp
+  :ensure (emp :host github :repo "progfolio/emp")
+  :config
+  :general)
+;; (+general-global-application
+;;  "v"  '(:ignore t :which-key "video/audio")
+;;  "vQ" 'emp-kill
+;;  "vf" '(:ignore t :which-key "frame")
+;;  "vfb" 'emp-frame-back-step
+;;  "vff" 'emp-frame-step
+;;  "vi" 'emp-insert-playback-time
+;;  "vo" 'emp-open
+;;  "vO" 'emp-cycle-osd
+;;  "v SPC" 'emp-pause
+;;  "vs" 'emp-seek
+;;  "vr" 'emp-revert-seek
+;;  "vt" 'emp-seek-absolute
+;;  "vv" 'emp-set-context
+;;  "vS" 'emp-speed-set))
+
+(package! evil-anzu
+  :after (evil anzu))
 
 (package! evil-collection
+  :after (evil)
+  ;; :init (setq evil-collection-setup-minibuffer t)
   :config
   (setq evil-collection-magit-use-z-for-folds t
-        evil-collection-magit-use-y-for-yank t
-        evil-collection-setup-minibuffer t)
-  :config
-  (evil-collection-init)
-  (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes)))
+        evil-collection-magit-use-y-for-yank t)
+  (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes))
+  (evil-collection-init))
 
-(package! evil-goggles)
+(package! evil-goggles
+  :after (evil))
 
 (package! evil-nerd-commenter
+  :after (evil)
   :config
   (evilnc-default-hotkeys))
 
 (package! evil-surround
+  :after (evil)
   :config
   (global-evil-surround-mode 1))
 
-(package! evil-snipe)
+;; (package! evil-vimish-fold
+;;   :config
+;;   (add-hook 'prog-mode-hook 'evil-vimish-fold-mode)
+;;   (add-hook 'text-mode-hook 'evil-vimish-fold-mode))
 
+
+(package! evil-quickscope
+  :config
+  (evil-quickscope-always-mode))
 
 (package! exec-path-from-shell
   :init
-  (when (file-executable-p "/usr/sbin/fish")
-    (setq exec-path-from-shell-arguments ""))
   :config
   (add-hook 'emacs-startup-hook #'exec-path-from-shell-initialize))
 
+;; BUG: find-function--search-by-expanding-macros: Invalid escape char syntax: \A not followed by -
+;; NOTE: Bug occurs after startup, seems to go away after opening a project
 (package! helpful
   :defer 10)
 
@@ -69,7 +137,7 @@
   (setq completion-pcm-leading-wildcard t))
 
 (package! persistent-scratch
-  :config
+  :init
   (persistent-scratch-setup-default))
 
 ;; NOTE: Could consider adding popper.
@@ -92,9 +160,9 @@ buffer called \"*scratch* (NAME)\"."
           (persp-reset-windows)))))
 
 (package! projectile
-  :hook (elpaca-after-init)
+  :after (general)
   :init
-  (setq projectile-project-search-path '("~/external/" "~/internal/" "~/code" "~/.config" ("~/projects" . 2))
+  (setq projectile-project-search-path '("~/code" "~/.config" ("~/projects" . 2))
         projectile-enable-caching t
         projectile-sort-order 'recently-active)
   (projectile-mode +1)
@@ -124,11 +192,21 @@ buffer called \"*scratch* (NAME)\"."
 (package! transient
   :defer t)
 
-(package! undo-fu)
+(package! undo-fu
+  :config
+  (setq undo-limit 67108864) ; 64mb.
+  (setq undo-strong-limit 100663296) ; 96mb.
+  (setq undo-outer-limit 1006632960)) ; 960mb. )
+
 (package! undo-fu-session
   :hook (text-mode prog-mode)
   :init
   (undo-fu-session-global-mode))
+
+(package! vc-hooks
+  :ensure nil
+  :custom
+  (vc-follow-symlinks t))
 
 
 (package! vertico
@@ -142,7 +220,6 @@ buffer called \"*scratch* (NAME)\"."
 
 
 (package! vterm
-  :defer 15
   :ensure (vterm :post-build
                  (progn
                    (setq vterm-always-compile-module t)
@@ -161,9 +238,14 @@ buffer called \"*scratch* (NAME)\"."
                       so (expand-file-name (file-name-nondirectory so)
                                            "../../builds/vterm")
                       'ok-if-already-exists))))
+  :commands (vterm vterm-other-window)
+  :general
+  (+general-global-application
+   "t" '(:ignore t :which-key "terminal")
+   "tt" 'vterm-other-window
+   "t." 'vterm)
   :config
-  (setq vterm-timer-delay nil
-        vterm-max-scrollback 50000))
+  (evil-set-initial-state 'vterm-mode 'insert))
 
 
 

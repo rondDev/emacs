@@ -1,11 +1,14 @@
+;;; -*- lexical-binding: t -*-
 ;; Display searches like anzu.vim
 (package! anzu
+  :defer 10
   :config
   (global-anzu-mode +1))
 
 (package! colorful-mode
   ;; :diminish
   ;; :ensure t ; Optional
+  :hook (prog-mode text-mode)
   :defer 5
   :custom
   (colorful-use-prefix t)
@@ -27,7 +30,13 @@
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))))
 
+(package! doom-themes
+  :defer t)
+
 (package! doom-modeline
+  ;; :defer 2
+  :custom
+  (doom-modeline-buffer-encoding 'nondefault)
   :config
   (doom-modeline-mode 1))
 
@@ -41,6 +50,11 @@
 
 (package! eldoc-box)
 
+(package! evil-search-highlight-persist
+  :config
+  (global-evil-search-highlight-persist t)
+  (evil-ex-define-cmd "noh[ighlight]" 'evil-search-highlight-persist-remove-all))
+
 (package! git-gutter
   :hook (prog-mode . git-gutter-mode)
   :config
@@ -49,6 +63,26 @@
         git-gutter:modified-sign "  "
         git-gutter:deleted-sign "  "))
 
+(use-package indent-bars
+  :hook (prog-mode . indent-bars-mode))
+
+(package! ligature
+  :config
+  (ligature-set-ligatures 'prog-mode
+                          '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                            ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                            "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                            "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                            "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                            "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                            "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                            "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                            ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                            "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                            "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                            "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                            "\\\\" "://"))
+  (global-ligature-mode t))
 
 (package! magit-todos
   :after magit
@@ -59,6 +93,7 @@
 
 ;; Enable rich annotations using the Marginalia package
 (package! marginalia
+  :defer 2
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
@@ -73,7 +108,7 @@
 
 (package! nerd-icons)
 
-(use-package nerd-icons-completion
+(package! nerd-icons-completion
   :after marginalia
   :config
   (nerd-icons-completion-mode)
@@ -166,12 +201,32 @@
   ;; it is very flexible.
   (setq spacious-padding-subtle-mode-line '(:mode-line-active "#37f499" :mode-line-inactive shadow)))
 
+;; (package! treesit-fold-indicators
+;;   :ensure (treesit-fold-indicators :host github :repo "emacs-tree-sitter/treesit-fold")
+;;   :config
+;;   (global-treesit-fold-indicators-mode))
+
 (package! unicode-fonts
   :defer 8
   :init
   (add-hook 'emacs-startup-hook #'unicode-fonts-setup))
 
+(package! window
+  :ensure nil
+  :custom
+  (switch-to-buffer-obey-display-actions t)
+  (switch-to-prev-buffer-skip-regexp
+   '("\\*Help\\*" "\\*Calendar\\*" "\\*mu4e-last-update\\*"
+     "\\*Messages\\*" "\\*scratch\\*" "\\magit-.*")))
+
 (package! which-key
+  :demand t
+  :init
+  (setq which-key-enable-extended-define-key t)
   :config
-  (setq which-key-idle-delay 0.2)
-  (add-hook 'emacs-startup-hook #'which-key-mode))
+  (which-key-mode)
+  :custom
+  (which-key-side-window-location 'bottom)
+  (which-key-sort-order 'which-key-key-order-alpha)
+  (which-key-side-window-max-width 0.33)
+  (which-key-idle-delay 0.2))

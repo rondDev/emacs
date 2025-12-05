@@ -7,13 +7,25 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys))
 
-(package! ob-deno)
+(package! ob-deno
+  :after org
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages '((deno . t))))
 (package! ob-go
+  :after org
   :ensure (ob-go
            :host github
-           :repo "pope/ob-go"))
-(package! ob-http)
-(package! ob-rust)
+           :repo "pope/ob-go")
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages '((go . t))))
+(package! ob-http
+  :after org
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages '((http . t))))
+(package! ob-rust
+  :after org
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages '((rust . t))))
 
 (package! org
   :defer 4
@@ -51,23 +63,19 @@
              (awk . t)
              (calc .t)
              (C . t)
-             (deno . ts)
              (emacs-lisp . t)
              (haskell . t)
              (gnuplot . t)
              (latex . t)
              ;;(ledger . t)
              (js . t)
-             (go . t)
              (haskell . t)
-             (http . t)
              (perl . t)
              (python . t)
              ;; (gnuplot . t)
              ;; org-babel does not currently support php.  That is really sad.
              ;;(php . t)
              (R . t)
-             (rust . t)
              (scheme . t)
              ;; (sh . t)
              (sql . t)
@@ -109,9 +117,10 @@
   (org-mode . org-modern-mode)
   (org-agenda-finalize . org-modern-agenda))
 
-(package! org-bullets
-  :defer t
-  :hook (org-mode . org-bullets-mode))
+(package! org-superstar
+  :ensure (org-superstar :host github :repo "integral-dw/org-superstar-mode")
+  :after (org))
+
 (package! org-ql
   :defer t)
 
@@ -120,3 +129,8 @@
   :defer 3
   :config
   (org-auto-tangle-mode))
+
+(package! org-cliplink
+  :config
+  (general-spc
+    "ol" #'org-cliplink))

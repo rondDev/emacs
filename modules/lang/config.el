@@ -33,48 +33,8 @@
         (when (executable-find "direnv")
           (direnv-mode)))
 
-(after! eglot
-        (add-to-list 'eglot-server-programs
-                     '(svelte-mode . ("svelteserver" "--stdio"))))
-
-(after! eglot-temple
-        (eglot-tempel-mode t))
-
 (after! eldoc
         (setq eldoc-echo-area-prefer-doc-buffer t))
-
-(after! flyover
-        (setq flyover-debounce-interval 0.1
-              flyover-show-virtual-line nil
-              flyover-show-at-eol t))
-
-(after! lsp-mode
-        (lsp-register-client
-         (make-lsp-client :new-connection (lsp-stdio-connection '("deno" "lsp"))
-                          ;; :activation-fn (lsp-activate-on "svelte")
-                          :major-modes '(typescript-mode js-mode web-mode svelte-mode)
-                          :initialized-fn (progn
-                                            (after! general
-                                                    (comma-def!
-                                                      "da" #'rond/deno-add)))
-
-                          ;; :add-on? t  ; This is the crucial flag
-                          :server-id 'deno-ls))
-        (lsp-register-client
-         (make-lsp-client :new-connection (lsp-stdio-connection '("deno" "lsp"))
-                          :activation-fn (lsp-activate-on "svelte")
-                          :initialized-fn (progn
-                                            (after! general
-                                                    (comma-def!
-                                                      "da" #'rond/deno-add)))
-
-                          :add-on? t  ; This is the crucial flag
-                          :server-id 'deno-ls-for-svelte))
-        ;; (setq lsp-disabled-clients '((typescript-mode . ts-ls)))
-        (add-to-list 'warning-suppress-log-types '(lsp-mode))
-        (add-to-list 'warning-suppress-types '(lsp-mode))
-        (setq lsp-signature-auto-activate t
-              lsp-eldoc-render-all t))
 
 (after! parinfer-rust-mode
         (setq parinfer-rust-check-before-enable nil

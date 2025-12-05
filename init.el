@@ -7,7 +7,7 @@
 ;; (trace-function 'run-hooks)
 (defvar rond/after-init-hook nil)
 
-(load-theme 'modus-vivendi t) ; prevent flashbang
+;; (load-theme 'modus-vivendi t) ; prevent flashbang
 
 (when rond//debug
   (profiler-start 'cpu+mem)
@@ -17,13 +17,21 @@
   (toggle-debug-on-error))
 
 (if (string= "rond" (user-login-name))
-    (add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
+    (add-to-list 'default-frame-alist '(font . "Iosevka Comfy Motion 12"))
   (add-to-list 'default-frame-alist '(font . "Iosevka Comfy 18")))
+
+(if debug-on-error
+    (setq use-package-verbose t
+          use-package-expand-minimally nil
+          use-package-compute-statistics t)
+  (setq use-package-verbose nil
+        use-package-expand-minimally t))
 
 
 ;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
 ;; huge impact to profile-dotemacs results; GC takes up a lot of init time
-(setq gc-cons-threshold most-positive-fixnum) ; pls no garbage collection in init
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 1) ; pls no garbage collection in init
 
 ;; reset gc-cons-threshold
 (defun rond/reset-gc-value ()
@@ -35,16 +43,11 @@
      ;; TODO try out different values
      (setq gc-cons-threshold 100000000)
      (when rond//debug (message "gc-cons-threshold restored to %S" gc-cons-threshold)))))
-(add-hook 'elpaca-after-init-hook #'rond/reset-gc-value)
+(add-hook 'after-init-hook #'rond/reset-gc-value)
 
 ;; new way to type y instead of yes
 (add-hook 'after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
 
-(setq load-prefer-newer t
-      custom-file (expand-file-name "custom.el" user-emacs-directory)
-      use-dialog-box nil ; no gui prompts
-      use-package-compute-statistics t ; analyzes package load times
-      custom-safe-themes t)
 
 ;; get doom mode line flicker and "nil" message otherwise
 (add-hook 'after-init-hook
@@ -61,21 +64,29 @@
 (with-eval-after-load 'prog-mode
   (add-hook 'prog-mode-hook #'show-paren-local-mode))
 
+(setq-default c-basic-offset 2)
 (setq-default indent-tabs-mode nil)
 (require 'uniquify)
-(setq uniquify-buffer-name-style 'forward
-      save-interprogram-paste-before-kill t
-      apropos-do-all t
-      mouse-yank-at-point t
-      visible-bell t
-      load-prefer-newer t
-      backup-by-copying t
-      frame-inhibit-implied-resize t
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      custom-file (expand-file-name "custom.el" user-emacs-directory)
-      read-process-output-max (* 32 1024 1024))
+(setq-default
+ read-process-output-max (* 1024 1024))
 
-(setq display-line-numbers-type 'relative)
+(setq apropos-do-all t
+      backup-by-copying t
+      custom-file (expand-file-name "custom.el" user-emacs-directory)
+      custom-safe-themes t
+      display-line-numbers-type 'relative
+      ediff-window-setup-function 'ediff-setup-windows-plain
+      frame-inhibit-implied-resize t
+      load-prefer-newer t
+      mouse-yank-at-point t
+      recentf-auto-cleanup 'never ;; disable before we start recentf!
+      recentf-keep '(file-remote-p file-readable-p)
+      save-interprogram-paste-before-kill t
+      use-dialog-box nil ; no gui prompts
+      use-package-compute-statistics t ; analyzes package load times
+      visible-bell t
+      uniquify-buffer-name-style 'forward)
+
 (global-display-line-numbers-mode)
 
 (defadvice keyboard-escape-quit
@@ -84,9 +95,7 @@
     ad-do-it))
 
 (column-number-mode)
-(setq recentf-auto-cleanup 'never) ;; disable before we start recentf!
-(setq recentf-keep '(file-remote-p file-readable-p))
-(recentf-mode)
+
 
 (setq inhibit-startup-screen t)
 (setq inhibit-startup-message t)
@@ -122,13 +131,26 @@
             (set-frame-parameter (selected-frame) 'alpha 100) "100 for fully opaque"
             (set-frame-parameter (selected-frame) 'background-alpha 100)))
 
-(savehist-mode t)
 
 (load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
 (load (expand-file-name "modules/initial-packages.el" user-emacs-directory))
 
+(package! recentf
+  :ensure nil
+  :config
+  (recentf-mode)
+  :custom
+  (recentf-max-menu-items 1000 "Offer more recent files in menu")
+  (recentf-max-saved-items 1000 "Save more recent files"))
+
 (package! no-littering
   :after 'savehist)
+
+(package! savehist
+  :ensure nil
+  :defer 1
+  :config
+  (savehist-mode 1))
 
 ;; No real effect on startup time
 (package! benchmark-init
@@ -140,20 +162,6 @@
 ;; TODO: Improve this loading, it's really messy
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
-;; (load (expand-file-name "modules/default/keybindings.el" user-emacs-directory))
-;; (load (expand-file-name "modules/default/packages.el" user-emacs-directory))
-;; (load (expand-file-name "modules/git/packages.el" user-emacs-directory))
-;; (load (expand-file-name "modules/lang/packages.el" user-emacs-directory))
-;; (load (expand-file-name "modules/lang/lsp.el" user-emacs-directory))
-;; (load (expand-file-name "modules/org/packages.el" user-emacs-directory))
-;; (load (expand-file-name "modules/ui/packages.el" user-emacs-directory))
-;; (load (expand-file-name "lisp/tramp.el" user-emacs-directory))
-
-
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-
 
 (package! welcome-dashboard
   ;; TODO: Change repo URL to upstream once this is merged: https://github.com/konrad1977/welcome-dashboard/pull/14
@@ -182,8 +190,13 @@
                                                           (when (welcome-dashboard--isActive)
                                                             (welcome-dashboard--refresh-screen)))))))
 
+(package! cus-edit
+  :ensure nil
+  :custom
+  (custom-file null-device "Don't store customizations"))
 
 
+(toggle-debug-on-error)
 
 (run-hooks 'rond/after-init-hook)
 ;;; init.el ends here

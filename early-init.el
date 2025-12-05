@@ -1,6 +1,19 @@
+;;; -*- lexical-binding: t -*-
 ;; improves startup speed when using an alternative package manager
-(setq package-enable-at-startup nil)
+(add-to-list 'initial-frame-alist '(background-color . "#000000")) ; Or any other color
 
+(setq package-enable-at-startup nil)
+;; (setq inhibit-default-init nil)
+(setq native-comp-async-report-warnings-errors nil) ; disable the pesky native comp warnings
+
+
+(defvar default-file-name-handler-alist file-name-handler-alist)
+(setq file-name-handler-alist nil)
+
+(setq server-client-instructions nil)
+(setq frame-inhibit-implied-resize t)
+
+(advice-add #'x-apply-session-resources :override #'ignore)
 
 ;; ** Disable Tool Bar, Menu Bar, and Scroll Bar
 ;; doing this here reduces init time by ~0.2 seconds for me
@@ -10,14 +23,15 @@
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
 (push '(horizontal-scroll-bars) default-frame-alist)
+
+
 (let ((gap (or (getenv "WM_GAP") "15")))
   (push (cons 'internal-border-width (string-to-number gap)) default-frame-alist))
 
 ;; unfortunately Emacs has no way to exclude text from being transparent
 ;; active and inactive alpha
 (unless (string= (getenv "XDG_SESSION_TYPE") "wayland")
-  (push '(alpha . (85 . 85)) default-frame-alist))
-
+  (push '(alpha . (100 . 100)) default-frame-alist))
 ;; no titlebar
 ;; added in a patch; see my emacs.nix overlay
 (when (eq system-type 'darwin)
@@ -35,7 +49,3 @@
 ;; * Silence lexical binding warning
 ;; don't show warning buffer for; tons of packages are missing it
 (setq warning-suppress-types '((files)))
-
-(let (file-name-handler-alist)  ; Temporarily nil
-  ;; startup code runs here
-  ) ; Original value restored when block ends

@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (package! cyberpunk-theme
   :defer 4)
 (package! kaolin-themes
@@ -5,6 +6,4 @@
 (package! cherry-blossom-theme
   :defer 4)
 
-(package! sakura-theme
-  :config
-  (load-theme 'sakura t))
+(package! sakura-theme)
