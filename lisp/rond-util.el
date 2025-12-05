@@ -169,4 +169,11 @@
       (ansi-color-apply-on-region compilation-filter-start (point-max))))
   (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
 
+;;;###autoload
+(defun rond/eval-last-sexp ()
+  (interactive)
+  (let ((result (eval-last-sexp nil)))
+    (kill-new (format "%S" result))
+    (message "Result copied: %S" result)))
+
 (provide 'rond/util)

@@ -116,6 +116,7 @@
           :keymaps 'rond/code-map
           "a" #'lsp-bridge-code-action
           "c" #'compile
+          "e" #'rond/eval-last-sexp
           "d" #'lsp-bridge-popup-documentation)
 
         (def!
