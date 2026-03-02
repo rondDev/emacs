@@ -74,6 +74,8 @@
     "es" 'eval-last-sexp
     "i"  'elisp-index-search))
 
+(package! hyprlang-ts-mode)
+
 (package! nix-mode)
 
 (package! qml-mode)
