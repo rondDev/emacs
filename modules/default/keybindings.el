@@ -97,7 +97,6 @@
           "gg" '(magit-status :wk "magit")
           "h" '(:keymap rond/helpful-map :wk "helpful")
           "o" '(:keymap rond/open-map :wk "open")
-          "oo" #'dired-jump
           "p" '(:keymap rond/projectile-map :wk "projectile")
           "sg" #'consult-ripgrep
           "u" '(:keymap rond/update-map :wk "update/change")
@@ -139,6 +138,12 @@
 
         (comma-def!
           "l" '(:keymap rond/lsp-map :wk "lsp"))
+
+        (def!
+          :keymaps 'rond/open-map
+          "o" #'dired-jump
+          "t" #'vterm-other-window)
+
 
 
         (def!
