@@ -11,6 +11,8 @@
               (assq-delete-all 'prettier-svelte apheleia-formatters))
         (push '(denofmt-svelte . ("deno" "fmt" "--unstable-component" "--ext" "svelte" "-"))
               apheleia-formatters)
+        (push '(qml-mode . qmlformat) apheleia-mode-alist)
+        (push '(qmlformat . ("qmlformat")) apheleia-formatters)
         ;; (setf (alist-get 'prettier-typescript apheleia-formatters) '("deno" "fmt" "-"))
         (setf (alist-get 'svelte-mode apheleia-mode-alist) 'denofmt-svelte)
         (setf (alist-get 'prettier-svelte apheleia-formatters) '("deno" "fmt" "--unstable-component" "--ext" "svelte" "-")))
