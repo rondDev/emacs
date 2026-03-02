@@ -137,6 +137,7 @@
           "v" #'helpful-variable)
 
         (comma-def!
+          "da" #'rond/deno-add
           "l" '(:keymap rond/lsp-map :wk "lsp"))
 
         (def!
