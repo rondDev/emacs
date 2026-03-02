@@ -58,10 +58,10 @@
 (package! git-gutter
   :hook (prog-mode . git-gutter-mode)
   :config
-  (setq git-gutter:update-interval 0.02
-        git-gutter:added-sign "  "
-        git-gutter:modified-sign "  "
-        git-gutter:deleted-sign "  "))
+  (setq git-gutter:update-interval 2
+        git-gutter:added-sign " + "
+        git-gutter:modified-sign " * "
+        git-gutter:deleted-sign " - "))
 
 (use-package indent-bars
   :hook (prog-mode . indent-bars-mode))
