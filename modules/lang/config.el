@@ -1,6 +1,6 @@
 ;;; config.el ---                                    -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2025  
+;; Copyright (C) 2026
 
 ;; Author:  <rond@oizys>
 ;; Keywords: 
