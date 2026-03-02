@@ -64,3 +64,6 @@
         (add-hook 'conf-mode-hook 'tempel-setup-capf)
         (add-hook 'prog-mode-hook 'tempel-setup-capf)
         (add-hook 'text-mode-hook 'tempel-setup-capf))
+
+;; Code folding
+(add-hook 'prog-mode-hook 'hs-minor-mode)
