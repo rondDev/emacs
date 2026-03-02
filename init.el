@@ -163,9 +163,14 @@
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 
+(defvar rond//skip-dashboard nil)
+
+(when (< 1 (length command-line-args))
+  (setq rond//skip-dashboard t))
+
 (package! welcome-dashboard
-  ;; TODO: Change repo URL to upstream once this is merged: https://github.com/konrad1977/welcome-dashboard/pull/14
-  :ensure (welcome-dashboard :host github :repo "rondDev/welcome-dashboard")
+  :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
+  :when (not rond//skip-dashboard)
   :config
   (setq welcome-dashboard-latitude 56.7365
         welcome-dashboard-longitude 16.2981     ;; latitude and longitude must be set to show weather information
@@ -196,7 +201,7 @@
   (custom-file null-device "Don't store customizations"))
 
 
-(toggle-debug-on-error)
+;; (toggle-debug-on-error)
 
 (run-hooks 'rond/after-init-hook)
 ;;; init.el ends here
