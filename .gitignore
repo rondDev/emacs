@@ -1,12 +1,17 @@
 .cache/
+.elsa
+devdocs/
 eln-cache/
 elpa/
 elpaca/
 eshell/
 etc/
+image-dired/
 multisession/
 parinfer-rust/
+persist/
 persp-confs/
+request/
 tmp/
 transient/
 tree-sitter/
