@@ -91,6 +91,7 @@
           "TAB" #'execute-extended-command
           "b" '(:keymap rond/buffer-map :wk "buffer")
           "c" '(:keymap rond/code-map :wk "code map")
+          "d" #'flymake-show-diagnostic
           "e" '(revert-buffer-quick :wk "revert buffer")
           "f" '(:keymap rond/file-map :wk "file")
           "g" '(:ignore t :wk "git")
@@ -116,7 +117,8 @@
           "a" #'lsp-bridge-code-action
           "c" #'compile
           "e" #'rond/eval-last-sexp
-          "d" #'lsp-bridge-popup-documentation)
+          "d" #'lsp-bridge-popup-documentation
+          "r" #'lsp-bridge-rename)
 
         (def!
           :keymaps 'rond/file-map
