@@ -2,7 +2,11 @@
 ;;; Commentary:
 
 (package! flymake
-  :defer 10)
+  :ensure (flymake
+           :host github
+           :repo "flymake/emacs-flymake"
+           :branch "master"))
+
 
 (package! parinfer-rust-mode
   :hook emacs-lisp-mode)
@@ -83,7 +87,7 @@
 
   ;; (add-to-list 'lsp-bridge-multi-lang-server-mode-list '((svelte-mode) . "svelte_deno_tailwind"))
   ;; (add-to-list 'lsp-bridge-multi-lang-server-extension-list '(("svelte") . "svelte_deno_tailwind"))
-  (add-hook 'lsp-bridge-mode-hook 'flymake-mode)
+  ;; (add-hook 'lsp-bridge-mode-hook 'flymake-mode)
   (add-hook 'lsp-bridge-mode-hook 'lsp-bridge-breadcrumb-mode)
   (setq lsp-bridge-get-lang-server-by-project
         (lambda (project-path file-path)
