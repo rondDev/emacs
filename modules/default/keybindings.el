@@ -59,10 +59,10 @@
         ;;     :keymaps 'override
         ;;     :states '(normal motion)
         ;;     "K" 'eldoc-box-help-at-point))
-        ;; (def!
-        ;;   :package 'corfu
-        ;;   :keymaps '(override corfu-map)
-        ;;   "C-y" #'corfu-complete)
+        (def!
+          :package 'corfu
+          :keymaps '(override corfu-map)
+          "C-y" #'corfu-complete)
 
         ;; (def!
         ;;   :package 'company
@@ -114,11 +114,11 @@
 
         (def!
           :keymaps 'rond/code-map
-          "a" #'lsp-bridge-code-action
+          "a" #'eglot-code-actions
           "c" #'compile
           "e" #'rond/eval-last-sexp
-          "d" #'lsp-bridge-popup-documentation
-          "r" #'lsp-bridge-rename)
+          "d" #'eldoc-doc-buffer
+          "r" #'eglot-rename)
 
         (def!
           :keymaps 'rond/file-map
@@ -172,6 +172,16 @@
           :package 'avy
           :keymaps '(normal visual motion)
           "s" #'avy-goto-char)
+
+        (def!
+          :package 'eglot
+          :keymaps '(eglot-mode-map override)
+          "K" #'eldoc-box-help-at-point)
+
+        (general-spc
+          :package 'eglot
+          :keymaps 'eglot-mode-map
+          "d" #'flymake-diagnostics)
 
         (def!
           :package 'org

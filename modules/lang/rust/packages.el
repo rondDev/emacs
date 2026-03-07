@@ -1,4 +1,7 @@
 ;;; -*- lexical-binding: t -*-
+(package! eglot
+  :ensure nil
+  :hook ((rust-ts-mode . eglot-ensure)))
 (package! rustic
   :disabled t
   :mode "\\.rs\\'"
@@ -18,3 +21,7 @@
     "x" '(rustic-cargo-rm :wk "cargo rm"))
   (setq rustic-lsp-client 'eglot)
   (add-hook 'eglot--managed-mode-hook (lambda () (flymake-mode -1))))
+
+(package! cargo
+  :config
+  (add-hook 'rust-mode-hook 'cargo-minor-mode))

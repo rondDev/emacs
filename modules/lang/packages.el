@@ -9,7 +9,6 @@
 (package! company)
 
 (package! corfu
-  :disabled t
   :init
   (global-corfu-mode))
 
