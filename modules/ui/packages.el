@@ -106,7 +106,11 @@
 ;; package.
 
 
-(package! nerd-icons)
+(package! nerd-icons
+  :config
+  (after! nerd-icons
+          (push '("^INSTALL\\.rs$" nerd-icons-devicon "nf-dev-rust" :face nerd-icons-maroon)
+                nerd-icons-regexp-icon-alist)))
 
 (package! nerd-icons-completion
   :after marginalia
