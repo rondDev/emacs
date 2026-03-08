@@ -70,8 +70,6 @@
 ;;   (setq lsp-bridge-enable-completion-in-minibuffer t)
 ;;   (setq lsp-bridge-enable-hover-diagnostic t)
 ;;   (setq lsp-bridge-enable-inlay-hint t)
-;;   ;; TODO: Remove after testing
-;;   (setq lsp-bridge-enable-log t)
 ;;   ;; NOTE: idk how much this affects performance, but i'd like it to update fast
 ;;   (setq lsp-bridge-breadcrumb-idle-delay 0.1)
 ;;   (setq lsp-bridge-mode-lighter " 🚀")

@@ -41,7 +41,6 @@
 ;; https://github.com/hlissner/doom-emacs/blob/7460e9e7989c9b219879073690e6f43ac535d274/modules/ui/modeline/config.el#L16
 ;; doesn't actually need to be set this early but it still makes sense to put it
 ;; here
-;; TODO: uncomment
 (unless after-init-time
   ;;prevent flash of unstyled modeline at startup
   (setq-default mode-line-format nil))

@@ -125,7 +125,6 @@
   ;; To disable collection of benchmark data after init is done.
   (add-hook 'after-init-hook 'benchmark-init/deactivate))
 
-;; TODO: Improve this loading, it's really messy
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 

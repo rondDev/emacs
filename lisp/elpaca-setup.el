@@ -1,5 +1,4 @@
 ;;; -*- lexical-binding: t -*-
-;; HACK: Building from master necessitates this
 
 (defvar elpaca-installer-version 0.12)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
