@@ -99,12 +99,10 @@
   ;; `completion-list-mode-map'.
   :bind (:map minibuffer-local-map
               ("M-A" . marginalia-cycle))
-  :hook (elpaca-after-init-hook . marginalia-mode)
-  :init)
-;; Marginalia must be activated in the :init section of use-package such that
-;; the mode gets enabled right away. Note that this forces loading the
-;; package.
-
+  :init
+  (marginalia-mode)
+  :config
+  (setf (alist-get 'elpaca-info marginalia-command-categories) 'elpaca))
 
 (package! nerd-icons
   :config
