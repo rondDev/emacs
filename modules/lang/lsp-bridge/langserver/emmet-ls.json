@@ -1,6 +1,0 @@
-{
-  "name": "emmet-ls",
-  "languageId": "",
-  "command": ["emmet-language-server", "--stdio"],
-  "settings": {}
-}
