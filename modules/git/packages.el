@@ -4,7 +4,8 @@
   :init (setq forge-add-default-bindings nil))
 
 (package! ghub
-  :defer 12)
+  :after magit)
+
 (package! magit
   :general (:states '(normal visual motion)
                     :keymaps '(override magit-mode-map magit-status-mode)
