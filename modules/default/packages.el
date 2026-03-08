@@ -37,8 +37,7 @@
       (ansi-color-apply-on-region (point-min) (point-max))))
   (add-hook 'compilation-filter-hook #'+compilation-colorize))
 
-(package! consult
-  :defer 4)
+(package! consult)
 
 
 (package! dired
@@ -49,9 +48,7 @@
   (dired-listing-switches "-alh" "Human friendly file sizes.")
   (dired-kill-when-opening-new-dired-buffer t)
   (dired-omit-files "\\(?:\\.+[^z-a]*\\)")
-  :hook (dired-mode-hook . dired-omit-mode)
-  :general
-  (+general-global-application "d" 'dired))
+  :hook (dired-mode-hook . dired-omit-mode))
 
 (package! editorconfig
   :defer 6
