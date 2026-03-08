@@ -108,7 +108,8 @@
     :states '(insert)
     "C-S-i" #'yas-insert-snippet)
   (general-spc
-    "is" #'yas-insert-snippet))
+    "is" #'yas-insert-snippet)
+  (add-hook 'prog-mode-hook #'yas-minor-mode))
 
 (package! yasnippet-snippets
   :after (yasnippet))
