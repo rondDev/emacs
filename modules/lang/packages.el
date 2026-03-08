@@ -9,7 +9,8 @@
 (package! company)
 
 (package! corfu
-  :init
+  :defer 5
+  :config
   (global-corfu-mode))
 
 (package! caddyfile-mode
