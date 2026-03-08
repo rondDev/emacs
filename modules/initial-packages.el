@@ -3,6 +3,10 @@
 (autoload 'package! (expand-file-name "lisp/rond-util.el" user-emacs-directory))
 (autoload 'after! (expand-file-name "lisp/rond-util.el" user-emacs-directory))
 
+(package! cus-edit
+  :ensure nil
+  :custom
+  (custom-file null-device "Don't store customizations"))
 
 (defvar evil-kill-on-visual-paste nil)
 (defvar evil-undo-system 'undo-fu)
