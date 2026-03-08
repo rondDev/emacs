@@ -11,9 +11,9 @@
 
         ;; (general-create-definer general-cc
         ;;   :states '(normal insert)
-        ;;   ;; don’t want prefix in e.g. vterm insert
-        ;;   ;; :keymaps 'override
-        ;;   :prefix "C-c")
+        ;; ;; don’t want prefix in e.g. vterm insert
+        ;; ;; :keymaps 'override
+        ;; :prefix "C-c")
 
         (general-create-definer general-t
           :states 'normal
@@ -41,7 +41,7 @@
         (def!
           :states '(normal visual motion)
           "gcc" #'evilnc-comment-or-uncomment-lines
-          "K" #'lsp-bridge-popup-documentation
+          ;; "K" #'lsp-bridge-popup-documentation
           "L" #'evil-end-of-line
           "H" #'evil-first-non-blank)
 
@@ -174,6 +174,7 @@
           "s" #'avy-goto-char)
 
         (def!
+          :states '(normal visual motion)
           :package 'eglot
           :keymaps '(eglot-mode-map override)
           "K" #'eldoc-box-help-at-point)
