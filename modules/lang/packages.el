@@ -66,12 +66,12 @@
   (general-spc
     :major-modes '(emacs-lisp-mode lisp-interaction-mode t)
     :keymaps     '(emacs-lisp-mode-map lisp-interaction-mode-map)
-    "e"  '(:ignore t :which-key "eval")
-    "eb" 'eval-buffer
-    "ed" 'eval-defun
-    "ee" 'eval-expression
-    "ep" 'pp-eval-last-sexp
-    "es" 'eval-last-sexp
+    "x"  '(:ignore t :which-key "eval")
+    "xb" 'eval-buffer
+    "xd" 'eval-defun
+    "xe" 'eval-expression
+    "xp" 'pp-eval-last-sexp
+    "xs" 'eval-last-sexp
     "i"  'elisp-index-search))
 
 (package! hyprlang-ts-mode)
