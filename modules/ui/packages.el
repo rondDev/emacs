@@ -25,9 +25,10 @@
   :defer t)
 
 (package! doom-modeline
-  ;; :defer 2
-  :custom
-  (doom-modeline-buffer-encoding 'nondefault)
+  :init
+  (setq doom-modeline-buffer-encoding 'nondefault
+        doom-modeline-modal-icon t
+        doom-modeline-icon t)
   :config
   (doom-modeline-mode 1))
 
