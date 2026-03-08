@@ -28,7 +28,7 @@
   (org-babel-do-load-languages 'org-babel-load-languages '((rust . t))))
 
 (package! org
-  :defer 4
+  :defer t
   :hook (org-mode . org-indent-mode)
   :config
   (comma-def!
@@ -105,6 +105,7 @@
 
 (package! org-modern
   ;; :disabled t
+  :after org
   :custom
   (org-modern-hide-stars nil) ; adds extra indentation
   (org-modern-table t)
