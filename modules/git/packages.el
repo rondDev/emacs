@@ -7,14 +7,15 @@
   :after magit)
 
 (package! magit
-  :general (:states '(normal visual motion)
-                    :keymaps '(override magit-mode-map magit-status-mode)
-                    "h" 'evil-backward-char
-                    "j" 'evil-next-visual-line
-                    "k" 'evil-previous-line
-                    "l" 'evil-forward-char)
-  
-  
+  :defer t
+  :after general
+  :general
+  (:states '(normal visual motion)
+           :keymaps '(override magit-mode-map magit-status-mode)
+           "h" 'evil-backward-char
+           "j" 'evil-next-visual-line
+           "k" 'evil-previous-line
+           "l" 'evil-forward-char)
   :config
   (add-hook 'git-commit-mode-hook 'evil-insert-state)
   (evil-set-initial-state 'git-commit-mode 'insert)
