@@ -174,6 +174,14 @@
 ;;       (rainbow-mode 1))))
 
 
+(package! simple
+  :ensure nil
+  ;; :general
+  ;; (+general-global-toggle
+  ;;  "f" 'auto-fill-mode)
+  :custom
+  (eval-expression-debug-on-error nil)
+  (fill-column 80 "Wrap at 80 columns."))
 
 (package! spacious-padding
   :ensure t
