@@ -40,7 +40,32 @@
                  display-buffer-at-bottom
                  (window-height . 6)))) ; Optionally set width (as a fraction of frame or specific number of columns)
 
-(package! eldoc-box)
+(package! eldoc-box
+  :after eldoc
+  :config
+  (defvar rond//eldoc-box-source-frame nil)
+  (defun rond/eldoc-box-focus ()
+    (interactive)
+    (when (and (boundp 'eldoc-box--frame) eldoc-box--frame
+               (frame-live-p eldoc-box--frame))
+      (progn
+        (setq rond//eldoc-box-source-frame (selected-frame))
+        (select-frame-set-input-focus eldoc-box--frame)
+        (goto-char (point-min))
+        (evil-normal-state))))
+
+  (defun rond/eldoc-box-unfocus ()
+    (interactive)
+    (when (and rond//eldoc-box-source-frame
+               (frame-live-p rond//eldoc-box-source-frame))
+      (select-frame-set-input-focus rond//eldoc-box-source-frame)
+      (setq rond//eldoc-box-source-frame nil)))
+
+  (defun rond/eldoc-box-focused-p ()
+    (and (boundp 'eldoc-box--frame)
+         eldoc-box--frame
+         (frame-live-p eldoc-box--frame)
+         (eq (selected-frame) eldoc-box--frame))))
 
 (package! evil-search-highlight-persist
   :config
