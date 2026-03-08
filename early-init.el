@@ -49,3 +49,28 @@
 ;; * Silence lexical binding warning
 ;; don't show warning buffer for; tons of packages are missing it
 (setq warning-suppress-types '((files)))
+
+
+;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
+;; huge impact to profile-dotemacs results; GC takes up a lot of init time
+(setq gc-cons-threshold most-positive-fixnum
+      gc-cons-percentage 1) ; pls no garbage collection in init
+
+(defun +gc-after-focus-change ()
+  "Run GC when frame loses focus."
+  (run-with-idle-timer
+   5 nil
+   (lambda () (unless (frame-focus-state) (garbage-collect)))))
+
+(defun +reset-init-values ()
+  (run-with-idle-timer
+   1 nil
+   (lambda ()
+     (setq file-name-handler-alist default-file-name-handler-alist
+           gc-cons-percentage 0.1
+           gc-cons-threshold 100000000)
+     (when (boundp 'after-focus-change-function)
+       (add-function :after after-focus-change-function #'+gc-after-focus-change)))))
+
+(with-eval-after-load 'elpaca
+  (add-hook 'elpaca-after-init-hook '+reset-init-values))

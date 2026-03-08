@@ -1,64 +1,36 @@
 ;;; init.el --- Initial config -*- lexical-binding: t -*-
 ;;; Version: 1.0.0
 
-(defvar rond//debug nil
-  "Custom debug mode")
-(defvar rond//debug-report nil)
-;; (trace-function 'run-hooks)
-(defvar rond/after-init-hook nil)
+(add-hook 'elpaca-after-init-hook
+          (lambda ()
+            (message "Emacs loaded in %s with %d garbage collections."
+                     (format "%.2f seconds"
+                             (float-time
+                              (time-subtract (current-time) before-init-time)))
+                     gcs-done)))
 
 ;; (load-theme 'modus-vivendi t) ; prevent flashbang
 
-(when rond//debug
+(when debug-on-error
   (profiler-start 'cpu+mem)
   (add-hook 'elpaca-after-init-hook
             (lambda () (profiler-stop)
-              (when rond//debug-report (profiler-report))))
-  (toggle-debug-on-error))
-
-(if (string= "rond" (user-login-name))
-    (add-to-list 'default-frame-alist '(font . "Iosevka Comfy Motion 12"))
-  (add-to-list 'default-frame-alist '(font . "Iosevka Comfy 18")))
-
-(if debug-on-error
-    (setq use-package-verbose t
-          use-package-expand-minimally nil
-          use-package-compute-statistics t)
-  (setq use-package-verbose nil
-        use-package-expand-minimally t))
-
-
-;; https://www.reddit.com/r/emacs/comments/3kqt6e/2_easy_little_known_steps_to_speed_up_emacs_start/
-;; huge impact to profile-dotemacs results; GC takes up a lot of init time
-(setq gc-cons-threshold most-positive-fixnum
-      gc-cons-percentage 1) ; pls no garbage collection in init
-
-;; reset gc-cons-threshold
-(defun rond/reset-gc-value ()
-  (run-with-idle-timer
-   1 nil
-   (lambda ()
-     ;; (setq gc-cons-threshold (car (get 'gc-cons-threshold 'standard-value)))
-     ;; https://github.com/emacs-lsp/lsp-mode#performance
-     ;; TODO try out different values
-     (setq gc-cons-threshold 100000000)
-     (when rond//debug (message "gc-cons-threshold restored to %S" gc-cons-threshold)))))
-(add-hook 'after-init-hook #'rond/reset-gc-value)
+              (profiler-report))))
 
 ;; new way to type y instead of yes
-(add-hook 'after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
+(add-hook 'elpaca-after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
 
+(add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
 
 ;; get doom mode line flicker and "nil" message otherwise
-(add-hook 'after-init-hook
+(add-hook 'elpaca-after-init-hook
           (lambda ()
             (run-with-timer 1 nil (lambda ()
                                     (setq inhibit-message nil)))))
 (setq ring-bell-function #'ignore)
 
-(add-hook 'emacs-startup-hook #'global-auto-revert-mode)
-(add-hook 'emacs-startup-hook #'global-hl-line-mode) ;; Highlight the current line in all buffers
-(add-hook 'emacs-startup-hook #'save-place-mode)
+(add-hook 'elpaca-after-init-hook #'global-hl-line-mode) ;; Highlight the current line in all buffers
+(add-hook 'elpaca-after-init-hook #'save-place-mode)
 
 
 (with-eval-after-load 'prog-mode
@@ -71,7 +43,6 @@
  read-process-output-max (* 1024 1024))
 
 (setq apropos-do-all t
-      backup-by-copying t
       custom-file (expand-file-name "custom.el" user-emacs-directory)
       custom-safe-themes t
       display-line-numbers-type 'relative
@@ -117,19 +88,13 @@
 (defvar rond-v/auto-save-folder (expand-file-name "tmp/auto-saves/" user-emacs-directory))
 (defvar rond-v/lockfile-folder (expand-file-name "tmp/lockfiles/" user-emacs-directory))
 (make-directory rond-v/auto-save-folder t)
-(setq auto-save-file-name-transforms `(("\\(?:[^/]*/\\)*\\(.*\\)" ,(concat rond-v/auto-save-folder "\\1") t)))
-(setq lock-file-name-transforms `(("\\(?:[^/]*/\\)*\\(.*\\)" ,(concat rond-v/lockfile-folder "\\1") t)))
 
 (setq tramp-auto-save-directory rond-v/auto-save-folder)
 
-(unless (native-comp-available-p)
-  (warn "Native compilation not available"))
-
-
-(add-hook 'after-make-frame-functions
-          (lambda (frame)
-            (set-frame-parameter (selected-frame) 'alpha 100) "100 for fully opaque"
-            (set-frame-parameter (selected-frame) 'background-alpha 100)))
+;; (add-hook 'after-make-frame-functions
+;;           (lambda (frame)
+;;             (set-frame-parameter (selected-frame) 'alpha 100) "100 for fully opaque"
+;;             (set-frame-parameter (selected-frame) 'background-alpha 100)))
 
 
 (load (expand-file-name "lisp/elpaca-setup.el" user-emacs-directory))
@@ -137,6 +102,7 @@
 
 (package! recentf
   :ensure nil
+  :defer 1
   :config
   (recentf-mode)
   :custom
@@ -169,12 +135,12 @@
   (setq rond//skip-dashboard t))
 
 (package! welcome-dashboard
-  :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
+  ;; :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
+  :ensure nil
+  :load-path "~/code/welcome-dashboard"
   :when (not rond//skip-dashboard)
   :config
-  (setq welcome-dashboard-latitude 56.7365
-        welcome-dashboard-longitude 16.2981     ;; latitude and longitude must be set to show weather information
-        welcome-dashboard-use-nerd-icons t      ;; Use nerd icons instead of all-the-icons
+  (setq welcome-dashboard-use-nerd-icons t      ;; Use nerd icons instead of all-the-icons
         welcome-dashboard-path-max-length 75
         welcome-dashboard-show-file-path t      ;; Hide or show filepath
         welcome-dashboard-use-fahrenheit nil    ;; show in celcius or fahrenheit.
@@ -195,13 +161,5 @@
                                                           (when (welcome-dashboard--isActive)
                                                             (welcome-dashboard--refresh-screen)))))))
 
-(package! cus-edit
-  :ensure nil
-  :custom
-  (custom-file null-device "Don't store customizations"))
 
-
-;; (toggle-debug-on-error)
-
-(run-hooks 'rond/after-init-hook)
 ;;; init.el ends here
