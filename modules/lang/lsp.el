@@ -1,12 +1,11 @@
 ;;; modules/lang/lsp.el --- Common LSP setup;;; -*- lexical-binding: t -*-
 ;;; Commentary:
 
-(package! flymake
-  :ensure (flymake
-           :host github
-           :repo "flymake/emacs-flymake"
-           :branch "master"))
+(package! flycheck
+  :commands (flycheck-mode)
+  :custom (flycheck-emacs-lisp-load-path 'inherit "necessary with alternatives to package.el"))
 
+(package! flymake)
 
 (package! parinfer-rust-mode
   :hook emacs-lisp-mode)
