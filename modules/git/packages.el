@@ -1,6 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 (package! forge
-  :defer 12)
+  :after magit
+  :init (setq forge-add-default-bindings nil))
+
 (package! ghub
   :defer 12)
 (package! magit
