@@ -21,15 +21,6 @@
 (package! consult-todo
   :after consult) ; https://github.com/eki3z/consult-todo
 
-;; NOTE: This is buggy on install for some reason. (recursive call on bookmarks)
-(package! dashboard
-  :disabled t
-  :config
-  (add-hook 'elpaca-after-init-hook #'dashboard-insert-startupify-lists)
-  (add-hook 'elpaca-after-init-hook #'dashboard-initialize)
-  (dashboard-setup-startup-hook)
-  (setq initial-buffer-choice (lambda () (get-buffer-create dashboard-buffer-name))))
-
 (package! doom-themes
   :defer t)
 
