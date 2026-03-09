@@ -77,10 +77,10 @@
         (setopt org-modern-hide-stars nil ; adds extra indentation
                 org-modern-table t
                 org-modern-list
-                '((?- . "-"
-                      (?* . "•")
-                      (?+ . "‣")))
-                org-modern-block-name '("" . ""))) ; or other chars; so top bracket is drawn promptly)
+                '((?- . "-")
+                  (?* . "•")
+                  (?+ . "‣")))
+        org-modern-block-name '("" . "")) ; or other chars; so top bracket is drawn promptly)
 
 (after! org-auto-tangle
         (org-auto-tangle-mode))

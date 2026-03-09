@@ -112,7 +112,7 @@
 
 (after! simple
         (setopt eval-expression-debug-on-error nil
-                fill-column 80 "Wrap at 80 columns."))
+                fill-column 80)) ;"Wrap at 80 columns."
 
 (after! window
         (setopt switch-to-buffer-obey-display-actions t

@@ -25,7 +25,7 @@
         (async-bytecomp-package-mode 1))
 
 (after! autorevert
-        (setopt auto-revert-interval 0.01 "Instantaneously revert")
+        (setopt auto-revert-interval 0.01) ; "Instantaneously revert"
         (global-auto-revert-mode t))
 
 (after! auto-sudoedit
@@ -41,7 +41,7 @@
 
 (after! dired
         (setopt dired-mouse-drag-files t)
-        (setopt dired-listing-switches "-alh" "Human friendly file sizes.")
+        (setopt dired-listing-switches "-alh") ;"Human friendly file sizes."
         (setopt dired-kill-when-opening-new-dired-buffer t)
         (setopt dired-omit-files "\\(?:\\.+[^z-a]*\\)")
         (add-hook 'dired-mode-hook 'dired-omit-mode))
