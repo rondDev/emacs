@@ -103,7 +103,7 @@
   (rond/todo-update-patterns))
 
 ;; NOTE: Call it... obviously
-(rond/todo-initialize)
+(add-hook 'elpaca-after-init-hook #'rond/todo-initialize)
 
 
 
