@@ -144,9 +144,9 @@
   (setq rond//skip-dashboard t))
 
 (package! welcome-dashboard
-  ;; :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
-  :ensure nil
-  :load-path "~/code/welcome-dashboard"
+  :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
+  ;; :ensure nil
+  ;; :load-path "~/code/welcome-dashboard"
   :when (not rond//skip-dashboard)
   :config
   (setq welcome-dashboard-use-nerd-icons t      ;; Use nerd icons instead of all-the-icons
