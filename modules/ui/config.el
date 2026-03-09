@@ -1,0 +1,128 @@
+(after! anzu
+        (global-anzu-mode +1))
+
+(after! colorful-mode
+        (setopt colorful-use-prefix t
+                colorful-only-strings 'only-prog)
+        ;; (css-fontify-colors nil)
+        (global-colorful-mode t)
+        (add-to-list 'global-colorful-modes 'helpful-mode))
+
+(after! doom-modeline
+        (doom-modeline-mode 1))
+
+(after! eldoc
+        (add-to-list 'display-buffer-alist
+                     '("^\\*eldoc" ; Match the buffer name, which changes based on context
+                       display-buffer-at-bottom
+                       (window-height . 6)))) ; Optionally set width (as a fraction of frame or specific number of columns))
+
+
+(after! eldoc-box
+        (defvar rond//eldoc-box-source-frame nil)
+        (defun rond/eldoc-box-focus ()
+          (interactive)
+          (when (and (boundp 'eldoc-box--frame) eldoc-box--frame
+                     (frame-live-p eldoc-box--frame))
+            (progn
+              (setq rond//eldoc-box-source-frame (selected-frame))
+              (select-frame-set-input-focus eldoc-box--frame)
+              (goto-char (point-min))
+              (evil-normal-state))))
+
+        (defun rond/eldoc-box-unfocus ()
+          (interactive)
+          (when (and rond//eldoc-box-source-frame
+                     (frame-live-p rond//eldoc-box-source-frame))
+            (select-frame-set-input-focus rond//eldoc-box-source-frame)
+            (setq rond//eldoc-box-source-frame nil)))
+
+        (defun rond/eldoc-box-focused-p ()
+          (and (boundp 'eldoc-box--frame)
+               eldoc-box--frame
+               (frame-live-p eldoc-box--frame)
+               (eq (selected-frame) eldoc-box--frame))))
+
+(after! evil-search-highlight-persist
+        (global-evil-search-highlight-persist t)
+        (evil-ex-define-cmd "noh[ighlight]" 'evil-search-highlight-persist-remove-all))
+
+(after! git-gutter
+        (setq git-gutter:update-interval 2
+              git-gutter:added-sign " + "
+              git-gutter:modified-sign " * "
+              git-gutter:deleted-sign " - "))
+
+(after! ligature
+        (ligature-set-ligatures 'prog-mode
+                                '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                  ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                  "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                  "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                  "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                  "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                  "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                  "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                  ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                  "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                  "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                  "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                  "\\\\" "://"))
+        (global-ligature-mode t))
+
+(after! magit-todos
+        (setq magit-todos-ignored-keywords
+              '("DONE"))
+        (magit-todos-mode 1)) ; https://github.com/alphapapa/magit-todos
+
+(after! marginalia
+        (setf (alist-get 'elpaca-info marginalia-command-categories) 'elpaca))
+
+(after! nerd-icons
+        (push '("^INSTALL\\.rs$" nerd-icons-devicon "nf-dev-rust" :face nerd-icons-maroon)
+              nerd-icons-regexp-icon-alist))
+
+(after! nerd-icons-completion
+        (nerd-icons-completion-mode)
+        (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+
+(after! page-break-lines
+        (add-to-list 'page-break-lines-modes 'text-mode)
+        (add-to-list 'page-break-lines-modes 'prog-mode)
+        (add-to-list 'page-break-lines-modes 'special-mode))
+
+(after! pulsar
+        (setq pulsar-pulse t)
+        (setq pulsar-delay 0.055)
+        (setq pulsar-iterations 10)
+        (setq pulsar-face 'pulsar-magenta)
+        (setq pulsar-highlight-face 'pulsar-yellow)
+        (add-hook 'minibuffer-setup-hook #'pulsar-pulse-line)
+        ;; integration with the `consult' package:
+        (add-hook 'consult-after-jump-hook #'pulsar-recenter-top)
+        (add-hook 'consult-after-jump-hook #'pulsar-reveal-entry)
+
+        ;; integration with the built-in `imenu':
+        (add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
+        (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
+        (pulsar-global-mode 1))
+
+(after! rainbow-delimiters
+        (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+
+(after! simple
+        (setopt eval-expression-debug-on-error nil
+                fill-column 80 "Wrap at 80 columns."))
+
+(after! window
+        (setopt switch-to-buffer-obey-display-actions t
+                switch-to-prev-buffer-skip-regexp
+                '("\\*Help\\*" "\\*Calendar\\*" "\\*mu4e-last-update\\*"
+                  "\\*Messages\\*" "\\*scratch\\*" "\\magit-.*")))
+
+(after! which-key
+        (which-key-mode)
+        (setopt which-key-side-window-location 'bottom
+                which-key-sort-order 'which-key-key-order-alpha
+                which-key-side-window-max-width 0.33
+                which-key-idle-delay 0.2))

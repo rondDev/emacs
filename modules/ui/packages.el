@@ -1,22 +1,13 @@
 ;;; -*- lexical-binding: t -*-
 ;; Display searches like anzu.vim
 (package! anzu
-  :defer 10
-  :config
-  (global-anzu-mode +1))
+  :defer 10)
 
 (package! colorful-mode
   ;; :diminish
   ;; :ensure t ; Optional
   :hook (prog-mode text-mode)
-  :defer 5
-  :custom
-  (colorful-use-prefix t)
-  (colorful-only-strings 'only-prog)
-  ;; (css-fontify-colors nil)
-  :config
-  (global-colorful-mode t)
-  (add-to-list 'global-colorful-modes 'helpful-mode))
+  :defer 5)
 
 (package! consult-todo
   :after consult) ; https://github.com/eki3z/consult-todo
@@ -28,85 +19,28 @@
   :init
   (setq doom-modeline-buffer-encoding 'nondefault
         doom-modeline-modal-icon t
-        doom-modeline-icon t)
-  :config
-  (doom-modeline-mode 1))
+        doom-modeline-icon t))
 
 (package! eldoc
-  :ensure nil
-  :config
-  (add-to-list 'display-buffer-alist
-               '("^\\*eldoc" ; Match the buffer name, which changes based on context
-                 display-buffer-at-bottom
-                 (window-height . 6)))) ; Optionally set width (as a fraction of frame or specific number of columns)
+  :ensure nil)
+
 
 (package! eldoc-box
-  :after eldoc
-  :config
-  (defvar rond//eldoc-box-source-frame nil)
-  (defun rond/eldoc-box-focus ()
-    (interactive)
-    (when (and (boundp 'eldoc-box--frame) eldoc-box--frame
-               (frame-live-p eldoc-box--frame))
-      (progn
-        (setq rond//eldoc-box-source-frame (selected-frame))
-        (select-frame-set-input-focus eldoc-box--frame)
-        (goto-char (point-min))
-        (evil-normal-state))))
-
-  (defun rond/eldoc-box-unfocus ()
-    (interactive)
-    (when (and rond//eldoc-box-source-frame
-               (frame-live-p rond//eldoc-box-source-frame))
-      (select-frame-set-input-focus rond//eldoc-box-source-frame)
-      (setq rond//eldoc-box-source-frame nil)))
-
-  (defun rond/eldoc-box-focused-p ()
-    (and (boundp 'eldoc-box--frame)
-         eldoc-box--frame
-         (frame-live-p eldoc-box--frame)
-         (eq (selected-frame) eldoc-box--frame))))
+  :after eldoc)
 
 (package! evil-search-highlight-persist
-  :config
-  (global-evil-search-highlight-persist t)
-  (evil-ex-define-cmd "noh[ighlight]" 'evil-search-highlight-persist-remove-all))
+  :after evil)
 
 (package! git-gutter
-  :hook (prog-mode . git-gutter-mode)
-  :config
-  (setq git-gutter:update-interval 2
-        git-gutter:added-sign " + "
-        git-gutter:modified-sign " * "
-        git-gutter:deleted-sign " - "))
+  :hook (prog-mode . git-gutter-mode))
 
 (use-package indent-bars
   :hook (prog-mode . indent-bars-mode))
 
-(package! ligature
-  :config
-  (ligature-set-ligatures 'prog-mode
-                          '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
-                            ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
-                            "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
-                            "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
-                            "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
-                            "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
-                            "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
-                            "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
-                            ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
-                            "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
-                            "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
-                            "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
-                            "\\\\" "://"))
-  (global-ligature-mode t))
+(package! ligature)
 
 (package! magit-todos
-  :after magit
-  :config
-  (setq magit-todos-ignored-keywords
-        '("DONE"))
-  (magit-todos-mode 1)) ; https://github.com/alphapapa/magit-todos
+  :after magit)
 
 ;; Enable rich annotations using the Marginalia package
 (package! marginalia
@@ -117,21 +51,12 @@
   :bind (:map minibuffer-local-map
               ("M-A" . marginalia-cycle))
   :init
-  (marginalia-mode)
-  :config
-  (setf (alist-get 'elpaca-info marginalia-command-categories) 'elpaca))
+  (marginalia-mode))
 
-(package! nerd-icons
-  :config
-  (after! nerd-icons
-          (push '("^INSTALL\\.rs$" nerd-icons-devicon "nf-dev-rust" :face nerd-icons-maroon)
-                nerd-icons-regexp-icon-alist)))
+(package! nerd-icons)
 
 (package! nerd-icons-completion
-  :after marginalia
-  :config
-  (nerd-icons-completion-mode)
-  (add-hook 'marginalia-mode-hook #'nerd-icons-completion-marginalia-setup))
+  :after marginalia)
 
 (package! nerd-icons-corfu
   :after corfu
@@ -153,52 +78,15 @@
   :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
 
 (package! page-break-lines
-  :hook (emacs-startup . global-page-break-lines-mode)
-  :config
-  (add-to-list 'page-break-lines-modes 'text-mode)
-  (add-to-list 'page-break-lines-modes 'prog-mode)
-  (add-to-list 'page-break-lines-modes 'special-mode))
+  :hook (emacs-startup . global-page-break-lines-mode))
 
 (package! pulsar
-  :hook (after-init)
-  :config
-  (setq pulsar-pulse t)
-  (setq pulsar-delay 0.055)
-  (setq pulsar-iterations 10)
-  (setq pulsar-face 'pulsar-magenta)
-  (setq pulsar-highlight-face 'pulsar-yellow)
-  (add-hook 'minibuffer-setup-hook #'pulsar-pulse-line)
-  ;; integration with the `consult' package:
-  (add-hook 'consult-after-jump-hook #'pulsar-recenter-top)
-  (add-hook 'consult-after-jump-hook #'pulsar-reveal-entry)
+  :hook (after-init))
 
-  ;; integration with the built-in `imenu':
-  (add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
-  (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
-  (pulsar-global-mode 1))
-
-(package! rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
-
-;; (package! rainbow-mode
-;;   :hook (emacs-lisp-mode text-mode lisp-mode)
-;;   :config
-;;   (defun prot/rainbow-mode-in-themes ()
-;;     (when-let ((file (buffer-file-name))
-;;                ((derived-mode-p 'emacs-lisp-mode))
-;;                ((string-match-p "-theme" file)))
-;;       (rainbow-mode 1))))
-
+(package! rainbow-delimiters)
 
 (package! simple
-  :ensure nil
-  ;; :general
-  ;; (+general-global-toggle
-  ;;  "f" 'auto-fill-mode)
-  :custom
-  (eval-expression-debug-on-error nil)
-  (fill-column 80 "Wrap at 80 columns."))
+  :ensure nil)
 
 (package! spacious-padding
   :ensure t
@@ -239,21 +127,9 @@
   (add-hook 'emacs-startup-hook #'unicode-fonts-setup))
 
 (package! window
-  :ensure nil
-  :custom
-  (switch-to-buffer-obey-display-actions t)
-  (switch-to-prev-buffer-skip-regexp
-   '("\\*Help\\*" "\\*Calendar\\*" "\\*mu4e-last-update\\*"
-     "\\*Messages\\*" "\\*scratch\\*" "\\magit-.*")))
+  :ensure nil)
 
 (package! which-key
   :demand t
   :init
-  (setq which-key-enable-extended-define-key t)
-  :config
-  (which-key-mode)
-  :custom
-  (which-key-side-window-location 'bottom)
-  (which-key-sort-order 'which-key-key-order-alpha)
-  (which-key-side-window-max-width 0.33)
-  (which-key-idle-delay 0.2))
+  (setq which-key-enable-extended-define-key t))
