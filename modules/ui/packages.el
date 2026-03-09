@@ -16,10 +16,9 @@
   :defer t)
 
 (package! doom-modeline
+  :defer t
   :init
-  (setq doom-modeline-buffer-encoding 'nondefault
-        doom-modeline-modal-icon t
-        doom-modeline-icon t))
+  (add-hook 'emacs-startup-hook #'doom-modeline-mode))
 
 (package! eldoc
   :ensure nil)
@@ -32,9 +31,14 @@
   :after evil)
 
 (package! git-gutter
+  :config
+  (setq git-gutter:update-interval 2
+        git-gutter:added-sign " + "
+        git-gutter:modified-sign " * "
+        git-gutter:deleted-sign " - ")
   :hook (prog-mode . git-gutter-mode))
 
-(use-package indent-bars
+(package! indent-bars
   :hook (prog-mode . indent-bars-mode))
 
 (package! ligature)
@@ -53,7 +57,8 @@
   :init
   (marginalia-mode))
 
-(package! nerd-icons)
+(package! nerd-icons
+  :demand t)
 
 (package! nerd-icons-completion
   :after marginalia)

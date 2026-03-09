@@ -38,7 +38,9 @@
   (setq evil-split-window-below t
         evil-vsplit-window-right t)
   (define-key evil-motion-state-map [down-mouse-1] nil)
-  (evil-mode))
+  (evil-mode)
+  (after! evil-collection
+          (evil-collection-init)))
 
 (package! general
   :ensure (:wait t))

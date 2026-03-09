@@ -2,7 +2,8 @@
 (package! ace-window
   :after general)
 
-(package! async)
+(package! async
+  :defer t)
 
 (package! auth-source
   :ensure nil
@@ -52,7 +53,8 @@
   :after (evil anzu))
 
 (package! evil-collection
-  :after (evil))
+  :after evil
+  :defer t)
 
 (package! evil-goggles
   :after (evil))
@@ -111,7 +113,8 @@
 (package! projectile-git-autofetch
   :after projectile
   :init
-  (add-hook 'emacs-startup-hook #'projectile-git-autofetch-setup))
+  (after! projectile
+          (add-hook 'emacs-startup-hook #'projectile-git-autofetch-setup)))
 
 (package! rg
   :defer 20)

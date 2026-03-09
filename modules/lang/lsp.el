@@ -120,4 +120,3 @@
 ;;                                                            "volar.json") lsp-bridge-directory)))))))))
 
 
-(package! markdown-mode)

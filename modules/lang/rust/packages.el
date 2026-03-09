@@ -6,4 +6,5 @@
   :disabled t
   :mode "\\.rs\\'")
 
-(package! cargo)
+(package! cargo
+  :hook (rust-ts-mode))

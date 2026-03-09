@@ -1,5 +1,12 @@
 ;;; init.el --- Initial config -*- lexical-binding: t -*-
 ;;; Version: 1.0.0
+;; Add this before everything else in init.el
+
+;; (defun trace-require (orig feature &rest args)
+;;   (when (eq feature 'nerd-icons)
+;;     (message "nerd-icons required by:") (backtrace))
+;;   (apply orig feature args))
+;; (advice-add 'require :around #'trace-require)
 
 (add-hook 'elpaca-after-init-hook
           (lambda ()
@@ -105,6 +112,10 @@
   :defer 1
   :config
   (recentf-mode)
+  (setq recentf-exclude '("^/[^/:]+:"))
+  (setopt recentf-auto-cleanup 'never)
+  (add-to-list 'recentf-exclude "/run/user/[0-9]+/gvfs")
+  (add-to-list 'recentf-exclude "^/\\(gvfs\\|run/user\\)")
   :custom
   (recentf-max-menu-items 1000 "Offer more recent files in menu")
   (recentf-max-saved-items 1000 "Save more recent files"))
@@ -114,7 +125,6 @@
 
 (package! savehist
   :ensure nil
-  :defer 1
   :config
   (savehist-mode 1))
 
@@ -123,7 +133,7 @@
   :ensure t
   :config
   ;; To disable collection of benchmark data after init is done.
-  (add-hook 'after-init-hook 'benchmark-init/deactivate))
+  (add-hook 'elpaca-after-init-hook 'benchmark-init/deactivate))
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
@@ -147,8 +157,8 @@
         welcome-dashboard-image-file (expand-file-name "vapor.png" user-emacs-directory)
         welcome-dashboard-image-width 450
         welcome-dashboard-image-height 250
-        welcome-dashboard-max-number-of-todos 5
-        welcome-dashboard-title (concat "Welcome " user-full-name))
+        welcome-dashboard-max-number-of-todos 5)
+  ;; welcome-dashboard-title (concat "Welcome " user-full-name))
   (add-hook 'window-configuration-change-hook #'welcome-dashboard--redisplay-buffer-on-resize)
   (add-hook 'emacs-startup-hook (lambda ()
                                   ;; Show dashboard immediately
@@ -159,6 +169,8 @@
                                   (run-with-timer 60 60 (lambda () 
                                                           (when (welcome-dashboard--isActive)
                                                             (welcome-dashboard--refresh-screen)))))))
+
+
 
 
 ;;; init.el ends here

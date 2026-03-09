@@ -6,4 +6,5 @@
 (package! cherry-blossom-theme
   :defer 4)
 
-(package! sakura-theme)
+(package! sakura-theme
+  :defer t)

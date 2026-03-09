@@ -19,9 +19,6 @@
                            aw-dispatch-always t)))
 
 (after! async
-        (autoload 'dired-async-mode "dired-async.el" nil t)
-        ;; make dired async
-        (dired-async-mode 1)
         (async-bytecomp-package-mode 1))
 
 (after! autorevert
@@ -44,7 +41,8 @@
         (setopt dired-listing-switches "-alh") ;"Human friendly file sizes."
         (setopt dired-kill-when-opening-new-dired-buffer t)
         (setopt dired-omit-files "\\(?:\\.+[^z-a]*\\)")
-        (add-hook 'dired-mode-hook 'dired-omit-mode))
+        (add-hook 'dired-mode-hook 'dired-omit-mode)
+        (dired-async-mode 1))
 
 (after! editorconfig
         (editorconfig-mode 1))
@@ -52,8 +50,7 @@
 (after! evil-collection
         (setq evil-collection-magit-use-z-for-folds t
               evil-collection-magit-use-y-for-yank t)
-        (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes))
-        (evil-collection-init))
+        (setq evil-emacs-state-modes (delq 'ibuffer-mode evil-emacs-state-modes)))
 
 (after! evil-nerd-commenter
         (evilnc-default-hotkeys))
@@ -103,8 +100,7 @@ buffer called \"*scratch* (NAME)\"."
         (setq vertico-cycle t)
         (setq vertico-count 20)
         (setq vertico-resize nil)
-        (vertico-mode)
-        (setq ido-mode nil))
+        (add-hook 'pre-command-hook #'vertico-mode))
 
 (after! wakatime-mode
         (when (file-executable-p "/usr/sbin/wakatime")

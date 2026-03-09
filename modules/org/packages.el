@@ -54,4 +54,5 @@
   :after org
   :defer 3)
 
-(package! org-cliplink)
+(package! org-cliplink
+  :after org)

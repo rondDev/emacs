@@ -9,7 +9,9 @@
         (add-to-list 'global-colorful-modes 'helpful-mode))
 
 (after! doom-modeline
-        (doom-modeline-mode 1))
+        (setq doom-modeline-buffer-encoding 'nondefault
+              doom-modeline-modal-icon t
+              doom-modeline-icon t))
 
 (after! eldoc
         (add-to-list 'display-buffer-alist
@@ -47,11 +49,8 @@
         (global-evil-search-highlight-persist t)
         (evil-ex-define-cmd "noh[ighlight]" 'evil-search-highlight-persist-remove-all))
 
-(after! git-gutter
-        (setq git-gutter:update-interval 2
-              git-gutter:added-sign " + "
-              git-gutter:modified-sign " * "
-              git-gutter:deleted-sign " - "))
+(after! git-gutter)
+
 
 (after! ligature
         (ligature-set-ligatures 'prog-mode

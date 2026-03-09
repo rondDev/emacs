@@ -4,7 +4,7 @@
   :init
   (apheleia-global-mode +1))
 
-(package! company)
+;; (package! company)
 
 (package! corfu
   :config
@@ -26,7 +26,9 @@
   :after consult)
 
 (package! devdocs
-  :after general)
+  :after general
+  :defer t
+  :commands (devdocs-lookup devdocs-install devdocs-peruse))
 
 (package! direnv
   :defer 10)
@@ -37,11 +39,18 @@
 (package! elisp-mode
   :ensure nil)
 
-(package! hyprlang-ts-mode)
+(package! hyprlang-ts-mode
+  :hook (hyprlang-ts-mode-hook))
 
-(package! nix-mode)
 
-(package! qml-mode)
+(package! markdown-mode
+  :hook (markdown-mode-hook))
+
+(package! nix-mode
+  :hook (nix-mode-hook))
+
+(package! qml-mode
+  :hook (qml-mode-hook))
 
 (package! tempel ;; templates
   :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
