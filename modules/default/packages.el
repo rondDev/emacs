@@ -1,4 +1,29 @@
 ;;; -*- lexical-binding: t -*-
+(package! ace-window
+  :after general
+  ;; NOTE: which-key might not work here, unsure
+  :general (general-spc
+             "j" #'ace-window
+             "jx" '(:ignore t :wk "delete window")
+             "jm" '(:ignore t :wk "swap windows")
+             "jM" '(:ignore t :wk "move window")
+             "jc" '(:ignore t :wk "copy window")
+             "jj" '(:ignore t :wk "select buffer")
+             "jn" '(:ignore t :wk "select previous buffer")
+             "ju" '(:ignore t :wk "select buffer in other window")
+             "jc" '(:ignore t :wk "split fairly")
+             "jv" '(:ignore t :wk "split vertically")
+             "jb" '(:ignore t :wk "split horizontally")
+             "jo" '(:ignore t :wk "maximize current window")
+             "j?" '(:ignore t :wk "show bindings"))
+
+  
+  :custom
+  (aw-dispatch-always t)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g ?h ?k ?l
+                     aw-dispatch-always t)))
+
 (package! async
   :config
   (autoload 'dired-async-mode "dired-async.el" nil t)
