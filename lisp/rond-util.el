@@ -102,6 +102,9 @@
 
   (rond/todo-update-patterns))
 
+;; NOTE: Call it... obviously
+(rond/todo-initialize)
+
 
 
 (define-minor-mode rond/todo-outline-mode
