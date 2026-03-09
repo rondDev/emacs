@@ -30,4 +30,7 @@
 
 (package! tramp
   :ensure nil
-  :defer t)
+  :defer t
+  :config
+  (setq remote-file-name-inhibit-locks t
+        remote-file-name-inhibit-auto-save-visited t))
