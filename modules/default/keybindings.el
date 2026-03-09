@@ -50,7 +50,7 @@
           "gc" #'evilnc-comment-or-uncomment-lines)
 
         (def!
-          :states '(insert)
+          :states '(insert override)
           "C-S-v" #'yank)
 
 
@@ -61,7 +61,8 @@
         ;;     "K" 'eldoc-box-help-at-point))
         (def!
           :package 'corfu
-          :keymaps '(override corfu-map)
+          :states 'insert
+          :keymaps '(corfu-map)
           "C-y" #'corfu-complete)
 
         ;; (def!
