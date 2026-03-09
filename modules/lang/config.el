@@ -17,6 +17,11 @@
         (setf (alist-get 'svelte-mode apheleia-mode-alist) 'denofmt-svelte)
         (setf (alist-get 'prettier-svelte apheleia-formatters) '("deno" "fmt" "--unstable-component" "--ext" "svelte" "-")))
 
+(after! cape
+        (add-hook 'completion-at-point-functions #'cape-dabbrev
+                  (add-hook 'completion-at-point-functions #'cape-file)
+                  (add-hook 'completion-at-point-functions #'cape-elisp-block)))
+
 (after! corfu
         (setq corfu-auto t
               corfu-auto-delay 0.1
@@ -31,12 +36,40 @@
         (keymap-set corfu-map "TAB" nil)
         (keymap-set corfu-map "RET" nil))
 
+(after! devdocs
+        (def!
+          :keymaps 'rond/code-map
+          "l" #'devdocs-lookup)
+        (defun devdocs-ensure (&rest slugs)
+          "Ensure that all documents listed in SLUGS are installed."
+          (dolist (slug slugs)
+            (unless (file-exists-p (expand-file-name (format "devdocs/%s/metadata" slug)
+                                                     user-emacs-directory)) ;; This assumes you didn't customize `devdocs-data-dir'.
+              (devdocs-install slug))))
+        (eval-when-compile
+          (apply #'devdocs-ensure '(astro bun c cpp css elisp git go haxe html http nix php rust sass vite zig zsh))))
+
 (after! direnv
         (when (executable-find "direnv")
           (direnv-mode)))
 
+(after! dumb-jump
+        (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+
 (after! eldoc
         (setq eldoc-echo-area-prefer-doc-buffer t))
+
+(after! elisp-mode
+        (general-spc
+          :major-modes '(emacs-lisp-mode lisp-interaction-mode t)
+          :keymaps     '(emacs-lisp-mode-map lisp-interaction-mode-map)
+          "x"  '(:ignore t :which-key "eval")
+          "xb" 'eval-buffer
+          "xd" 'eval-defun
+          "xe" 'eval-expression
+          "xp" 'pp-eval-last-sexp
+          "xs" 'eval-last-sexp
+          "i"  'elisp-index-search))
 
 (after! parinfer-rust-mode
         (setq parinfer-rust-check-before-enable nil
@@ -64,6 +97,19 @@
         (add-hook 'conf-mode-hook 'tempel-setup-capf)
         (add-hook 'prog-mode-hook 'tempel-setup-capf)
         (add-hook 'text-mode-hook 'tempel-setup-capf))
+
+(after! treesit-auto
+        (setopt treesit-auto-install 'prompt)
+        (treesit-auto-add-to-auto-mode-alist 'all)
+        (global-treesit-auto-mode))
+
+(after! yasnippet
+        (def!
+          :states '(insert)
+          "C-S-i" #'yas-insert-snippet)
+        (general-spc
+          "is" #'yas-insert-snippet)
+        (add-hook 'prog-mode-hook #'yas-minor-mode))
 
 ;; Code folding
 (add-hook 'prog-mode-hook 'hs-minor-mode)

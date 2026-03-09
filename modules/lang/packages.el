@@ -4,8 +4,6 @@
   :init
   (apheleia-global-mode +1))
 
-
-
 (package! company)
 
 (package! corfu
@@ -15,11 +13,7 @@
 (package! caddyfile-mode
   :defer 12)
 
-(package! cape
-  :init
-  (add-hook 'completion-at-point-functions #'cape-dabbrev
-            (add-hook 'completion-at-point-functions #'cape-file)
-            (add-hook 'completion-at-point-functions #'cape-elisp-block)))
+(package! cape)
 ;; Add to the global default value of `completion-at-point-functions' which is
 ;; used by `completion-at-point'.  The order of the functions matters, the
 ;; first function returning a result wins.  Note that the list of buffer-local
@@ -32,46 +26,16 @@
   :after consult)
 
 (package! devdocs
-  ;; devdocs-update-all
-  ;; devdocs-install
-  :config
-  (def!
-    :keymaps 'rond/code-map
-    "l" #'devdocs-lookup)
-  (defun devdocs-ensure (&rest slugs)
-    "Ensure that all documents listed in SLUGS are installed."
-    (dolist (slug slugs)
-      (unless (file-exists-p (expand-file-name (format "devdocs/%s/metadata" slug)
-                                               user-emacs-directory)) ;; This assumes you didn't customize `devdocs-data-dir'.
-        (devdocs-install slug))))
-  (eval-when-compile
-    (apply #'devdocs-ensure '(astro bun c cpp css elisp git go haxe html http nix php rust sass vite zig zsh))))
-
-
+  :after general)
 
 (package! direnv
-  :defer 10
-  :config
-  (direnv-mode))
+  :defer 10)
 
 ;; dumb-jump is jump to definition for 50+ languages
-(package! dumb-jump
-  :config
-  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
+(package! dumb-jump)
 
 (package! elisp-mode
-  :ensure nil
-  :config
-  (general-spc
-    :major-modes '(emacs-lisp-mode lisp-interaction-mode t)
-    :keymaps     '(emacs-lisp-mode-map lisp-interaction-mode-map)
-    "x"  '(:ignore t :which-key "eval")
-    "xb" 'eval-buffer
-    "xd" 'eval-defun
-    "xe" 'eval-expression
-    "xp" 'pp-eval-last-sexp
-    "xs" 'eval-last-sexp
-    "i"  'elisp-index-search))
+  :ensure nil)
 
 (package! hyprlang-ts-mode)
 
@@ -87,12 +51,7 @@
 (package! tempel-collection
   :after 'tempel)
 
-(package! treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
+(package! treesit-auto)
 
 ;; (package! treesit-fold
 ;;   :config
@@ -104,14 +63,7 @@
 ;; (package! vimish-fold)
 
 (package! yasnippet
-  :commands (yas-global-mode)
-  :config
-  (def!
-    :states '(insert)
-    "C-S-i" #'yas-insert-snippet)
-  (general-spc
-    "is" #'yas-insert-snippet)
-  (add-hook 'prog-mode-hook #'yas-minor-mode))
+  :commands (yas-global-mode))
 
 (package! yasnippet-snippets
   :after (yasnippet))
