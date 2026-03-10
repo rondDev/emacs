@@ -41,7 +41,7 @@
         (setopt dired-listing-switches "-alh") ;"Human friendly file sizes."
         (setopt dired-kill-when-opening-new-dired-buffer t)
         (setopt dired-omit-files "\\(?:\\.+[^z-a]*\\)")
-        (add-hook 'dired-mode-hook 'dired-omit-mode)
+        ;; (add-hook 'dired-mode-hook 'dired-omit-mode)
         (dired-async-mode 1))
 
 (after! editorconfig
