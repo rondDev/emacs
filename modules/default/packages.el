@@ -53,8 +53,7 @@
   :after (evil anzu))
 
 (package! evil-collection
-  :after evil
-  :defer t)
+  :after evil)
 
 (package! evil-goggles
   :after (evil))
