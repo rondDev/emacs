@@ -142,7 +142,6 @@
   :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
   ;; :ensure nil
   ;; :load-path "~/code/welcome-dashboard"
-  :when (not (< 1 (length command-line-args)))
   :config
   (setq welcome-dashboard-use-nerd-icons t      ;; Use nerd icons instead of all-the-icons
         welcome-dashboard-path-max-length 75
@@ -152,20 +151,8 @@
         welcome-dashboard-image-file (expand-file-name "vapor.png" user-emacs-directory)
         welcome-dashboard-image-width 450
         welcome-dashboard-image-height 250
-        welcome-dashboard-max-number-of-todos 5)
-  ;; welcome-dashboard-title (concat "Welcome " user-full-name))
-  (add-hook 'window-configuration-change-hook #'welcome-dashboard--redisplay-buffer-on-resize)
-  (add-hook 'emacs-startup-hook (lambda ()
-                                  ;; Show dashboard immediately
-                                  (welcome-dashboard--refresh-screen)
-                                  ;; Defer loading of additional data - only weather, no TODOs
-                                  (run-with-idle-timer 2.0 nil #'welcome-dashboard--fetch-weather-data t)
-                                  ;; Update time every minute when dashboard is active
-                                  (run-with-timer 60 60 (lambda () 
-                                                          (when (welcome-dashboard--isActive)
-                                                            (welcome-dashboard--refresh-screen)))))))
-
-
-
+        welcome-dashboard-max-number-of-todos 5
+        welcome-dashboard-title (concat "Welcome " user-full-name))
+  (welcome-dashboard-create-welcome-hook)) 
 
 ;;; init.el ends here
