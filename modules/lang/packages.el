@@ -38,7 +38,8 @@
 
 (package! eglot
   :ensure nil
-  :hook ((rust-ts-mode . eglot-ensure)))
+  :hook ((rust-ts-mode . eglot-ensure)
+         (go-ts-mode . eglot-ensure)))
 
 
 (package! elisp-mode
