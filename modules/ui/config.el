@@ -21,6 +21,8 @@
 
 
 (after! eldoc-box
+        (setq eldoc-box-clear-with-C-g t)
+        (advice-add #'keyboard-quit :before #'eldoc-box-quit-frame)
         (defvar rond//eldoc-box-source-frame nil)
         (defun rond/eldoc-box-focus ()
           (interactive)
