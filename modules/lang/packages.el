@@ -36,6 +36,11 @@
 ;; dumb-jump is jump to definition for 50+ languages
 (package! dumb-jump)
 
+(package! eglot
+  :ensure nil
+  :hook ((rust-ts-mode . eglot-ensure)))
+
+
 (package! elisp-mode
   :ensure nil)
 
