@@ -30,6 +30,9 @@
 (package! evil-search-highlight-persist
   :after evil)
 
+(package! flymake-popon
+  :hook (flymake-mode . flymake-popon-mode))
+
 (package! git-gutter
   :config
   (setq git-gutter:update-interval 2
