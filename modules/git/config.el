@@ -13,8 +13,8 @@
                       evil-collection-magit-use-z-for-folds t
                       evil-collection-magit-section-use-z-for-folds t
                       evil-collection-magit-use-y-for-yank t)
-        (setq magit-clone-default-directory "~/code/"
-              magit-diff-visit-previous-blob nil)
+        (setq magit-clone-default-directory "~/code/")
+        ;; magit-diff-visit-previous-blob nil)
         (transient-bind-q-to-quit))
 
 (after! tramp
