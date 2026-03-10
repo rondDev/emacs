@@ -7,7 +7,7 @@
 (after! eglot
         (add-to-list 'eglot-server-programs
                      '(rust-ts-mode . ("rass" "rust")))
-        (add-hook 'rust-ts-mode #'eglot-ensure))
+        (add-hook 'rust-ts-mode-hook #'eglot-ensure))
 
 (after! rustic
         ;; TODO: Add more
