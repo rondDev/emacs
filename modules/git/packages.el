@@ -6,9 +6,12 @@
 (package! ghub
   :after magit)
 
-(package! magit
-  :defer t
-  :after general)
+(elpaca (magit
+         :host github
+         :repo "magit/magit"
+         :depth 1
+         :after general)
+  :defer t)
 
 (package! tramp
   :ensure nil
