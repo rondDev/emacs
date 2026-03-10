@@ -8,6 +8,22 @@
   :custom
   (custom-file null-device "Don't store customizations"))
 
+(package! display-fill-column-indicator
+  :ensure nil
+  :custom
+  (display-fill-column-indicator-character
+   (plist-get '( triple-pipe  ?┆
+                 double-pipe  ?╎
+                 double-bar   ?║
+                 solid-block  ?█
+                 empty-bullet ?◦)
+              'triple-pipe)))
+;; :general
+;; (+general-global-toggle
+;;  "F" '(:ignore t :which-key "fill-column-indicator")
+;;  "FF" 'display-fill-column-indicator-mode
+;;  "FG" 'global-display-fill-column-indicator-mode)
+
 (defvar evil-kill-on-visual-paste nil)
 (defvar evil-undo-system 'undo-fu)
 
@@ -41,9 +57,6 @@
   (evil-mode)
   (after! evil-collection
           (evil-collection-init)))
-
-(package! general
-  :ensure (:wait t))
 
 
 ;;Turns off elpaca-use-package-mode current declaration
@@ -103,19 +116,5 @@
    "Store safe local variables here instead of in emacs-custom.el")
   (lock-file-name-transforms `(("\\(?:[^/]*/\\)*\\(.*\\)" ,(concat rond-v/lockfile-folder "\\1") t))))
 
-(package! display-fill-column-indicator
-  :ensure nil
-  :custom
-  (display-fill-column-indicator-character
-   (plist-get '( triple-pipe  ?┆
-                 double-pipe  ?╎
-                 double-bar   ?║
-                 solid-block  ?█
-                 empty-bullet ?◦)
-              'triple-pipe)))
-;; :general
-;; (+general-global-toggle
-;;  "F" '(:ignore t :which-key "fill-column-indicator")
-;;  "FF" 'display-fill-column-indicator-mode
-;;  "FG" 'global-display-fill-column-indicator-mode)
-
+(package! general
+  :ensure (:wait t))

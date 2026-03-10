@@ -112,6 +112,7 @@
           :keymaps 'rond/buffer-map
           "b" #'switch-to-buffer
           "k" #'kill-buffer
+          "m" (lambda () (interactive) (switch-to-buffer "*Messages*"))
           "s" #'scratch-buffer
           "i" #'ibuffer)
 

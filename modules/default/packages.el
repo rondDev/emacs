@@ -59,7 +59,8 @@
   :after (evil))
 
 (package! evil-nerd-commenter
-  :after (evil))
+  :after (evil)
+  :commands (evilnc-comment-or-uncomment-lines))
 
 (package! evil-surround
   :after (evil))
@@ -87,9 +88,9 @@
 
 (package! orderless)
 
-(package! persistent-scratch
-  :init
-  (persistent-scratch-setup-default))
+;; (package! persistent-scratch
+;;   :init
+;;   (persistent-scratch-setup-default))
 
 ;; NOTE: Could consider adding popper.
 ;; https://github.com/karthink/popper
