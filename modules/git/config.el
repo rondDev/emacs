@@ -7,6 +7,7 @@
           "k" 'evil-previous-line
           "l" 'evil-forward-char)
         (add-hook 'git-commit-mode-hook 'evil-insert-state)
+        (add-hook 'magit-status-sections-hook #'magit-insert-worktrees)
         (evil-set-initial-state 'git-commit-mode 'insert)
         (evil-set-initial-state 'magit-status-mode 'normal)
         (setq-default magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1
@@ -15,7 +16,19 @@
                       evil-collection-magit-use-y-for-yank t)
         (setq magit-clone-default-directory "~/code/")
         ;; magit-diff-visit-previous-blob nil)
-        (transient-bind-q-to-quit))
+        (transient-bind-q-to-quit)
+        (defun rond/consult-git-worktree ()
+          (interactive)
+          (let* ((worktrees (shell-command-to-string "git worktree list --porcelain"))
+                 (paths (cl-remove-if #'null
+                                      (mapcar (lambda (line)
+                                                (when (string-prefix-p "worktree " line)
+                                                  (substring line 9)))
+                                              (split-string worktrees "\n")))))
+            (projectile-switch-project-by-name
+             (completing-read "Worktree: " paths))))
+        (general-spc
+          "gw" '(rond/consult-git-worktree :wk "Switch to worktree")))
 
 (after! tramp
         (setq remote-file-name-inhibit-locks t
