@@ -97,6 +97,8 @@
           "f" '(:keymap rond/file-map :wk "file")
           "g" '(:ignore t :wk "git")
           "gg" '(magit-status :wk "magit")
+          "gb" #'magit-blame
+          "gl" #'magit-log-buffer-file
           "h" '(:keymap rond/helpful-map :wk "helpful")
           "o" '(:keymap rond/open-map :wk "open")
           "p" '(:keymap rond/projectile-map :wk "projectile")
