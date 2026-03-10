@@ -143,6 +143,10 @@
           "da" #'rond/deno-add
           "l" '(:keymap rond/lsp-map :wk "lsp"))
 
+        (comma-def!
+          :keymaps '(rust-ts-mode-map)
+          "r" '(:keymap cargo-mode-command-map :package cargo-mode :wk "cargo-mode"))
+
         (def!
           :keymaps 'rond/open-map
           "o" #'dired-jump

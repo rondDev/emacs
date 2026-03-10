@@ -1,8 +1,8 @@
 ;;; -*- lexical-binding: t -*-
 (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 
-(after! cargo
-        (add-hook 'rust-mode-hook 'cargo-minor-mode))
+(after! cargo-mode
+        (setq compilation-scroll-output t))
 
 (after! eglot
         (add-to-list 'eglot-server-programs
