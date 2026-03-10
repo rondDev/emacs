@@ -105,3 +105,5 @@ buffer called \"*scratch* (NAME)\"."
 (after! wakatime-mode
         (when (file-executable-p "/usr/sbin/wakatime")
           (global-wakatime-mode)))
+
+(setq compilation-scroll-output t)
