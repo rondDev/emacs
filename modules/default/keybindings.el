@@ -96,9 +96,11 @@
           "e" '(revert-buffer-quick :wk "revert buffer")
           "f" '(:keymap rond/file-map :wk "file")
           "g" '(:ignore t :wk "git")
-          "gg" '(magit-status :wk "magit")
           "gb" #'magit-blame
+          "gc" #'magit-checkout
+          "gg" '(magit-status :wk "magit")
           "gl" #'magit-log-buffer-file
+          "gs" #'magit-worktree-checkout
           "h" '(:keymap rond/helpful-map :wk "helpful")
           "o" '(:keymap rond/open-map :wk "open")
           "p" '(:keymap rond/projectile-map :wk "projectile")
