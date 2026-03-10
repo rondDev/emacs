@@ -138,16 +138,11 @@
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
 
-(defvar rond//skip-dashboard nil)
-
-(when (< 1 (length command-line-args))
-  (setq rond//skip-dashboard t))
-
 (package! welcome-dashboard
   :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
   ;; :ensure nil
   ;; :load-path "~/code/welcome-dashboard"
-  :when (not rond//skip-dashboard)
+  :when (not (< 1 (length command-line-args)))
   :config
   (setq welcome-dashboard-use-nerd-icons t      ;; Use nerd icons instead of all-the-icons
         welcome-dashboard-path-max-length 75
