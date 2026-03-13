@@ -1,13 +1,15 @@
 ;;; -*- lexical-binding: t -*-
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+;; (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 
 (after! cargo-mode
         (setq compilation-scroll-output t))
 
-(after! eglot
-        (add-to-list 'eglot-server-programs
-                     '(rust-ts-mode . ("rass" "rust")))
-        (add-hook 'rust-ts-mode-hook #'eglot-ensure))
+
+;; (after! eglot
+;;         (add-to-list 'eglot-server-programs
+;;                      '(rust-ts-mode . ("rass" "rust")))
+;;         (add-hook 'rust-ts-mode-hook #'eglot-ensure))
 
 (after! rustic
         ;; TODO: Add more
