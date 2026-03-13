@@ -11,7 +11,23 @@
 (after! doom-modeline
         (setq doom-modeline-buffer-encoding 'nondefault
               doom-modeline-modal-icon t
-              doom-modeline-icon t))
+              doom-modeline-icon t
+              doom-modeline-buffer-file-name-style 'truncate-upto-project)
+        (setq doom-modeline-lsp t))
+
+
+(add-to-list 'global-mode-string
+             '(:eval
+               (when (and (bound-and-true-p eglot--managed-mode)
+                          (eglot-current-server))
+                 (let ((pending (if (fboundp 'jsonrpc-continuation-count)
+                                    (jsonrpc-continuation-count (eglot-current-server))
+                                  (hash-table-count
+                                   (jsonrpc--request-continuations (eglot-current-server))))))
+                   (if (> pending 0)
+                       (format " [ LSP %d⇡ ]  " pending)
+                     " [ LSP✓ ]   ")))))
+
 
 (after! eldoc
         (add-to-list 'display-buffer-alist
@@ -98,15 +114,15 @@
         (setq pulsar-iterations 10)
         (setq pulsar-face 'pulsar-magenta)
         (setq pulsar-highlight-face 'pulsar-yellow)
+        ;; (setq pulsar-pulse-region-functions pulsar-pulse-region-common-functions)
         (add-hook 'minibuffer-setup-hook #'pulsar-pulse-line)
         ;; integration with the `consult' package:
         (add-hook 'consult-after-jump-hook #'pulsar-recenter-top)
         (add-hook 'consult-after-jump-hook #'pulsar-reveal-entry)
 
-        ;; integration with the built-in `imenu':
+                                        ; integration with the built-in `imenu':
         (add-hook 'imenu-after-jump-hook #'pulsar-recenter-top)
-        (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry)
-        (pulsar-global-mode 1))
+        (add-hook 'imenu-after-jump-hook #'pulsar-reveal-entry))
 
 (after! rainbow-delimiters
         (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
