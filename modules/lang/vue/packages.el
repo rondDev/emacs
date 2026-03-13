@@ -1,3 +1,3 @@
 ;; -*- lexical-binding: t; -*-
-(package! vue-mode
-  :mode "\\.vue\\'")
+;; (package! vue-mode
+;;   :mode "\\.vue\\'")
