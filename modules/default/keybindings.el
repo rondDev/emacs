@@ -97,10 +97,12 @@
           "f" '(:keymap rond/file-map :wk "file")
           "g" '(:ignore t :wk "git")
           "gb" #'magit-blame
-          "gc" #'magit-checkout
+          "gco" #'magit-checkout
+          "gcc" #'magit-clone
           "gg" '(magit-status :wk "magit")
+          "gi" '(magit-init :wk "git init")
           "gl" #'magit-log-buffer-file
-          "gs" #'magit-worktree-checkout
+          "gs" #'magit-worktree
           "h" '(:keymap rond/helpful-map :wk "helpful")
           "o" '(:keymap rond/open-map :wk "open")
           "p" '(:keymap rond/projectile-map :wk "projectile")
