@@ -89,7 +89,7 @@
   :hook (emacs-startup . global-page-break-lines-mode))
 
 (package! pulsar
-  :hook (after-init))
+  :hook (elpaca-after-init . pulsar-global-mode))
 
 (package! rainbow-delimiters)
 
