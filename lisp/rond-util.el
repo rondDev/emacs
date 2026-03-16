@@ -29,10 +29,15 @@
 
 (defvar rond/todo-patterns nil)
 
+(defmacro rond//todo-pattern (keyword color)
+  `(list ,(concat "\\(\\s-*\\(" keyword "\\)\\(\s\\|:\\)\\)")
+         (1 '(:background ,color :foreground ,(face-attribute 'default :background) :weight bold) t)
+         (3 '(:background ,color :foreground ,color :weight bold) t)))
+
 ;; TODO: Make this into a macro
 ;; NOTE: Colors could be updated
 ;;;###autoload
-(defun rond/todo-update-patterns ()
+(defun rond//todo-update-patterns ()
   (let ((bg (face-attribute 'default :background))
         (todo (face-foreground 'warning))
         (fixme (face-foreground 'error))
@@ -43,32 +48,16 @@
         (bug (face-foreground 'error))
         (warning (face-foreground 'font-lock-constant-face)))
     (setq rond/todo-patterns
-          `(("\\(\\s-*\\(TODO\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,todo :foreground ,bg :weight bold) t)
-             (3 '(:background ,todo :foreground ,todo :weight bold) t))
-            ("\\(\\s-*\\(FIXME\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,fixme :foreground ,bg :weight bold) t)
-             (3 '(:background ,fixme :foreground ,fixme :weight bold) t))
-            ("\\(\\s-*\\(REVIEW\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,review :foreground ,bg :weight bold) t)
-             (3 '(:background ,review :foreground ,review :weight bold) t))
-            ("\\(\\s-*\\(HACK\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,hack :foreground ,bg :weight bold) t)
-             (3 '(:background ,hack :foreground ,hack :weight bold) t))
-            ("\\(\\s-*\\(DEPRECATED\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,deprecated :foreground ,bg :weight bold) t)
-             (3 '(:background ,deprecated :foreground ,deprecated :weight bold) t))
-            ("\\(\\s-*\\(NOTE\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,note :foreground ,bg :weight bold) t)
-             (3 '(:background ,note :foreground ,note :weight bold) t))
-            ("\\(\\s-*\\(BUG\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,bug :foreground ,bg :weight bold) t)
-             (3 '(:background ,bug :foreground ,bug :weight bold) t))
-            ("\\(\\s-*\\(WARNING\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,warning :foreground ,bg :weight bold) t)
-             (3 '(:background ,warning :foreground ,warning :weight bold) t)))))) 
+          (list (rond//todo-pattern "TODO" todo) 
+                (rond//todo-pattern "FIXME" fixme)
+                (rond//todo-pattern "REVIEW" review)
+                (rond//todo-pattern "HACK" hack)
+                (rond//todo-pattern "DEPRECATED" deprecated)
+                (rond//todo-pattern "NOTE" note)
+                (rond//todo-pattern "BUG" bug)
+                (rond//todo-pattern "WARNING" warning)))))
 
-(add-hook 'elpaca-after-init-hook #'rond/todo-update-patterns)
+(add-hook 'elpaca-after-init-hook #'rond//todo-update-patterns)
 
 (defun rond/todo-apply-overlays (beg end)
   (rond/todo-remove-overlays beg end)
@@ -101,7 +90,7 @@
 (defun rond/todo-reload-overlays (&rest _)
   (interactive)
   (when rond/todo-global-mode
-    (rond/todo-update-patterns)
+    (rond//todo-update-patterns)
     (jit-lock-refontify)))
 
 (define-minor-mode rond/todo-mode
