@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (after! ace-window
         (setopt aw-dispatch-always t)
         ;; NOTE: which-key might not work here, unsure

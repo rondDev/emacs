@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (after! eglot
         (add-to-list 'eglot-server-programs
                      '(go-ts-mode . ("gopls")))

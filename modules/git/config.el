@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (after! magit
         (def!
           :states '(normal visual motion)

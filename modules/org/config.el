@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (after! evil-org
         (require 'evil-org-agenda)
         (evil-org-agenda-set-keys))

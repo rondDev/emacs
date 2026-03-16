@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (after! eglot
         (add-to-list 'eglot-server-programs
                      '(scss-mode . ("some-sass-language-server" "--stdio"))))

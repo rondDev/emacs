@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (after! anzu
         (global-anzu-mode +1))
 
