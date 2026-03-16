@@ -114,3 +114,4 @@
 
 ;; Code folding
 (add-hook 'prog-mode-hook 'hs-minor-mode)
+(add-hook 'emacs-lisp-mode-hook '(lambda () (setq electric-indent-local-mode nil)))
