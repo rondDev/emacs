@@ -29,10 +29,10 @@
 
 (defvar rond/todo-patterns nil)
 
-(defmacro rond//todo-pattern (keyword color)
-  `(list ,(concat "\\(\\s-*\\(" keyword "\\)\\(\s\\|:\\)\\)")
-         (1 '(:background ,color :foreground ,(face-attribute 'default :background) :weight bold) t)
-         (3 '(:background ,color :foreground ,color :weight bold) t)))
+(defun rond//todo-pattern (keyword color)
+  (list (concat "\\(\\s-*\\(" keyword "\\)\\(\s\\|:\\)\\)")
+        (list 1 (list :background color :foreground (face-attribute 'default :background) :weight 'bold) t)
+        (list 3 (list :background color :foreground color :weight 'bold) t)))
 
 ;; TODO: Make this into a macro
 ;; NOTE: Colors could be updated
@@ -69,7 +69,7 @@
           (while (re-search-forward re end t)
             (dolist (highlighter (cdr rule))
               (let* ((group (nth 0 highlighter))
-                     (face  (eval (nth 1 highlighter)))
+                     (face  (nth 1 highlighter))
                      (ov    (make-overlay (match-beginning group)
                                           (match-end group))))
                 (overlay-put ov 'face      face)
@@ -89,9 +89,17 @@
 
 (defun rond/todo-reload-overlays (&rest _)
   (interactive)
-  (when rond/todo-global-mode
-    (rond//todo-update-patterns)
-    (jit-lock-refontify)))
+  (rond//todo-update-patterns)
+  (dolist (buf (buffer-list))
+    (when (buffer-local-value 'rond/todo-mode buf)
+      (with-current-buffer buf
+        (rond/todo-remove-overlays (point-min) (point-max))
+        (jit-lock-refontify)))))
+
+(defgroup rond nil
+  "personal config group"
+  :group 'convenience
+  :prefix "rond/")
 
 (define-minor-mode rond/todo-mode
   "Highlight TODO-style comment keywords."
@@ -100,12 +108,18 @@
       (rond/todo-enable)
     (rond/todo-disable)))
 
+(defun rond//todo-global-mode-turn-on ()
+  (rond/todo-mode 1))
+
+
 (define-globalized-minor-mode rond/todo-global-mode
   rond/todo-mode
-  (lambda () (rond/todo-mode 1)))
+  rond//todo-global-mode-turn-on
+  :group 'rond)
 
-(add-hook 'prog-mode-hook #'rond/todo-global-mode)
+(rond/todo-global-mode 1)
 (advice-add 'load-theme :after #'rond/todo-reload-overlays)
+(advice-add 'enable-theme :after #'rond/todo-reload-overlays)
 
 
 ;;;###autoload
