@@ -158,4 +158,6 @@
         welcome-dashboard-title (concat "Welcome " user-full-name))
   (welcome-dashboard-create-welcome-hook)) 
 
+(server-start)
+
 ;;; init.el ends here
