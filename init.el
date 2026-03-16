@@ -57,8 +57,11 @@
       frame-inhibit-implied-resize t
       load-prefer-newer t
       mouse-yank-at-point t
+      password-cache t
+      password-cache-expiry 3600
       recentf-auto-cleanup 'never ;; disable before we start recentf!
       recentf-keep '(file-remote-p file-readable-p)
+      recentf-max-saved-items nil ;; Save the entire recent files list
       save-interprogram-paste-before-kill t
       use-dialog-box nil ; no gui prompts
       use-package-compute-statistics t ; analyzes package load times
