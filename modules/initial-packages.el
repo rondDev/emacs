@@ -37,6 +37,7 @@
   (evil-search-module 'evil-search "use vim-like search instead of 'isearch")
   (evil-want-C-i-jump t)
   (evil-shift-width 2 "Same behavior for vim's '<' and '>' commands")
+  (evil-want-minibuffer t)
   :hook
   (lisp-interaction-mode . (lambda () (setq-local evil-lookup-func #'+evil-lookup-elisp-symbol))) ; stolen from progfolio
   (emacs-lisp-mode . (lambda () (setq-local evil-lookup-func #'+evil-lookup-elisp-symbol))) ; stolen from progfolio
