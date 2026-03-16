@@ -152,6 +152,7 @@
           "v" #'helpful-variable)
 
         (comma-def!
+          "b" '(bookmark-map :wk "Bookmarks")
           "da" #'rond/deno-add
           "l" '(:keymap rond/lsp-map :wk "lsp"))
 
