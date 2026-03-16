@@ -225,7 +225,8 @@
           :package 'vertico
           :keymaps 'vertico-map
           "C-h" #'vertico-previous-group
-          "C-l" #'vertico-next-group)
+          "C-l" #'vertico-next-group
+          "C-w" #'evil-window-map)
 
         (def!
           :keymaps 'rond/projectile-map
