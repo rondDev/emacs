@@ -1,7 +1,4 @@
 ;;; -*- lexical-binding: t -*-
-(package! ace-window
-  :after general)
-
 (package! async
   :defer t)
 
@@ -9,27 +6,6 @@
   :ensure nil
   :defer t
   :custom (auth-sources '("~/.authinfo.gpg")))
-
-(package! autorevert
-  :ensure nil
-  :defer 2)
-
-(package! auto-sudoedit
-  :defer 3)
-
-(package! avy)
-
-(package! complile
-  :ensure nil
-  :commands (compile recompile))
-
-(package! consult)
-
-(package! dired
-  :ensure nil
-  :commands (dired))
-
-(package! editorconfig)
 
 (package! emp
   :ensure (emp :host github :repo "progfolio/emp"))
@@ -75,11 +51,6 @@
 
 (package! exec-path-from-shell)
 
-;; BUG: find-function--search-by-expanding-macros: Invalid escape char syntax: \A not followed by -
-;; NOTE: Bug occurs after startup, seems to go away after opening a project
-(package! helpful
-  :defer 10)
-
 ;; (package! multi-vterm
 ;;   :defer 15)
 
@@ -87,10 +58,6 @@
   :defer 3)
 
 (package! orderless)
-
-;; (package! persistent-scratch
-;;   :init
-;;   (persistent-scratch-setup-default))
 
 ;; NOTE: Could consider adding popper.
 ;; https://github.com/karthink/popper
@@ -116,13 +83,6 @@
   (after! projectile
           (add-hook 'emacs-startup-hook #'projectile-git-autofetch-setup)))
 
-(package! rg
-  :defer 20)
-
-(package! smartparens
-  :defer 1
-  :hook (prog-mode text-mode markdown-mode))
-
 (package! transient
   :defer t)
 
@@ -133,39 +93,4 @@
   :init
   (undo-fu-session-global-mode))
 
-(package! vc-hooks
-  :ensure nil
-  :custom
-  (vc-follow-symlinks t))
-
 (package! vertico)
-
-(package! vterm
-  :ensure (vterm :post-build
-                 (progn
-                   (setq vterm-always-compile-module t)
-                   (require 'vterm)
-                   ;;print compilation info for elpaca
-                   (with-current-buffer (get-buffer-create vterm-install-buffer-name)
-                     (goto-char (point-min))
-                     (while (not (eobp))
-                       (message "%S"
-                                (buffer-substring (line-beginning-position)
-                                                  (line-end-position)))
-                       (forward-line)))
-                   (when-let* ((so (expand-file-name "./vterm-module.so"))
-                               ((file-exists-p so)))
-                     (make-symbolic-link
-                      so (expand-file-name (file-name-nondirectory so)
-                                           "../../builds/vterm")
-                      'ok-if-already-exists))))
-  :commands (vterm vterm-other-window)
-  :general
-  (+general-global-application
-   "t" '(:ignore t :which-key "terminal")
-   "tt" 'vterm-other-window
-   "t." 'vterm)
-  :config
-  (evil-set-initial-state 'vterm-mode 'insert))
-
-(package! wakatime-mode)
