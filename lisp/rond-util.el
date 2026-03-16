@@ -18,14 +18,6 @@
 
 (advice-add 'evil-yank :around 'rond/evil-yank-advice)
 
-(defvar rond/todo-patterns nil)
-
-;;;###autoload
-(defun rond//todo-max-contrast (face &optional ratio &rest args)
-  (let ((r (or ratio 4)))
-    (ct-contrast-max (face-foreground face) (face-attribute 'default :background) r))) 
-
-
 ;; TODO: test todo
 ;; FIXME: test todo
 ;; REVIEW: test todo
@@ -35,88 +27,96 @@
 ;; BUG: test todo
 ;; WARNING: test todo
 
+(defvar rond/todo-patterns nil)
 
-
-;; BUG: It's unreadable in most themes when current line is highlighted
-;; NOTE: Could this be a macro?
+;; TODO: Make this into a macro
 ;; NOTE: Colors could be updated
 ;;;###autoload
 (defun rond/todo-update-patterns ()
-  (let ((bg-color (face-attribute 'default :background))
-        (todo-color (face-foreground 'warning))
-        (fixme-color (face-foreground 'error))
-        (review-color (face-foreground 'font-lock-keyword-face))
-        (hack-color (face-foreground 'font-lock-constant-face))
-        (deprecated-color (face-foreground 'font-lock-doc-face))
-        (note-color (face-foreground 'success))
-        (bug-color (face-foreground 'error))
-        (warning-color (face-foreground 'font-lock-constant-face)))
-    ;; (todo-color (rond//max-contrast (or term-color-cyan error)))
-    ;; (fixme-color (rond//max-contrast 'term-color-red))
-    ;; (review-color (rond//max-contrast 'term-color-yellow))
-    ;; (hack-color (rond//max-contrast 'font-lock-constant-face))
-    ;; (deprecated-color (rond//max-contrast 'font-lock-doc-face))
-    ;; (note-color (rond//max-contrast 'success))
-    ;; (bug-color (rond//max-contrast 'error))
-    ;; (warning-color (rond//max-contrast 'font-lock-constant-face)))
-    (setq rond/todo-patterns 
+  (let ((bg (face-attribute 'default :background))
+        (todo (face-foreground 'warning))
+        (fixme (face-foreground 'error))
+        (review (face-foreground 'font-lock-keyword-face))
+        (hack (face-foreground 'font-lock-constant-face))
+        (deprecated (face-foreground 'font-lock-string-face))
+        (note (face-foreground 'success))
+        (bug (face-foreground 'error))
+        (warning (face-foreground 'font-lock-constant-face)))
+    (setq rond/todo-patterns
           `(("\\(\\s-*\\(TODO\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,todo-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,todo-color :foreground ,todo-color :weight bold) t))
+             (1 '(:background ,todo :foreground ,bg :weight bold) t)
+             (3 '(:background ,todo :foreground ,todo :weight bold) t))
             ("\\(\\s-*\\(FIXME\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,fixme-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,fixme-color :foreground ,fixme-color :weight bold) t))
+             (1 '(:background ,fixme :foreground ,bg :weight bold) t)
+             (3 '(:background ,fixme :foreground ,fixme :weight bold) t))
             ("\\(\\s-*\\(REVIEW\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,review-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,review-color :foreground ,review-color :weight bold) t))
+             (1 '(:background ,review :foreground ,bg :weight bold) t)
+             (3 '(:background ,review :foreground ,review :weight bold) t))
             ("\\(\\s-*\\(HACK\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,hack-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,hack-color :foreground ,hack-color :weight bold) t))
+             (1 '(:background ,hack :foreground ,bg :weight bold) t)
+             (3 '(:background ,hack :foreground ,hack :weight bold) t))
             ("\\(\\s-*\\(DEPRECATED\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,deprecated-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,deprecated-color :foreground ,deprecated-color :weight bold) t))
+             (1 '(:background ,deprecated :foreground ,bg :weight bold) t)
+             (3 '(:background ,deprecated :foreground ,deprecated :weight bold) t))
             ("\\(\\s-*\\(NOTE\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,note-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,note-color :foreground ,note-color :weight bold) t))
+             (1 '(:background ,note :foreground ,bg :weight bold) t)
+             (3 '(:background ,note :foreground ,note :weight bold) t))
             ("\\(\\s-*\\(BUG\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,bug-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,bug-color :foreground ,bug-color :weight bold) t))
+             (1 '(:background ,bug :foreground ,bg :weight bold) t)
+             (3 '(:background ,bug :foreground ,bug :weight bold) t))
             ("\\(\\s-*\\(WARNING\\)\\(\s\\|:\\)\\)" 
-             (1 '(:background ,warning-color :foreground ,bg-color :weight bold) t)
-             (3 '(:background ,warning-color :foreground ,warning-color :weight bold) t))))))
+             (1 '(:background ,warning :foreground ,bg :weight bold) t)
+             (3 '(:background ,warning :foreground ,warning :weight bold) t)))))) 
 
-;;;###autoload
-(defun rond/todo-update-highlights (&rest args)
-  (dolist (buffer (buffer-list))
-    (with-current-buffer buffer
-      (when rond/todo-outline-mode
-        (font-lock-remove-keywords nil rond/todo-patterns)
-        (rond/todo-update-patterns)
-        (font-lock-add-keywords nil rond/todo-patterns)
-        (font-lock-flush)))))
+(add-hook 'elpaca-after-init-hook #'rond/todo-update-patterns)
 
-;; Initialize patterns
-(defun rond/todo-initialize ()
-  ;; Needed for maxing contrast
-  (package! ct)
+(defun rond/todo-apply-overlays (beg end)
+  (rond/todo-remove-overlays beg end)
+  (let ((case-fold-search nil))
+    (save-excursion
+      (dolist (rule rond/todo-patterns)
+        (let ((re (car rule)))
+          (goto-char beg)
+          (while (re-search-forward re end t)
+            (dolist (highlighter (cdr rule))
+              (let* ((group (nth 0 highlighter))
+                     (face  (eval (nth 1 highlighter)))
+                     (ov    (make-overlay (match-beginning group)
+                                          (match-end group))))
+                (overlay-put ov 'face      face)
+                (overlay-put ov 'priority  100)
+                (overlay-put ov 'evaporate t)
+                (overlay-put ov 'rond/todo t)))))))))
 
-  (rond/todo-update-patterns))
+(defun rond/todo-remove-overlays (beg end)
+  (remove-overlays beg end 'rond/todo t))
 
-;; NOTE: Call it... obviously
-(add-hook 'elpaca-after-init-hook #'rond/todo-initialize)
+(defun rond/todo-enable ()
+  (jit-lock-register #'rond/todo-apply-overlays))
 
+(defun rond/todo-disable ()
+  (jit-lock-unregister #'rond/todo-apply-overlays)
+  (rond/todo-remove-overlays (point-min) (point-max)))
 
+(defun rond/todo-reload-overlays (&rest _)
+  (interactive)
+  (when rond/todo-global-mode
+    (rond/todo-update-patterns)
+    (jit-lock-refontify)))
 
-(define-minor-mode rond/todo-outline-mode
-  "Highlight TODOs with theme background for colon."
-  :global nil
-  (if rond/todo-outline-mode
-      (font-lock-add-keywords nil rond/todo-patterns)
-    (font-lock-remove-keywords nil rond/todo-patterns))
-  (when font-lock-mode (font-lock-flush)))
+(define-minor-mode rond/todo-mode
+  "Highlight TODO-style comment keywords."
+  :lighter "rond/todo-hl"
+  (if rond/todo-mode
+      (rond/todo-enable)
+    (rond/todo-disable)))
 
-(add-hook 'prog-mode-hook #'rond/todo-outline-mode)
-(advice-add 'enable-theme :after #'rond/todo-update-highlights)
+(define-globalized-minor-mode rond/todo-global-mode
+  rond/todo-mode
+  (lambda () (rond/todo-mode 1)))
+
+(add-hook 'prog-mode-hook #'rond/todo-global-mode)
+(advice-add 'load-theme :after #'rond/todo-reload-overlays)
 
 
 ;;;###autoload
