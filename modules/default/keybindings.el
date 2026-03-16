@@ -113,6 +113,10 @@
           "," #'consult-buffer)
 
         (def!
+          :keymaps 'override
+          "C-/" #'term-toggle-vterm)
+
+        (def!
           :keymaps 'rond/buffer-map
           "b" #'switch-to-buffer
           "k" #'kill-buffer
