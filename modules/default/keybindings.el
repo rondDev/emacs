@@ -135,6 +135,7 @@
         (def!
           :keymaps 'rond/file-map
           "f" #'find-file
+          "c" #'rond/find-config-file
           "d" #'dired
           "r" #'rename-file
           "s" #'save-buffer)
