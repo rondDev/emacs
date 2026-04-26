@@ -3,6 +3,8 @@
 (autoload 'package! (expand-file-name "lisp/rond-util.el" user-emacs-directory))
 (autoload 'after! (expand-file-name "lisp/rond-util.el" user-emacs-directory))
 
+(package! autothemer)
+
 (package! cus-edit
   :ensure nil
   :custom
