@@ -83,6 +83,7 @@
         (var! rond/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
         (var! rond/code-map (make-sparse-keymap) "Custom keymap for code (LSP)")
         (var! rond/file-map (make-sparse-keymap) "Custom keymap for file stuff")
+        (var! rond/git-map (make-sparse-keymap) "Custom keymap for git thingies")
         (var! rond/helpful-map (make-sparse-keymap) "Custom keymap for helpful")
         (var! rond/lsp-map (make-sparse-keymap) "Custom keymap for all things lsp")
         (var! rond/open-map (make-sparse-keymap) "Custom keymap to open stuff")
@@ -99,14 +100,7 @@
           "d" #'flymake-show-diagnostic
           "e" '(revert-buffer-quick :wk "revert buffer")
           "f" '(:keymap rond/file-map :wk "file")
-          "g" '(:ignore t :wk "git")
-          "gb" #'magit-blame
-          "gco" #'magit-checkout
-          "gcc" #'magit-clone
-          "gg" '(magit-status :wk "magit")
-          "gi" '(magit-init :wk "git init")
-          "gl" #'magit-log-buffer-file
-          "gs" #'magit-worktree
+          "g" '(:keymap rond/git-map :wk "git")
           "h" '(:keymap rond/helpful-map :wk "helpful")
           "o" '(:keymap rond/open-map :wk "open")
           "p" '(:keymap rond/projectile-map :wk "projectile")
@@ -144,6 +138,17 @@
           "d" #'dired
           "r" #'rename-file
           "s" #'save-buffer)
+
+        (def!
+          :keymaps 'rond/git-map
+          "b" #'magit-blame
+          "co" #'magit-checkout
+          "cc" #'magit-clone
+          "g" '(magit-status :wk "magit")
+          "i" '(magit-init :wk "git init")
+          "l" #'magit-log-buffer-file
+          "s" #'magit-worktree
+          "v" #'git-link)
 
         (def!
           :keymaps 'rond/helpful-map
