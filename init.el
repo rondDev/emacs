@@ -141,6 +141,7 @@
 
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "themes/*/*.el")))
 (mapc 'load (file-expand-wildcards (concat user-emacs-directory "modules/*/*.el")))
+(load-theme 'oxocarbon)
 
 (package! welcome-dashboard
   :ensure (welcome-dashboard :host github :repo "konrad1977/welcome-dashboard")
