@@ -21,6 +21,9 @@
   :ensure nil
   :commands (dired))
 
+(package! dirvish
+  :defer t)
+
 (package! editorconfig)
 
 (package! helpful
