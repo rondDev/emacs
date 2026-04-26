@@ -94,7 +94,7 @@
     "Temp directory to use")
   (when (not (file-directory-p rond/tmpdir))
     (make-directory rond/tmpdir))
-  (setq backup-directory-alist `(("." . , rond/tmpdir))))
+  (setq backup-directory-alist '("." . rond/tmpdir)))
 
 (defvar rond-v/auto-save-folder (expand-file-name "tmp/auto-saves/" user-emacs-directory))
 (defvar rond-v/lockfile-folder (expand-file-name "tmp/lockfiles/" user-emacs-directory))
