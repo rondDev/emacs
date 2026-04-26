@@ -22,3 +22,7 @@
                      '(svelte-mode . ("rass" "svelte"))))
 
 (add-hook 'svelte-mode-hook #'eglot-ensure)
+
+;; TODO consider
+;; (setq eglot-ignored-server-capabilities
+;;       '(:documentHighlightProvider :signatureHelpProvider))
