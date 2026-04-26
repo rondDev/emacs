@@ -6,6 +6,8 @@
 (package! ghub
   :after magit)
 
+(package! git-link)
+
 (elpaca (magit
          :host github
          :repo "magit/magit"

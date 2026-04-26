@@ -47,3 +47,15 @@
 (after! tramp
         (setq remote-file-name-inhibit-locks t
               remote-file-name-inhibit-auto-save-visited t))
+
+(after! git-link
+        (setq git-link-default-remote "origin")
+        (setq git-link-open-in-browser t)
+
+        (add-to-list 'git-link-remote-alist
+                     '("gitssh\\.rond\\.cc" git-link-codeberg))
+        (add-to-list 'git-link-commit-remote-alist
+                     '("gitssh\\.rond\\.cc" git-link-commit-codeberg))
+
+        (add-to-list 'git-link-web-host-alist `("gitssh\\.rond\\.cc" . "git.rond.cc")))
+
