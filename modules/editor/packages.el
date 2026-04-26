@@ -29,6 +29,27 @@
 (package! evil-multiedit)
 
 (package! helpful
+  :commands helpful--read-symbol
+  :init
+  (setq apropos-do-all t)
+
+  (global-set-key [remap describe-function] #'helpful-callable)
+  (global-set-key [remap describe-command]  #'helpful-command)
+  (global-set-key [remap describe-variable] #'helpful-variable)
+  (global-set-key [remap describe-key]      #'helpful-key)
+  (after! apropos
+          ;; patch apropos buttons to call helpful instead of help
+          (dolist (fun-bt '(apropos-function apropos-macro apropos-command))
+            (button-type-put
+             fun-bt 'action
+             (lambda (button)
+               (helpful-callable (button-get button 'apropos-symbol)))))
+          (dolist (var-bt '(apropos-variable apropos-user-option))
+            (button-type-put
+             var-bt 'action
+             (lambda (button)
+               (helpful-variable (button-get button 'apropos-symbol))))))
+
   :defer 10)
 
 (package! rg
