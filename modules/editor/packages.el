@@ -63,6 +63,15 @@
          :host github
          :repo "rondDev/emacs-term-toggle"))
 
+(package! server
+  :when (display-graphic-p)
+  :ensure nil
+  :config
+  (when-let* ((name (getenv "EMACS_SERVER_NAME")))
+    (setq server-name name)
+    (unless (server-running-p)
+      (server-start))))
+
 (package! vc-hooks
   :ensure nil
   :custom
