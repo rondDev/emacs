@@ -38,12 +38,16 @@
           :states '(normal visual motion)
           :prefix ",")
 
+        (general-def 'emacs "<escape>" #'evil-normal-state)
+
         (def!
           :states '(normal visual motion)
           "gcc" #'evilnc-comment-or-uncomment-lines
           ;; "K" #'lsp-bridge-popup-documentation
           "L" #'evil-end-of-line
-          "H" #'evil-first-non-blank)
+          "H" #'evil-first-non-blank
+          "M-p" #'flymake-goto-prev-error
+          "M-n" #'flymake-goto-next-error)
 
         (def!
           :states '(visual motion)
@@ -75,7 +79,6 @@
 
 
         
-        (defalias 'var! 'defvar)
         
         (var! rond/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
         (var! rond/code-map (make-sparse-keymap) "Custom keymap for code (LSP)")
@@ -84,6 +87,7 @@
         (var! rond/lsp-map (make-sparse-keymap) "Custom keymap for all things lsp")
         (var! rond/open-map (make-sparse-keymap) "Custom keymap to open stuff")
         (var! rond/projectile-map (make-sparse-keymap) "Custom keymap for projectile")
+        (var! rond/search-map (make-sparse-keymap) "Custom keymap for search")
         (var! rond/update-map (make-sparse-keymap) "Custom keymap for changing/updating stuff")
 
         ;; NOTE: Might want to change capitalization of the which-key labels
@@ -106,9 +110,10 @@
           "h" '(:keymap rond/helpful-map :wk "helpful")
           "o" '(:keymap rond/open-map :wk "open")
           "p" '(:keymap rond/projectile-map :wk "projectile")
-          "sg" #'consult-ripgrep
+          "s" '(:keymap rond/search-map :wk "search")
           "u" '(:keymap rond/update-map :wk "update/change")
           "w" '(:keymap evil-window-map :package evil :wk "window")
+          "v" #'doom/toggle-scratch-buffer
           "/" #'projectile-run-vterm
           "," #'consult-buffer)
 
@@ -165,6 +170,12 @@
           "o" #'dired-jump
           "t" #'vterm-other-window)
 
+        (def!
+          :keymaps 'rond/search-map
+          "g" #'consult-ripgrep
+          "b" #'+default/search-buffer
+          "p" #'+default/search-project
+          "P" #'+default/search-project-for-symbol-at-point)
 
 
         (def!
@@ -232,10 +243,16 @@
 
         (def!
           :keymaps 'rond/projectile-map
+          "&" #'projectile-run-async-shell-command-in-root
+          "!" #'projectile-run-shell-command-in-root
           "a" #'projectile-add-known-project
           "b" #'projectile-switch-to-buffer
+          "C" #'projectile-repeat-last-command
+          "d" #'projectile-remove-known-project
+          "D" #'projectile-discover-projects-in-search-path
           "i" #'projectile-ibuffer
-          "p" #'projectile-switch-project)
+          "p" #'projectile-switch-project
+          "x" #'doom/toggle-project-scratch-buffer)
 
 
 
