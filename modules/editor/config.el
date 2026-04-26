@@ -22,3 +22,15 @@
        (time-less-p (rond//file-modification-time b) (rond//file-modification-time a))))
     
     :prompt "Config file: " :sort nil :category 'file)))
+
+(after! evil-multiedit
+        (evil-multiedit-default-keybinds))
+
+(after! visual-regexp-steroids
+        (defun rond/select-vr-replace ()
+          (interactive)
+          (evil-visual-select (point-min) (point-max))
+          (call-interactively 'vr/replace))
+        (def!
+          :states '(normal visual motion)
+          "C-%" 'rond/select-vr-replace))
