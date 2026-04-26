@@ -26,6 +26,8 @@
 
 (package! editorconfig)
 
+(package! evil-multiedit)
+
 (package! helpful
   :defer 10)
 
