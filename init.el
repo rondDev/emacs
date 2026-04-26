@@ -66,6 +66,7 @@
       use-dialog-box nil ; no gui prompts
       use-package-compute-statistics t ; analyzes package load times
       visible-bell t
+      dired-create-destination-dirs 'always
       uniquify-buffer-name-style 'forward)
 
 (global-display-line-numbers-mode)
