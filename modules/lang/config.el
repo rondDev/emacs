@@ -81,6 +81,16 @@
           "xs" 'eval-last-sexp
           "i"  'elisp-index-search))
 
+(after! eglot
+        (add-hook 'eglot-managed-mode-hook
+                  (lambda ()
+                    ;; Show flymake diagnostics first.
+                    (setq eldoc-documentation-functions
+                          (cons #'flymake-eldoc-function
+                                (remove #'flymake-eldoc-function eldoc-documentation-functions)))
+                    ;; Show all eldoc feedback.
+                    (setq eldoc-documentation-strategy #'eldoc-documentation-compose))))
+
 (after! parinfer-rust-mode
         (setq parinfer-rust-check-before-enable nil
               parinfer-rust-preferred-mode "smart"))
