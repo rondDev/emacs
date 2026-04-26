@@ -21,6 +21,7 @@
   (add-hook 'emacs-startup-hook #'doom-modeline-mode))
 
 (package! eldoc
+  :custom (eldoc-idle-delay 0)
   :ensure nil)
 
 
