@@ -1,4 +1,17 @@
 ;; -*- lexical-binding: t; -*-
+(after! forge
+        (push '("gitssh.rond.cc"               ; GITHOST
+                "git.rond.cc/api/v1"        ; APIHOST
+                "git.rond.cc"               ; WEBHOST and INSTANCE-ID
+                forge-gitea-repository)     ; CLASS
+
+              forge-alist)
+        (push '("git.rond.cc"               ; GITHOST
+                "git.rond.cc/api/v1"        ; APIHOST
+                "git.rond.cc"               ; WEBHOST and INSTANCE-ID
+                forge-gitea-repository)     ; CLASS
+              forge-alist))
+
 (after! magit
         (def!
           :states '(normal visual motion)
