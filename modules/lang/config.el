@@ -77,6 +77,7 @@
           "xd" 'eval-defun
           "xe" 'eval-expression
           "xp" 'pp-eval-last-sexp
+          "xr" 'eval-region
           "xs" 'eval-last-sexp
           "i"  'elisp-index-search))
 
