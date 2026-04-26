@@ -77,6 +77,10 @@
   :custom
   (vc-follow-symlinks t))
 
+(package! visual-regexp)
+(package! visual-regexp-steroids
+  :after 'general)
+
 (package! vterm
   :ensure (vterm :post-build
                  (progn
