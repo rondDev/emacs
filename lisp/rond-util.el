@@ -11,6 +11,9 @@
 ;;;###autoload
 (defalias 'package! 'use-package)
 
+;;;###autoload
+(defalias 'var! 'defvar)
+
 ;; Thanks https://blog.meain.io/2020/emacs-highlight-yanked/
 (defun rond/evil-yank-advice (orig-fn beg end &rest args)
   (pulse-momentary-highlight-region beg end)
@@ -181,5 +184,22 @@
   (let ((result (eval-last-sexp nil)))
     (kill-new (format "%S" result))
     (message "Result copied: %S" result)))
+
+;;;###autoload
+(defun rond/dired-create-files-bulk (files)
+  "Create multiple files at once. Type names separated by spaces."
+  (interactive "sFiles to create: ")
+  (let ((file-list (split-string files " " t)))
+    (dolist (file file-list)
+      (write-region "" nil (expand-file-name file dired-directory)))
+    (revert-buffer)))
+
+(after! dired
+        (general-spc :keymaps 'dired-mode-map
+          "n" #'rond/dired-create-files-bulk))
+
+(after! evil
+        (advice-add 'evil-force-normal-state :after '(lambda () (evil-ex-execute "noh"))))
+
 
 (provide 'rond/util)
