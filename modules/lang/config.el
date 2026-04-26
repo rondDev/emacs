@@ -47,7 +47,15 @@
               (unless (file-exists-p (expand-file-name (format "devdocs/%s/metadata" slug)
                                                        user-emacs-directory)) ;; This assumes you didn't customize `devdocs-data-dir'.
                 (devdocs-install slug))))
-          (apply #'devdocs-ensure '(astro bun c cpp css elisp git go haxe html http nix php rust sass vite zig zsh))))
+          (apply #'devdocs-ensure '(astro bun c cpp css elisp git go haxe html http nix php rust sass vite zig zsh)))
+
+        (add-hook 'typescript-mode-hook (lambda () (setq-local devdocs-current-docs '("typescript" "javascript" "node"))))
+        (add-hook 'typescript-ts-mode-hook (lambda () (setq-local devdocs-current-docs '("typescript" "node" "bun" "deno~2" "javascript" "dom" "vue~3" "html"))))
+        (add-hook 'js-mode-hook (lambda () (setq-local devdocs-current-docs '("javascript" "node" "bun" "deno~2"))))
+        (add-hook 'vue-mode-hook (lambda () (setq-local devdocs-current-docs '("typescript" "javascript" "node" "bun" "deno~2" "dom" "vue~3" "html"))))
+        (add-hook 'rust-mode-hook (lambda () (setq-local devdocs-current-docs '("rust"))))
+        (add-hook 'css-mode-hook (lambda () (setq-local devdocs-current-docs '("css")))))
+
 
 (after! direnv
         (when (executable-find "direnv")
