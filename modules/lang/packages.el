@@ -43,8 +43,10 @@
 
 (elpaca
     (eglot-booster :host github :repo "jdtsmith/eglot-booster" :after eglot)
+  :custom
   :config
-  (eglot-booster-mode))
+  (eglot-booster-mode) 
+  (setq eglot-booster-io-only t))
 
 
 (package! elisp-mode
@@ -83,6 +85,8 @@
 ;; (package! vimish-fold)
 
 (package! yasnippet
+  :init
+  (add-hook 'prog-mode-hook #'yas-minor-mode)
   :commands (yas-global-mode))
 
 (package! yasnippet-snippets
