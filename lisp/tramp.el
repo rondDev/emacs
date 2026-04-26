@@ -1,7 +1,7 @@
 ;;; Tramp
 ;; TRAMP performance settings
 (setq tramp-use-ssh-controlmaster-options nil) ; Use your SSH config instead
-(setq tramp-default-method "scp")             ; Force SSH method
+(setq tramp-default-method "ssh")             ; Force SSH method
 (setq password-cache-expiry 3600)             ; Cache passwords longer
 
 ;; For faster connection establishment
@@ -18,7 +18,7 @@
  '((tramp-direct-async-process . t)))
 
 (connection-local-set-profiles
- '(:application tramp :protocol "scp")
+ '(:application tramp :protocol "ssh")
  'remote-direct-async-process)
 
 (setq magit-tramp-pipe-stty-settings 'pty)
