@@ -80,8 +80,9 @@
                 org-modern-list
                 '((?- . "-")
                   (?* . "•")
-                  (?+ . "‣")))
-        org-modern-block-name '("" . "")) ; or other chars; so top bracket is drawn promptly)
+                  (?+ . "‣"))
+                org-modern-checkbox '((88 . "󰄳 ") (45 . #("□–" 0 2 (composition ((2))))) (32 . "󰄰 "))
+                org-modern-block-name '("" . ""))) ; or other chars; so top bracket is drawn promptly)
 
 (after! org-auto-tangle
         (org-auto-tangle-mode))
