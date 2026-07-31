@@ -7,6 +7,11 @@
   :defer t
   :custom (auth-sources '("~/.authinfo.gpg")))
 
+(package! compat)
+
+(package! embark)
+(package! embark-consult)
+
 (package! emp
   :ensure (emp :host github :repo "progfolio/emp"))
 ;; (+general-global-application
