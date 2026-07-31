@@ -1,4 +1,24 @@
 ;; -*- lexical-binding: t; -*-
+
+;; Font fallback
+
+;; If a character is an icon, use Nerd Fonts first
+(set-fontset-font "fontset-default" '(#xe000 . #xf8ff) 
+                  (font-spec :family "NotoSansM Nerd Font Mono"))
+
+;; If a character is East Asian text, use CJK fonts
+(set-fontset-font "fontset-default" 'han 
+                  (font-spec :family "Noto Sans CJK SC"))
+
+;; Tier 1 Universal Fallback: Check for standard symbols/text first
+(set-fontset-font "fontset-default" nil 
+                  (font-spec :family "DejaVu Sans"))
+
+;; Tier 2 Universal Fallback: If DejaVu fails, look for emojis here
+(set-fontset-font "fontset-default" nil 
+                  (font-spec :family "Noto Color Emoji") nil 'append)
+
+
 (after! anzu
   (global-anzu-mode +1))
 
