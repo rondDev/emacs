@@ -42,7 +42,14 @@
             (projectile-switch-project-by-name
              (completing-read "Worktree: " paths))))
         (general-spc
-          "gw" '(rond/consult-git-worktree :wk "Switch to worktree")))
+          "gw" '(rond/consult-git-worktree :wk "Switch to worktree"))
+  (add-to-list 'display-buffer-alist
+   '("^magit-diff:"
+     (display-buffer-in-side-window)
+     (side . right)
+     (slot . 0)
+     (window-width . 0.5)
+     (inhibit-same-window . t))))
 
 (after! tramp
         (setq remote-file-name-inhibit-locks t
