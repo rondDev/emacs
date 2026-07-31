@@ -12,6 +12,7 @@ parinfer-rust/
 persist/
 persp-confs/
 request/
+scratch/
 tmp/
 transient/
 tree-sitter/
