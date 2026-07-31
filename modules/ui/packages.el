@@ -20,6 +20,10 @@
   :init
   (add-hook 'emacs-startup-hook #'doom-modeline-mode))
 
+(elpaca (doom-snippets
+          :host github
+          :repo "doomemacs/snippets"))
+
 (package! eldoc
   :custom (eldoc-idle-delay 0)
   :ensure nil)
