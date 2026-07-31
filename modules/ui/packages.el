@@ -29,8 +29,8 @@
   :ensure nil)
 
 
-(package! eldoc-box
-  :after eldoc)
+;; (package! eldoc-box
+;;   :after eldoc)
 
 (package! evil-search-highlight-persist
   :after evil)
