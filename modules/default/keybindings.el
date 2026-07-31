@@ -110,6 +110,8 @@
     "v" #'doom/toggle-scratch-buffer
     "/" #'projectile-run-vterm
     "," #'consult-buffer
+    "." #'dired-jump)
+
   (def!
     :keymaps 'override
     "C-/" #'term-toggle-vterm)
