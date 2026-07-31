@@ -65,13 +65,15 @@
 (package! qml-mode
   :hook (qml-mode-hook))
 
-(package! tempel ;; templates
-  :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
-         ("M-*" . tempel-insert)
-         ("S-C-y" . tempel-insert)))
+(package! quickrun)
 
-(package! tempel-collection
-  :after 'tempel)
+;; (package! tempel ;; templates
+;;   :bind (("M-+" . tempel-complete) ;; Alternative tempel-expand
+;;          ("M-*" . tempel-insert)
+;;          ("S-C-y" . tempel-insert)))
+
+;; (package! tempel-collection
+;;   :after 'tempel)
 
 (package! treesit-auto)
 

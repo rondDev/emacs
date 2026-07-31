@@ -129,6 +129,8 @@
     "e" #'rond/eval-last-sexp
     "d" #'eldoc-doc-buffer
     "r" #'eglot-rename
+    "x" #'quickrun
+    "X" #'quickrun-shell)
 
   (def!
     :keymaps 'rond/file-map
