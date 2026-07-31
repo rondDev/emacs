@@ -27,7 +27,9 @@
 ;; new way to type y instead of yes
 (add-hook 'elpaca-after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
 
-(add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
+;; (add-to-list 'default-frame-alist '(font . "Delugia-10"))
+;; (add-to-list 'default-frame-alist '(font . "Iosevka Comfy 12"))
+(add-to-list 'default-frame-alist '(font . "AporeticSansMono Nerd Font 12"))
 
 ;; get doom mode line flicker and "nil" message otherwise
 (add-hook 'elpaca-after-init-hook
@@ -167,5 +169,7 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
+(set-fontset-font "fontset-default" nil "Symbols Nerd Font" nil 'append)
+
 
 ;;; init.el ends here
