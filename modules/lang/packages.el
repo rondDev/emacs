@@ -39,10 +39,10 @@
 (package! eglot
   :ensure nil
   :hook ((rust-ts-mode . eglot-ensure)
-         (go-ts-mode . eglot-ensure)))
+          (go-ts-mode . eglot-ensure)))
 
 (elpaca
-    (eglot-booster :host github :repo "jdtsmith/eglot-booster" :after eglot)
+  (eglot-booster :host github :repo "jdtsmith/eglot-booster" :after eglot)
   :custom
   :config
   (eglot-booster-mode) 

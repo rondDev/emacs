@@ -37,9 +37,9 @@
 (package! git-gutter
   :config
   (setq git-gutter:update-interval 2
-        git-gutter:added-sign " + "
-        git-gutter:modified-sign " * "
-        git-gutter:deleted-sign " - ")
+    git-gutter:added-sign " + "
+    git-gutter:modified-sign " * "
+    git-gutter:deleted-sign " - ")
   :hook (prog-mode . git-gutter-mode))
 
 (package! indent-bars
@@ -57,7 +57,7 @@
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
   :bind (:map minibuffer-local-map
-              ("M-A" . marginalia-cycle))
+          ("M-A" . marginalia-cycle))
   :init
   (marginalia-mode))
 
@@ -72,12 +72,12 @@
   :init
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter
 
-               ;; Optionally:
-               (setq nerd-icons-corfu-mapping
-                     '((array :style "cod" :icon "symbol_array" :face font-lock-type-face)
-                       (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
-                       ;; ...
-                       (t :style "cod" :icon "code" :face font-lock-warning-face)))))
+    ;; Optionally:
+    (setq nerd-icons-corfu-mapping
+      '((array :style "cod" :icon "symbol_array" :face font-lock-type-face
+          (boolean :style "cod" :icon "symbol_boolean" :face font-lock-builtin-face)
+          ;; ...
+          (t :style "cod" :icon "code" :face font-lock-warning-face))))))
 
 (package! nerd-icons-dired
   :hook
@@ -105,14 +105,14 @@
   :init
   ;; These are the defaults, but I keep it here for visiibility.
   (setq spacious-padding-widths
-        '( :internal-border-width 30
-           :header-line-width 4
-           :mode-line-width 6
-           :tab-width 4
-           :right-divider-width 30
-           :scroll-bar-width 8
-           :left-fringe-width 20
-           :right-fringe-width 20))
+    '( :internal-border-width 30
+       :header-line-width 4
+       :mode-line-width 6
+       :tab-width 4
+       :right-divider-width 30
+       :scroll-bar-width 8
+       :left-fringe-width 20
+       :right-fringe-width 20))
 
   ;; (setq spacious-padding-subtle-mode-line
   ;;       `( :mode-line-active ,(if (or (eq prot-emacs-load-theme-family 'modus)

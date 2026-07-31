@@ -1,33 +1,33 @@
 ;; -*- lexical-binding: t; -*-
 (after! anzu
-        (global-anzu-mode +1))
+  (global-anzu-mode +1))
 
 (after! colorful-mode
-        (setopt colorful-use-prefix t
-                colorful-only-strings 'only-prog)
-        ;; (css-fontify-colors nil)
-        (global-colorful-mode t)
-        (add-to-list 'global-colorful-modes 'helpful-mode))
+  (setopt colorful-use-prefix t
+    colorful-only-strings 'only-prog)
+  ;; (css-fontify-colors nil)
+  (global-colorful-mode t)
+  (add-to-list 'global-colorful-modes 'helpful-mode))
 
 (after! doom-modeline
-        (setq doom-modeline-buffer-encoding 'nondefault
-              doom-modeline-modal-icon t
-              doom-modeline-icon t
-              doom-modeline-buffer-file-name-style 'truncate-upto-project)
-        (setq doom-modeline-lsp t))
+  (setq doom-modeline-buffer-encoding 'nondefault
+    doom-modeline-modal-icon t
+    doom-modeline-icon t
+    doom-modeline-buffer-file-name-style 'truncate-upto-project)
+  (setq doom-modeline-lsp t))
 
 
 (add-to-list 'global-mode-string
-             '(:eval
-               (when (and (bound-and-true-p eglot--managed-mode)
-                          (eglot-current-server))
-                 (let ((pending (if (fboundp 'jsonrpc-continuation-count)
-                                    (jsonrpc-continuation-count (eglot-current-server))
-                                  (hash-table-count
-                                   (jsonrpc--request-continuations (eglot-current-server))))))
-                   (if (> pending 0)
-                       (format " [ LSP %d⇡ ]  " pending)
-                     " [ LSP✓ ]   ")))))
+  '(:eval
+     (when (and (bound-and-true-p eglot--managed-mode)
+             (eglot-current-server))
+       (let ((pending (if (fboundp 'jsonrpc-continuation-count)
+                        (jsonrpc-continuation-count (eglot-current-server))
+                        (hash-table-count
+                          (jsonrpc--request-continuations (eglot-current-server))))))
+         (if (> pending 0)
+           (format " [ LSP %d⇡ ]  " pending)
+           " [ LSP✓ ]   ")))))
 
 
 (after! eldoc

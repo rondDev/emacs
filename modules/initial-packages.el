@@ -14,12 +14,12 @@
   :ensure nil
   :custom
   (display-fill-column-indicator-character
-   (plist-get '( triple-pipe  ?┆
-                 double-pipe  ?╎
-                 double-bar   ?║
-                 solid-block  ?█
-                 empty-bullet ?◦)
-              'triple-pipe)))
+    (plist-get '( triple-pipe  ?┆
+                  double-pipe  ?╎
+                  double-bar   ?║
+                  solid-block  ?█
+                  empty-bullet ?◦)
+      'triple-pipe)))
 ;; :general
 ;; (+general-global-toggle
 ;;  "F" '(:ignore t :which-key "fill-column-indicator")
@@ -51,16 +51,16 @@
   (defun +evil-lookup-elisp-symbol ()
     "Lookup elisp symbol at point."
     (if-let* ((symbol (thing-at-point 'symbol)))
-        (describe-symbol (intern symbol))
+      (describe-symbol (intern symbol))
       (user-error "No symbol at point")))
   ;; Place the cursor in the new window after a horizontal split
   ;; Place the cursor in the new window after a vertical split
   (setq evil-split-window-below t
-        evil-vsplit-window-right t)
+    evil-vsplit-window-right t)
   (define-key evil-motion-state-map [down-mouse-1] nil)
   (evil-mode)
   (after! evil-collection
-          (evil-collection-init)))
+    (evil-collection-init)))
 
 
 ;;Turns off elpaca-use-package-mode current declaration
@@ -73,7 +73,7 @@
   (scroll-conservatively 101 "Scroll just enough to bring text into view")
   (enable-recursive-minibuffers t "Allow minibuffer commands in minibuffer")
   (frame-title-format '(buffer-file-name "%f" ("%b"))
-                      "Make frame title current file's name.")
+    "Make frame title current file's name.")
   (find-library-include-other-files nil)
   (indent-tabs-mode nil "Use spaces, not tabs")
   (inhibit-startup-screen t)
@@ -95,12 +95,12 @@
   (defun rename-file-and-buffer (new-name)
     "Renames both current buffer and file it's visiting to NEW-NAME."
     (interactive "sNew name: ")
-    (let ((name (buffer-name))
-          (filename (buffer-file-name)))
+    (let ((name (buffer-name)
+            (filename (buffer-file-name))))
       (if (not filename)
-          (message "Buffer '%s' is not visiting a file." name)
+        (message "Buffer '%s' is not visiting a file." name)
         (if (get-buffer new-name)
-            (message "A buffer named '%s' already exists." new-name)
+          (message "A buffer named '%s' already exists." new-name)
           (progn
             (rename-file filename new-name 1)
             (rename-buffer new-name)
@@ -115,9 +115,9 @@
   (kept-old-versions 5)
   (version-control t)
   (safe-local-variable-values
-   '((eval load-file "./init-dev.el")
-     (org-clean-refile-inherit-tags))
-   "Store safe local variables here instead of in emacs-custom.el")
+    '((eval load-file "./init-dev.el"
+        (org-clean-refile-inherit-tags)))
+    "Store safe local variables here instead of in emacs-custom.el")
   (lock-file-name-transforms `(("\\(?:[^/]*/\\)*\\(.*\\)" ,(concat rond-v/lockfile-folder "\\1") t))))
 
 (package! general
