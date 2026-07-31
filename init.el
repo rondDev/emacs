@@ -9,20 +9,20 @@
 ;; (advice-add 'require :around #'trace-require)
 
 (add-hook 'elpaca-after-init-hook
-          (lambda ()
-            (message "Emacs loaded in %s with %d garbage collections."
-                     (format "%.2f seconds"
-                             (float-time
-                              (time-subtract (current-time) before-init-time)))
-                     gcs-done)))
+  (lambda ()
+    (message "Emacs loaded in %s with %d garbage collections."
+      (format "%.2f seconds"
+        (float-time
+          (time-subtract (current-time) before-init-time)))
+      gcs-done)))
 
 ;; (load-theme 'modus-vivendi t) ; prevent flashbang
 
 (when debug-on-error
   (profiler-start 'cpu+mem)
   (add-hook 'elpaca-after-init-hook
-            (lambda () (profiler-stop)
-              (profiler-report))))
+    (lambda () (profiler-stop)
+      (profiler-report))))
 
 ;; new way to type y instead of yes
 (add-hook 'elpaca-after-init-hook #'(lambda () (fset 'yes-or-no-p 'y-or-n-p)))
@@ -31,9 +31,9 @@
 
 ;; get doom mode line flicker and "nil" message otherwise
 (add-hook 'elpaca-after-init-hook
-          (lambda ()
-            (run-with-timer 1 nil (lambda ()
-                                    (setq inhibit-message nil)))))
+  (lambda ()
+    (run-with-timer 1 nil (lambda ()
+                            (setq inhibit-message nil)))))
 (setq ring-bell-function #'ignore)
 
 (add-hook 'elpaca-after-init-hook #'global-hl-line-mode) ;; Highlight the current line in all buffers
@@ -47,32 +47,32 @@
 (setq-default indent-tabs-mode nil)
 (require 'uniquify)
 (setq-default
- read-process-output-max (* 1024 1024))
+  read-process-output-max (* 1024 1024))
 
 (setq apropos-do-all t
-      custom-file (expand-file-name "custom.el" user-emacs-directory)
-      custom-safe-themes t
-      display-line-numbers-type 'relative
-      ediff-window-setup-function 'ediff-setup-windows-plain
-      frame-inhibit-implied-resize t
-      load-prefer-newer t
-      mouse-yank-at-point t
-      password-cache t
-      password-cache-expiry 3600
-      recentf-auto-cleanup 'never ;; disable before we start recentf!
-      recentf-keep '(file-remote-p file-readable-p)
-      recentf-max-saved-items nil ;; Save the entire recent files list
-      save-interprogram-paste-before-kill t
-      use-dialog-box nil ; no gui prompts
-      use-package-compute-statistics t ; analyzes package load times
-      visible-bell t
-      dired-create-destination-dirs 'always
-      uniquify-buffer-name-style 'forward)
+  custom-file (expand-file-name "custom.el" user-emacs-directory)
+  custom-safe-themes t
+  display-line-numbers-type 'relative
+  ediff-window-setup-function 'ediff-setup-windows-plain
+  frame-inhibit-implied-resize t
+  load-prefer-newer t
+  mouse-yank-at-point t
+  password-cache t
+  password-cache-expiry 3600
+  recentf-auto-cleanup 'never ;; disable before we start recentf!
+  recentf-keep '(file-remote-p file-readable-p)
+  recentf-max-saved-items nil ;; Save the entire recent files list
+  save-interprogram-paste-before-kill t
+  use-dialog-box nil ; no gui prompts
+  use-package-compute-statistics t ; analyzes package load times
+  visible-bell t
+  dired-create-destination-dirs 'always
+  uniquify-buffer-name-style 'forward)
 
 (global-display-line-numbers-mode)
 
 (defadvice keyboard-escape-quit
-    (around keyboard-escape-quit-dont-close-windows activate)
+  (around keyboard-escape-quit-dont-close-windows activate)
   (let ((buffer-quit-function (lambda () ())))
     ad-do-it))
 
@@ -94,7 +94,7 @@
     "Temp directory to use")
   (when (not (file-directory-p rond/tmpdir))
     (make-directory rond/tmpdir))
-  (setq backup-directory-alist '("." . rond/tmpdir)))
+  (setq backup-directory-alist `(("." . ,rond/tmpdir))))
 
 (defvar rond-v/auto-save-folder (expand-file-name "tmp/auto-saves/" user-emacs-directory))
 (defvar rond-v/lockfile-folder (expand-file-name "tmp/lockfiles/" user-emacs-directory))
@@ -149,19 +149,19 @@
   ;; :load-path "~/code/welcome-dashboard"
   :config
   (setq welcome-dashboard-use-nerd-icons t      ;; Use nerd icons instead of all-the-icons
-        welcome-dashboard-path-max-length 75
-        welcome-dashboard-show-file-path t      ;; Hide or show filepath
-        welcome-dashboard-use-fahrenheit nil    ;; show in celcius or fahrenheit.
-        welcome-dashboard-min-left-padding 10
-        welcome-dashboard-image-file (expand-file-name "vapor.png" user-emacs-directory)
-        welcome-dashboard-image-width 450
-        welcome-dashboard-image-height 250
-        welcome-dashboard-max-number-of-todos 5
-        welcome-dashboard-title (concat "Welcome " user-full-name))
+    welcome-dashboard-path-max-length 75
+    welcome-dashboard-show-file-path t      ;; Hide or show filepath
+    welcome-dashboard-use-fahrenheit nil    ;; show in celcius or fahrenheit.
+    welcome-dashboard-min-left-padding 10
+    welcome-dashboard-image-file (expand-file-name "vapor.png" user-emacs-directory)
+    welcome-dashboard-image-width 450
+    welcome-dashboard-image-height 250
+    welcome-dashboard-max-number-of-todos 5
+    welcome-dashboard-title (concat "Welcome " user-full-name))
   (welcome-dashboard-create-welcome-hook)) 
 
 (if pgtk-initialized
-    (setq-default pgtk-wait-for-event-timeout 0.001)
+  (setq-default pgtk-wait-for-event-timeout 0.001)
   (setq-default x-wait-for-event-timeout 0.001))
 
 (require 'server)
