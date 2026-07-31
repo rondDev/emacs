@@ -6,16 +6,19 @@
 ;; Keywords: 
 
 (after! apheleia
-        ;; NOTE: THERE HAS TO BE A BETTER WAY TO DO THIS
-        (setf apheleia-formatters
-              (assq-delete-all 'prettier-svelte apheleia-formatters))
-        (push '(denofmt-svelte . ("deno" "fmt" "--unstable-component" "--ext" "svelte" "-"))
-              apheleia-formatters)
-        (push '(qml-mode . qmlformat) apheleia-mode-alist)
-        (push '(qmlformat . ("qmlformat")) apheleia-formatters)
-        ;; (setf (alist-get 'prettier-typescript apheleia-formatters) '("deno" "fmt" "-"))
-        (setf (alist-get 'svelte-mode apheleia-mode-alist) 'denofmt-svelte)
-        (setf (alist-get 'prettier-svelte apheleia-formatters) '("deno" "fmt" "--unstable-component" "--ext" "svelte" "-")))
+  ;; NOTE: THERE HAS TO BE A BETTER WAY TO DO THIS
+  (setf apheleia-formatters
+    (assq-delete-all 'prettier-svelte apheleia-formatters))
+  (push '(denofmt-svelte . ("deno" "fmt" "--unstable-component" "--ext" "svelte" "-"))
+    apheleia-formatters)
+  (push '(qml-mode . qmlformat) apheleia-mode-alist)
+  (push '(qmlformat . ("qmlformat")) apheleia-formatters)
+  (push '(nufmt . ("nufmt" "--stdin")) apheleia-formatters)
+  ;; (setf (alist-get 'prettier-typescript apheleia-formatters) '("deno" "fmt" "-"))
+  (setf (alist-get 'svelte-mode apheleia-mode-alist) 'denofmt-svelte)
+  (setf (alist-get 'prettier-svelte apheleia-formatters) '("deno" "fmt" "--unstable-component" "--ext" "svelte" "-"))
+  (setq apheleia-mode-alist
+        (assq-delete-all 'emacs-lisp-mode apheleia-mode-alist)))
 
 (after! cape
   (add-hook 'completion-at-point-functions #'cape-dabbrev
