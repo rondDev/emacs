@@ -86,6 +86,14 @@
   (setq vertico-count 20)
   (setq vertico-resize nil)
   (add-hook 'pre-command-hook #'vertico-mode)
+  (defun my/vertico-find-file-vsplit ()
+    (interactive)
+    (split-window-right)
+    (other-window 1)
+    (vertico-exit))
+
+  (define-key vertico-map (kbd "C-s") #'my/vertico-find-file-vsplit))
+
 
 (after! wakatime-mode
   (when (file-executable-p "/usr/sbin/wakatime")
