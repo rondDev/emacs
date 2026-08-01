@@ -78,8 +78,8 @@
   ;; (magit-diff-visit-file &optional OTHER-WINDOW)
 
 
-  
-  
+
+
   (var! rond/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
   (var! rond/code-map (make-sparse-keymap) "Custom keymap for code (LSP)")
   (var! rond/file-map (make-sparse-keymap) "Custom keymap for file stuff")
@@ -167,6 +167,8 @@
   (comma-def!
     "b" '(bookmark-map :wk "Bookmarks")
     "da" #'rond/deno-add
+    "i" #'consult-imenu
+    "I" #'consult-imenu-multi
     "l" '(:keymap rond/lsp-map :wk "lsp"))
 
   (comma-def!
