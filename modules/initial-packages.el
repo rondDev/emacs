@@ -88,8 +88,8 @@
 
 (package! files
   :ensure nil
-  ;;:hook
-  ;;(before-save . delete-trailing-whitespace)
+  :hook
+  (before-save . delete-trailing-whitespace)
   :config
   ;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
   (defun rename-file-and-buffer (new-name)
