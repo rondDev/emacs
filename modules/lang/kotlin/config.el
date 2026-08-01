@@ -3,9 +3,17 @@
 
 (after! eglot
   ;; Reset any conflicting arguments and apply backwards-compatible JVM parameters
-  ;; (setq eglot-connect-timeout 120)
+  (setq eglot-connect-timeout 120)
   (add-to-list 'eglot-server-programs
-               '(kotlin-mode . ("env"
-                                "JDK_JAVA_OPTIONS=--add-opens=java.base/java.lang=ALL-UNNAMED" 
-                                "kotlin-language-server"))))
+    '(kotlin-mode . ("rass" "kotlin"))))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(kotlin-mode . ("env"
+  ;;                               "JAVA_HOME=/home/rond/.sdkman/candidates/java/current"
+  ;;                               "JDK_JAVA_OPTIONS=--add-opens=java.base/java.lang=ALL-UNNAMED"
+  ;;                               "kotlin-language-server")))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(kotlin-mode . ("env"
+  ;;                               "JAVA_HOME=/home/rond/.sdkman/candidates/java/current"
+  ;;                               "JDK_JAVA_OPTIONS=--add-opens=java.base/java.lang=ALL-UNNAMED"
+  ;;                               "kmp-lsp"))))
 
