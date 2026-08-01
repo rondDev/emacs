@@ -42,16 +42,16 @@
 ;;;###autoload
 (defun rond//todo-update-patterns ()
   (let ((bg (face-attribute 'default :background))
-         (todo (face-foreground 'warning))
-         (fixme (face-foreground 'error))
-         (review (face-foreground 'font-lock-keyword-face))
-         (hack (face-foreground 'font-lock-constant-face))
-         (deprecated (face-foreground 'font-lock-string-face))
-         (note (face-foreground 'success))
-         (bug (face-foreground 'error))
-         (warning (face-foreground 'font-lock-constant-face)))
+        (todo (face-foreground 'warning))
+        (fixme (face-foreground 'error))
+        (review (face-foreground 'font-lock-keyword-face))
+        (hack (face-foreground 'font-lock-constant-face))
+        (deprecated (face-foreground 'font-lock-string-face))
+        (note (face-foreground 'success))
+        (bug (face-foreground 'error))
+        (warning (face-foreground 'font-lock-constant-face)))
     (setq rond/todo-patterns
-      (list (rond//todo-pattern "TODO" todo) 
+      (list (rond//todo-pattern "TODO" todo)
         (rond//todo-pattern "FIXME" fixme)
         (rond//todo-pattern "REVIEW" review)
         (rond//todo-pattern "HACK" hack)
@@ -72,9 +72,9 @@
           (while (re-search-forward re end t)
             (dolist (highlighter (cdr rule))
               (let* ((group (nth 0 highlighter))
-                      (face  (nth 1 highlighter))
-                      (ov    (make-overlay (match-beginning group)
-                               (match-end group))))
+                     (face  (nth 1 highlighter))
+                     (ov    (make-overlay (match-beginning group)
+                              (match-end group))))
                 (overlay-put ov 'face      face)
                 (overlay-put ov 'priority  100)
                 (overlay-put ov 'evaporate t)
@@ -149,13 +149,13 @@
   "Renames current buffer and file it is visiting."
   (interactive)
   (let* ((name (buffer-name))
-          (filename (buffer-file-name)))
+         (filename (buffer-file-name)))
     (if (not (and filename (file-exists-p filename)))
       (error "Buffer '%s' is not visiting a file!" name)
       (let* ((dir (file-name-directory filename))
-              (new-name (read-file-name "New name: " dir)))
+             (new-name (read-file-name "New name: " dir)))
         (cond ((get-buffer new-name)
-                (error "A buffer named '%s' already exists!" new-name))
+               (error "A buffer named '%s' already exists!" new-name))
           (t
             (let ((dir (file-name-directory new-name)))
               (when (and (not (file-exists-p dir)) (yes-or-no-p (format "Create directory '%s'?" dir)))
@@ -206,16 +206,16 @@
 (defun rond/wtype-text (text)
   "Process TEXT for wtype, handling newlines properly."
   (let* ((has-final-newline (string-match-p "\n$" text))
-          (lines (split-string text "\n"))
-          (last-idx (1- (length lines))))
+         (lines (split-string text "\n"))
+         (last-idx (1- (length lines))))
     (string-join
       (cl-loop for line in lines
         for i from 0
         collect (cond
                   ;; Last line without final newline
                   ((and (= i last-idx) (not has-final-newline))
-                    (format "wtype -s 350 \"%s\""
-                      (replace-regexp-in-string "\"" "\\\\\"" line)))
+                   (format "wtype -s 350 \"%s\""
+                     (replace-regexp-in-string "\"" "\\\\\"" line)))
                   ;; Any other line
                   (t
                     (format "wtype -s 350 \"%s\" && wtype -k Return"
@@ -226,11 +226,11 @@
   "Launch a temporary frame with a clean buffer for typing."
   (interactive)
   (let ((frame (make-frame '((name . "emacs-float")
-                              (fullscreen . 0)
-                              (undecorated . t)
-                              (width . 70)
-                              (height . 20))))
-         (buf (get-buffer-create "emacs-float")))
+                             (fullscreen . 0)
+                             (undecorated . t)
+                             (width . 70)
+                             (height . 20))))
+        (buf (get-buffer-create "emacs-float")))
     (select-frame frame)
     (switch-to-buffer buf)
     (erase-buffer)

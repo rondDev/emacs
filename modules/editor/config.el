@@ -34,13 +34,13 @@
                            (padded-display (truncate-string-to-width short 25 nil ?\s)))
                       (propertize short 'display padded-display)))
            (sort (directory-files base-dir t "^[^.]" t)
-                      (lambda (a b)
-                        (time-less-p (rond//file-mod-time b)
-                                     (rond//file-mod-time a)))))))
-    
+                 (lambda (a b)
+                   (time-less-p (rond//file-mod-time b)
+                                (rond//file-mod-time a)))))))
+
     (minibuffer-with-setup-hook
         (lambda () (setq default-directory base-dir))
-      
+
       (let ((selection (consult--read
                         candidates
                         :prompt "Config file: "
@@ -48,7 +48,7 @@
                         :category 'file
                         :annotate (lambda (cand)
                                     (marginalia-annotate-file cand)))))
-        
+
         (find-file (expand-file-name selection base-dir))))))
 
 (after! evil-multiedit
