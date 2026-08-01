@@ -1,6 +1,7 @@
 ;;; -*- lexical-binding: t -*-
 ;; improves startup speed when using an alternative package manager
 (add-to-list 'initial-frame-alist '(background-color . "#000000")) ; Or any other color
+(add-to-list 'initial-frame-alist '(foreground-color . "#aaaaaa")) ; Or any other color
 
 (setq package-enable-at-startup nil)
 ;; (setq inhibit-default-init nil)

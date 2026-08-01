@@ -25,7 +25,7 @@
   :defer 10
   :after consult)
 
-(use-package dape
+(package! dape)
   ; :preface
   ;; By default dape shares the same keybinding prefix as `gud'
   ;; If you do not want to use any prefix, set it to nil.
@@ -48,7 +48,7 @@
   ;; (dape-info-hide-mode-line nil)
 
   ;; Projectile users
-  ;; (dape-cwd-function #'projectile-project-root)
+  ;; (dape-cwd-function #'(lambda () (interactive)(project-root (project-current))))
 
   ; :config
   ;; Pulse source line (performance hit)
@@ -59,16 +59,16 @@
 
   ;; Kill compile buffer on build success
   ;; (add-hook 'dape-compile-hook #'kill-buffer)
-  )
+
 
 ;; For a more ergonomic Emacs and `dape' experience
-(use-package repeat
+(package! repeat
              :ensure nil
   :custom
   (repeat-mode +1))
 
 ;; Left and right side windows occupy full frame height
-(use-package emacs
+(package! emacs
   :ensure nil
   :custom
   (window-sides-vertical t))
@@ -78,8 +78,23 @@
   :defer t
   :commands (devdocs-lookup devdocs-install devdocs-peruse))
 
-(package! direnv
-  :defer 10)
+;; (package! direnv
+;;   :defer 10)
+
+(package! ben
+  :bind
+  (:map ben-mode-map
+        ("C-c e" . ben-command-map))
+  ;; NOTE: Optionally un-comment the following config section to customize the
+  ;; mode-line status indicator with nerd-icons.
+  ;; :config
+  ;; (setq ben-indicator `(,(substring-no-properties (nerd-icons-faicon "nf-fa-cubes"))
+  ;;                       "[" (:eval (ben--status)) "]")
+  ;;       ;; A prettier spinner, not all fonts support it.
+  ;;       ben-status-frames
+  ;;       '("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏"))
+  :init
+  (add-hook 'after-init-hook #'ben-global-mode 99))
 
 ;; dumb-jump is jump to definition for 50+ languages
 (package! dumb-jump)
@@ -87,7 +102,7 @@
 (package! eglot
   :ensure nil
   :hook ((rust-ts-mode . eglot-ensure)
-          (go-ts-mode . eglot-ensure)))
+         (go-ts-mode . eglot-ensure)))
 
 (elpaca
   (eglot-booster :host github :repo "jdtsmith/eglot-booster" :after eglot)

@@ -31,18 +31,7 @@
         (setq magit-clone-default-directory "~/code/")
         ;; magit-diff-visit-previous-blob nil)
         (transient-bind-q-to-quit)
-        (defun rond/consult-git-worktree ()
-          (interactive)
-          (let* ((worktrees (shell-command-to-string "git worktree list --porcelain"))
-                 (paths (cl-remove-if #'null
-                                      (mapcar (lambda (line)
-                                                (when (string-prefix-p "worktree " line)
-                                                  (substring line 9)))
-                                              (split-string worktrees "\n")))))
-            (projectile-switch-project-by-name
-             (completing-read "Worktree: " paths))))
-        (general-spc
-          "gw" '(rond/consult-git-worktree :wk "Switch to worktree"))
+
   (add-to-list 'display-buffer-alist
    '("^magit-diff:"
      (display-buffer-in-side-window)
@@ -65,4 +54,3 @@
                      '("gitssh\\.rond\\.cc" git-link-commit-codeberg))
 
         (add-to-list 'git-link-web-host-alist `("gitssh\\.rond\\.cc" . "git.rond.cc")))
-

@@ -160,11 +160,11 @@
     welcome-dashboard-image-height 250
     welcome-dashboard-max-number-of-todos 5
     welcome-dashboard-title (concat "Welcome " user-full-name))
-  (welcome-dashboard-create-welcome-hook)) 
+  (welcome-dashboard-create-welcome-hook))
 
-(if pgtk-initialized
-  (setq-default pgtk-wait-for-event-timeout 0.001)
-  (setq-default x-wait-for-event-timeout 0.001))
+(cond ((and (string= (symbol-name (window-system)) "pgtk") pgtk-initialized)
+       (setq-default pgtk-wait-for-event-timeout 0.001))
+  ((string= (symbol-name (window-system)) "x")(setq-default x-wait-for-event-timeout 0.001)))
 
 (require 'server)
 (unless (server-running-p)

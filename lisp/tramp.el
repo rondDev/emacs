@@ -33,9 +33,7 @@
                         ("vterm-clear-scrollback" vterm-clear-scrollback)
                         ("dired" dired)
                         ("ediff-files" ediff-files)))
-(setq vc-ignore-dir-regexp
-      (format "\\(%s\\)\\|\\(%s\\)"
-              vc-ignore-dir-regexp
-              tramp-file-name-regexp))
-
-(setq projectile-mode-line "Projectile")
+;; (setq vc-ignore-dir-regexp
+;;       (format "\\(%s\\)\\|\\(%s\\)"
+;;               vc-ignore-dir-regexp
+;;               tramp-file-name-regexp))
