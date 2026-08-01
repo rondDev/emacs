@@ -69,7 +69,11 @@
   (add-hook 'xref-backend-functions #'dumb-jump-xref-activate))
 
 (after! eldoc
-  (setq eldoc-echo-area-prefer-doc-buffer t))
+  (setq eldoc-echo-area-prefer-doc-buffer t)
+  (add-to-list 'display-buffer-alist
+             '("\\*eldoc\\*"
+               (display-buffer-reuse-window display-buffer-below-selected)
+               (window-height . 0.3))))
 
 (after! elisp-mode
   (general-spc
