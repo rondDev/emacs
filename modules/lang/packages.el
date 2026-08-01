@@ -78,8 +78,23 @@
   :defer t
   :commands (devdocs-lookup devdocs-install devdocs-peruse))
 
-(package! direnv
-  :defer 10)
+;; (package! direnv
+;;   :defer 10)
+
+(package! ben
+  :bind
+  (:map ben-mode-map
+        ("C-c e" . ben-command-map))
+  ;; NOTE: Optionally un-comment the following config section to customize the
+  ;; mode-line status indicator with nerd-icons.
+  ;; :config
+  ;; (setq ben-indicator `(,(substring-no-properties (nerd-icons-faicon "nf-fa-cubes"))
+  ;;                       "[" (:eval (ben--status)) "]")
+  ;;       ;; A prettier spinner, not all fonts support it.
+  ;;       ben-status-frames
+  ;;       '("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏"))
+  :init
+  (add-hook 'after-init-hook #'ben-global-mode 99))
 
 ;; dumb-jump is jump to definition for 50+ languages
 (package! dumb-jump)
