@@ -40,7 +40,7 @@
 
 (package! git-gutter
   :config
-  (setq git-gutter:update-interval 2
+  (setq git-gutter:update-interval 5
     git-gutter:added-sign " + "
     git-gutter:modified-sign " * "
     git-gutter:deleted-sign " - ")
