@@ -76,13 +76,13 @@
 
 
 
- (defvar rond//eldoc-box-source-frame nil)
- (defun rond/eldoc-box-focus ()
+ (defvar r//eldoc-box-source-frame nil)
+ (defun r/eldoc-box-focus ()
    (interactive)
    (when (and (boundp 'eldoc-box--frame) eldoc-box--frame
            (frame-live-p eldoc-box--frame))
      (progn
-       (setq rond//eldoc-box-source-frame (selected-frame))
+       (setq r//eldoc-box-source-frame (selected-frame))
        (select-frame-set-input-focus eldoc-box--frame)
        (goto-char (point-min))
        (evil-normal-state))))
@@ -97,24 +97,24 @@
       (setq-local cursor-type nil)
       ;; 3. Safely kill the childframe window now that focus has left it
       (eldoc-box-quit-frame)))
- (defun rond/eldoc-box-unfocus ()
+ (defun r/eldoc-box-unfocus ()
    (interactive)
-   (when (and rond//eldoc-box-source-frame
-           (frame-live-p rond//eldoc-box-source-frame))
-     (select-frame-set-input-focus rond//eldoc-box-source-frame)
-     (setq rond//eldoc-box-source-frame nil)))
+   (when (and r//eldoc-box-source-frame
+           (frame-live-p r//eldoc-box-source-frame))
+     (select-frame-set-input-focus r//eldoc-box-source-frame)
+     (setq r//eldoc-box-source-frame nil)))
 
- (defun rond/eldoc-box-focused-p ()
+ (defun r/eldoc-box-focused-p ()
    (and (boundp 'eldoc-box--frame)
      eldoc-box--frame
      (frame-live-p eldoc-box--frame)
      (eq (selected-frame) eldoc-box--frame)))
- (defun rond/eldoc-box-toggle-focus ()
+ (defun r/eldoc-box-toggle-focus ()
    "Toggle context cleanly between code and the eldoc-box popup."
    (interactive)
-   (if (rond/eldoc-box-focused-p)
-     (rond/eldoc-box-unfocus)
-     (rond/eldoc-box-focus))))
+   (if (r/eldoc-box-focused-p)
+     (r/eldoc-box-unfocus)
+     (r/eldoc-box-focus))))
 
   ;; (advice-add #'keyboard-quit :before #'(lambda ()
   ;;                                         (other-buffer)))

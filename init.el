@@ -92,11 +92,11 @@
                                 (when (get-buffer-window "*scratch*")
                                   (bury-buffer "*scratch*"))))
 (unless backup-directory-alist
-  (defvar rond/tmpdir "/tmp/backup"
+  (defvar r/tmpdir "/tmp/backup"
     "Temp directory to use")
-  (when (not (file-directory-p rond/tmpdir))
-    (make-directory rond/tmpdir))
-  (setq backup-directory-alist `(("." . ,rond/tmpdir))))
+  (when (not (file-directory-p r/tmpdir))
+    (make-directory r/tmpdir))
+  (setq backup-directory-alist `(("." . ,r/tmpdir))))
 
 (defvar rond-v/auto-save-folder (expand-file-name "tmp/auto-saves/" user-emacs-directory))
 (defvar rond-v/lockfile-folder (expand-file-name "tmp/lockfiles/" user-emacs-directory))

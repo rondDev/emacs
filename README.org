@@ -26,8 +26,8 @@ https://magit.vc/manual/magit/Performance.html
 
 ** Guidelines:
 - Try to utilize elpaca (use-package) to do most of the things.
-- Custom variables and functions will be prefixed with ~rond/~ while internal
-  functions and variables will be prefixed with ~rond//~.
+- Custom variables and functions will be prefixed with ~r/~ while internal
+  functions and variables will be prefixed with ~r//~.
 
 
 ** [[file:TODO.org][TODO]]

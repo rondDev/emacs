@@ -80,32 +80,32 @@
 
 
 
-  (var! rond/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
-  (var! rond/code-map (make-sparse-keymap) "Custom keymap for code (LSP)")
-  (var! rond/file-map (make-sparse-keymap) "Custom keymap for file stuff")
-  (var! rond/git-map (make-sparse-keymap) "Custom keymap for git thingies")
-  (var! rond/helpful-map (make-sparse-keymap) "Custom keymap for helpful")
-  (var! rond/lsp-map (make-sparse-keymap) "Custom keymap for all things lsp")
-  (var! rond/open-map (make-sparse-keymap) "Custom keymap to open stuff")
-  (var! rond/project-map (make-sparse-keymap) "Custom keymap for project")
-  (var! rond/search-map (make-sparse-keymap) "Custom keymap for search")
-  (var! rond/update-map (make-sparse-keymap) "Custom keymap for changing/updating stuff")
+  (var! r/buffer-map (make-sparse-keymap) "Custom keymap for buffers")
+  (var! r/code-map (make-sparse-keymap) "Custom keymap for code (LSP)")
+  (var! r/file-map (make-sparse-keymap) "Custom keymap for file stuff")
+  (var! r/git-map (make-sparse-keymap) "Custom keymap for git thingies")
+  (var! r/helpful-map (make-sparse-keymap) "Custom keymap for helpful")
+  (var! r/lsp-map (make-sparse-keymap) "Custom keymap for all things lsp")
+  (var! r/open-map (make-sparse-keymap) "Custom keymap to open stuff")
+  (var! r/project-map (make-sparse-keymap) "Custom keymap for project")
+  (var! r/search-map (make-sparse-keymap) "Custom keymap for search")
+  (var! r/update-map (make-sparse-keymap) "Custom keymap for changing/updating stuff")
 
   ;; NOTE: Might want to change capitalization of the which-key labels
   (general-spc
     "SPC" #'project-find-file
     "TAB" #'execute-extended-command
-    "b" '(:keymap rond/buffer-map :wk "buffer")
-    "c" '(:keymap rond/code-map :wk "code map")
+    "b" '(:keymap r/buffer-map :wk "buffer")
+    "c" '(:keymap r/code-map :wk "code map")
     "d" #'flymake-show-diagnostic
     "e" '(revert-buffer-quick :wk "revert buffer")
-    "f" '(:keymap rond/file-map :wk "file")
-    "g" '(:keymap rond/git-map :wk "git")
-    "h" '(:keymap rond/helpful-map :wk "helpful")
-    "o" '(:keymap rond/open-map :wk "open")
-    "p" '(:keymap rond/project-map :wk "project")
-    "s" '(:keymap rond/search-map :wk "search")
-    "u" '(:keymap rond/update-map :wk "update/change")
+    "f" '(:keymap r/file-map :wk "file")
+    "g" '(:keymap r/git-map :wk "git")
+    "h" '(:keymap r/helpful-map :wk "helpful")
+    "o" '(:keymap r/open-map :wk "open")
+    "p" '(:keymap r/project-map :wk "project")
+    "s" '(:keymap r/search-map :wk "search")
+    "u" '(:keymap r/update-map :wk "update/change")
     "w" '(:keymap evil-window-map :package evil :wk "window")
     "v" #'doom/toggle-scratch-buffer
     "/" #'ghostel-project
@@ -117,7 +117,7 @@
     "C-/" #'term-toggle-vterm)
 
   (def!
-    :keymaps 'rond/buffer-map
+    :keymaps 'r/buffer-map
     "b" #'switch-to-buffer
     "k" #'kill-buffer
     "m" (lambda () (interactive) (switch-to-buffer "*Messages*"))
@@ -125,25 +125,25 @@
     "i" #'ibuffer)
 
   (def!
-    :keymaps 'rond/code-map
+    :keymaps 'r/code-map
     "a" #'eglot-code-actions
     "c" #'compile
-    "e" #'rond/eval-last-sexp
+    "e" #'r/eval-last-sexp
     "d" #'eldoc-doc-buffer
     "r" #'eglot-rename
     "x" #'quickrun
     "X" #'quickrun-shell)
 
   (def!
-    :keymaps 'rond/file-map
+    :keymaps 'r/file-map
     "f" #'find-file
-    "c" #'rond/find-config-file
+    "c" #'r/find-config-file
     "d" #'dired
     "r" #'rename-file
     "s" #'save-buffer)
 
   (def!
-    :keymaps 'rond/git-map
+    :keymaps 'r/git-map
     "b" #'magit-blame
     "co" #'magit-checkout
     "cc" #'magit-clone
@@ -154,7 +154,7 @@
     "v" #'git-link)
 
   (def!
-    :keymaps 'rond/helpful-map
+    :keymaps 'r/helpful-map
     "c" #'helpful-command
     "f" #'helpful-function
     "k" #'helpful-key
@@ -166,22 +166,22 @@
 
   (comma-def!
     "b" '(bookmark-map :wk "Bookmarks")
-    "da" #'rond/deno-add
+    "da" #'r/deno-add
     "i" #'consult-imenu
     "I" #'consult-imenu-multi
-    "l" '(:keymap rond/lsp-map :wk "lsp"))
+    "l" '(:keymap r/lsp-map :wk "lsp"))
 
   (comma-def!
     :keymaps '(rust-ts-mode-map)
     "r" '(:keymap cargo-mode-command-map :package cargo-mode :wk "cargo-mode"))
 
   (def!
-    :keymaps 'rond/open-map
+    :keymaps 'r/open-map
     "o" #'dired-jump
     "t" #'vterm-other-window)
 
   (def!
-    :keymaps 'rond/search-map
+    :keymaps 'r/search-map
     "g" #'consult-ripgrep
     "b" #'+default/search-buffer
     "p" #'+default/search-project
@@ -189,7 +189,7 @@
 
 
   (def!
-    :keymaps 'rond/update-map
+    :keymaps 'r/update-map
     "t" #'consult-theme)
 
   (def!
@@ -257,7 +257,7 @@
 
 
   (def!
-    :keymaps 'rond/project-map
+    :keymaps 'r/project-map
     "&" #'project-async-shell-command
     ;; "a" #'project-add-known-project
     "b" #'project-switch-to-buffer

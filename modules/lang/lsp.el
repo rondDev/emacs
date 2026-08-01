@@ -15,7 +15,7 @@
 
 ;; TODO: Move or refactor this
 ;;;###autoload
-(defun rond/deno-add ()
+(defun r/deno-add ()
   "Run `compile' in the project root with `command'."
   (interactive)
   (let ((default-directory (project-root (project-current t))))
@@ -118,5 +118,3 @@
 ;;                                          (expand-file-name (if IS-MAC
 ;;                                                                "volar_darwin.json")
 ;;                                                            "volar.json") lsp-bridge-directory)))))))))
-
-

@@ -1,5 +1,5 @@
 ;; -*- lexical-binding: t; -*-
-(defvar rond/config-files
+(defvar r/config-files
   (list
    "~/.emacs-profiles.el"
    "~/.zshrc"
@@ -7,11 +7,11 @@
    "~/.config/neovim/init.lua"))
 
 ;; NOTE: Ensures it has a timestamp because nil will always be less
-(defun rond//file-mod-time (f)
+(defun r//file-mod-time (f)
   (or (file-attribute-modification-time (file-attributes f)) '(0 0)))
 
 ;; NOTE: I feel like this is really ugly, but idk a better way to do it
-;; (defun rond/find-config-file ()
+;; (defun r/find-config-file ()
 ;;   "Function to find config files for easy editing"
 ;;   (interactive)
 ;;   (find-file
@@ -19,13 +19,13 @@
 ;;     (sort
 ;;       (split-string (string-trim (shell-command-to-string "fd .  ~/.config/home-manager/config/ -d 1 -t d")))
 ;;      (lambda (a b)
-;;        (time-less-p (rond//file-mod-time b) (rond//file-mod-time a))))
+;;        (time-less-p (r//file-mod-time b) (r//file-mod-time a))))
 
 ;;     :prompt "Config file: " :sort nil :category 'file)))
 
 
 
-(defun rond/find-config-file ()
+(defun r/find-config-file ()
   (interactive)
   (let* ((base-dir (expand-file-name "~/.config/home-manager/config/"))
          (candidates
@@ -35,8 +35,8 @@
                       (propertize short 'display padded-display)))
            (sort (directory-files base-dir t "^[^.]" t)
                  (lambda (a b)
-                   (time-less-p (rond//file-mod-time b)
-                                (rond//file-mod-time a)))))))
+                   (time-less-p (r//file-mod-time b)
+                                (r//file-mod-time a)))))))
 
     (minibuffer-with-setup-hook
         (lambda () (setq default-directory base-dir))
@@ -55,10 +55,10 @@
         (evil-multiedit-default-keybinds))
 
 (after! visual-regexp-steroids
-        (defun rond/select-vr-replace ()
+        (defun r/select-vr-replace ()
           (interactive)
           (evil-visual-select (point-min) (point-max))
           (call-interactively 'vr/replace))
         (def!
           :states '(normal visual motion)
-          "C-%" 'rond/select-vr-replace))
+          "C-%" 'r/select-vr-replace))

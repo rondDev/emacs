@@ -1,15 +1,15 @@
 
 # Table of Contents
 
-1.  [Emacs config](#orgbaad13c)
-    1.  [Resources](#org82a58fe)
-        1.  [Performance](#orgeb2a186)
-    2.  [Guidelines:](#orgadcb15d)
-    3.  [TODO](#orgb87b67f)
+1.  [Emacs config](#org91805b3)
+    1.  [Resources](#org7bb8b1b)
+        1.  [Performance](#org78a0667)
+    2.  [Guidelines:](#orgdd65d5c)
+    3.  [TODO](#org0f7ed4f)
 
 
 
-<a id="orgbaad13c"></a>
+<a id="org91805b3"></a>
 
 # Emacs config
 
@@ -26,12 +26,12 @@ To use:
     git clone git@github.com:rondDev/emacs.git ~/.config/emacs
 
 
-<a id="org82a58fe"></a>
+<a id="org7bb8b1b"></a>
 
 ## Resources
 
 
-<a id="orgeb2a186"></a>
+<a id="org78a0667"></a>
 
 ### Performance
 
@@ -39,16 +39,16 @@ To use:
 <https://magit.vc/manual/magit/Performance.html>
 
 
-<a id="orgadcb15d"></a>
+<a id="orgdd65d5c"></a>
 
 ## Guidelines:
 
 -   Try to utilize elpaca (use-package) to do most of the things.
--   Custom variables and functions will be prefixed with `rond/` while internal
-    functions and variables will be prefixed with `rond//`.
+-   Custom variables and functions will be prefixed with `r/` while internal
+    functions and variables will be prefixed with `r//`.
 
 
-<a id="orgb87b67f"></a>
+<a id="org0f7ed4f"></a>
 
 ## [TODO](TODO.md)
 

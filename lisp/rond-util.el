@@ -15,11 +15,11 @@
 (defalias 'var! 'defvar)
 
 ;; Thanks https://blog.meain.io/2020/emacs-highlight-yanked/
-(defun rond/evil-yank-advice (orig-fn beg end &rest args)
+(defun r/evil-yank-advice (orig-fn beg end &rest args)
   (pulse-momentary-highlight-region beg end)
   (apply orig-fn beg end args))
 
-(advice-add 'evil-yank :around 'rond/evil-yank-advice)
+(advice-add 'evil-yank :around 'r/evil-yank-advice)
 
 ;; TODO: test todo
 ;; FIXME: test todo
@@ -30,9 +30,9 @@
 ;; BUG: test todo
 ;; WARNING: test todo
 
-(defvar rond/todo-patterns nil)
+(defvar r/todo-patterns nil)
 
-(defun rond//todo-pattern (keyword color)
+(defun r//todo-pattern (keyword color)
   (list (concat "\\(\\s-*\\(" keyword "\\)\\(\s\\|:\\)\\)")
     (list 1 (list :background color :foreground (face-attribute 'default :background) :weight 'bold) t)
     (list 3 (list :background color :foreground color :weight 'bold) t)))
@@ -40,7 +40,7 @@
 ;; TODO: Make this into a macro
 ;; NOTE: Colors could be updated
 ;;;###autoload
-(defun rond//todo-update-patterns ()
+(defun r//todo-update-patterns ()
   (let ((bg (face-attribute 'default :background))
         (todo (face-foreground 'warning))
         (fixme (face-foreground 'error))
@@ -50,23 +50,23 @@
         (note (face-foreground 'success))
         (bug (face-foreground 'error))
         (warning (face-foreground 'font-lock-constant-face)))
-    (setq rond/todo-patterns
-      (list (rond//todo-pattern "TODO" todo)
-        (rond//todo-pattern "FIXME" fixme)
-        (rond//todo-pattern "REVIEW" review)
-        (rond//todo-pattern "HACK" hack)
-        (rond//todo-pattern "DEPRECATED" deprecated)
-        (rond//todo-pattern "NOTE" note)
-        (rond//todo-pattern "BUG" bug)
-        (rond//todo-pattern "WARNING" warning)))))
+    (setq r/todo-patterns
+      (list (r//todo-pattern "TODO" todo)
+        (r//todo-pattern "FIXME" fixme)
+        (r//todo-pattern "REVIEW" review)
+        (r//todo-pattern "HACK" hack)
+        (r//todo-pattern "DEPRECATED" deprecated)
+        (r//todo-pattern "NOTE" note)
+        (r//todo-pattern "BUG" bug)
+        (r//todo-pattern "WARNING" warning)))))
 
-(add-hook 'elpaca-after-init-hook #'rond//todo-update-patterns)
+(add-hook 'elpaca-after-init-hook #'r//todo-update-patterns)
 
-(defun rond/todo-apply-overlays (beg end)
-  (rond/todo-remove-overlays beg end)
+(defun r/todo-apply-overlays (beg end)
+  (r/todo-remove-overlays beg end)
   (let ((case-fold-search nil))
     (save-excursion
-      (dolist (rule rond/todo-patterns)
+      (dolist (rule r/todo-patterns)
         (let ((re (car rule)))
           (goto-char beg)
           (while (re-search-forward re end t)
@@ -78,51 +78,51 @@
                 (overlay-put ov 'face      face)
                 (overlay-put ov 'priority  100)
                 (overlay-put ov 'evaporate t)
-                (overlay-put ov 'rond/todo t)))))))))
+                (overlay-put ov 'r/todo t)))))))))
 
-(defun rond/todo-remove-overlays (beg end)
-  (remove-overlays beg end 'rond/todo t))
+(defun r/todo-remove-overlays (beg end)
+  (remove-overlays beg end 'r/todo t))
 
-(defun rond/todo-enable ()
-  (jit-lock-register #'rond/todo-apply-overlays))
+(defun r/todo-enable ()
+  (jit-lock-register #'r/todo-apply-overlays))
 
-(defun rond/todo-disable ()
-  (jit-lock-unregister #'rond/todo-apply-overlays)
-  (rond/todo-remove-overlays (point-min) (point-max)))
+(defun r/todo-disable ()
+  (jit-lock-unregister #'r/todo-apply-overlays)
+  (r/todo-remove-overlays (point-min) (point-max)))
 
-(defun rond/todo-reload-overlays (&rest _)
+(defun r/todo-reload-overlays (&rest _)
   (interactive)
-  (rond//todo-update-patterns)
+  (r//todo-update-patterns)
   (dolist (buf (buffer-list))
-    (when (buffer-local-value 'rond/todo-mode buf)
+    (when (buffer-local-value 'r/todo-mode buf)
       (with-current-buffer buf
-        (rond/todo-remove-overlays (point-min) (point-max))
+        (r/todo-remove-overlays (point-min) (point-max))
         (jit-lock-refontify)))))
 
 (defgroup rond nil
   "personal config group"
   :group 'convenience
-  :prefix "rond/")
+  :prefix "r/")
 
-(define-minor-mode rond/todo-mode
+(define-minor-mode r/todo-mode
   "Highlight TODO-style comment keywords."
-  :lighter "rond/todo-hl"
-  (if rond/todo-mode
-    (rond/todo-enable)
-    (rond/todo-disable)))
+  :lighter "r/todo-hl"
+  (if r/todo-mode
+    (r/todo-enable)
+    (r/todo-disable)))
 
-(defun rond//todo-global-mode-turn-on ()
-  (rond/todo-mode 1))
+(defun r//todo-global-mode-turn-on ()
+  (r/todo-mode 1))
 
 
-(define-globalized-minor-mode rond/todo-global-mode
-  rond/todo-mode
-  rond//todo-global-mode-turn-on
+(define-globalized-minor-mode r/todo-global-mode
+  r/todo-mode
+  r//todo-global-mode-turn-on
   :group 'rond)
 
-(rond/todo-global-mode 1)
-(advice-add 'load-theme :after #'rond/todo-reload-overlays)
-(advice-add 'enable-theme :after #'rond/todo-reload-overlays)
+(r/todo-global-mode 1)
+(advice-add 'load-theme :after #'r/todo-reload-overlays)
+(advice-add 'enable-theme :after #'r/todo-reload-overlays)
 
 
 ;;;###autoload
@@ -136,7 +136,7 @@
 
 
 ;;;###autoload
-(defun rond/compile-from-clipboard ()
+(defun r/compile-from-clipboard ()
   "Compile from clipboard"
   (interactive)
   (let ((command-text (car kill-ring)))
@@ -179,14 +179,14 @@
   (add-hook 'compilation-filter-hook 'my-colorize-compilation-buffer))
 
 ;;;###autoload
-(defun rond/eval-last-sexp ()
+(defun r/eval-last-sexp ()
   (interactive)
   (let ((result (eval-last-sexp nil)))
     (kill-new (format "%S" result))
     (message "Result copied: %S" result)))
 
 ;;;###autoload
-(defun rond/dired-create-files-bulk (files)
+(defun r/dired-create-files-bulk (files)
   "Create multiple files at once. Type names separated by spaces."
   (interactive "sFiles to create: ")
   (let ((file-list (split-string files " " t)))
@@ -196,14 +196,14 @@
 
 (after! dired
   (general-spc :keymaps 'dired-mode-map
-    "n" #'rond/dired-create-files-bulk))
+    "n" #'r/dired-create-files-bulk))
 
 (after! evil
   (advice-add 'evil-force-normal-state :after '(lambda () (evil-ex-execute "noh"))))
 
 
 ;; https://thanosapollo.org/posts/use-emacs-everywhere/
-(defun rond/wtype-text (text)
+(defun r/wtype-text (text)
   "Process TEXT for wtype, handling newlines properly."
   (let* ((has-final-newline (string-match-p "\n$" text))
          (lines (split-string text "\n"))
@@ -222,7 +222,7 @@
                       (replace-regexp-in-string "\"" "\\\\\"" line)))))
       " && ")))
 
-(defun rond/type ()
+(defun r/type ()
   "Launch a temporary frame with a clean buffer for typing."
   (interactive)
   (let ((frame (make-frame '((name . "emacs-float")
@@ -247,9 +247,9 @@
       (lambda () (interactive)
         (start-process-shell-command
           "wtype" nil
-          (rond/wtype-text (buffer-string)))
+          (r/wtype-text (buffer-string)))
         (delete-frame)))))
 
 
 
-(provide 'rond/util)
+(provide 'r/util)

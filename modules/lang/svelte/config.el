@@ -5,7 +5,7 @@
 (define-derived-mode svelte-mode web-mode "Svelte")
 
 
-(defun rond/file-mode-hook ()
+(defun r/file-mode-hook ()
   (when (stringp buffer-file-name)
     (progn
       (when (string-match "\\.svelte\\'" buffer-file-name)
@@ -15,7 +15,7 @@
       (when (string-match "\\.ts\\'" buffer-file-name)
         (typescript-ts-mode)))))
 
-(add-hook 'find-file-hook #'rond/file-mode-hook)
+(add-hook 'find-file-hook #'r/file-mode-hook)
 
 (after! eglot
         (add-to-list 'eglot-server-programs

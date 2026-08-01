@@ -41,7 +41,7 @@
 
 (after! devdocs
   (def!
-    :keymaps 'rond/code-map
+    :keymaps 'r/code-map
     "l" #'devdocs-lookup)
   (defun devdocs-ensure (&rest slugs)
     "Ensure that all documents listed in SLUGS are installed."
