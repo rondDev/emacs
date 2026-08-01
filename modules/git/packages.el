@@ -36,6 +36,6 @@
   (setq tramp-connection-properties
         (append tramp-connection-properties
                 '((nil "disable-ipv6" t)
-                  (nil "suppress-progress-reporter" t))))
-  (setq vc-handled-backends '())
-  (setq vc-ignore-dir-regexp ".+"))
+                  (nil "suppress-progress-reporter" t)))))
+  ;; (setq vc-handled-backends '())
+  ;; (setq vc-ignore-dir-regexp ".+"))

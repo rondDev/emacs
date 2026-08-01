@@ -163,10 +163,7 @@ Respects `doom-scratch-initial-major-mode' configuration."
 (defun doom-project-root (&optional dir)
   "Return the project root of DIR (defaults to `default-directory').
 Returns nil if not in a project."
-  (let ((projectile-project-root
-         (unless dir (bound-and-true-p projectile-project-root)))
-        projectile-require-project-root)
-    (projectile-project-root dir)))
+  (project-root (project-current)))
 
 
 
@@ -175,9 +172,8 @@ Returns nil if not in a project."
   "Return the name of the current project.
 
 Returns '-' if not in a valid project."
-  (if-let* ((project-root (or (doom-project-root dir)
-                              (if dir (expand-file-name dir)))))
-      (funcall projectile-project-name-function project-root)
+  (if-let* ((p-name (project-name (project-current))))
+      p-name
     "-"))
 
 
@@ -185,7 +181,6 @@ Returns '-' if not in a valid project."
 ;;; Commands
 
 
-(defvar projectile-enable-caching)
 ;;;###autoload
 (defun doom/open-scratch-buffer (&optional arg project-p same-window-p)
   "Pop up a persistent scratch buffer.
@@ -194,17 +189,16 @@ If passed the prefix ARG, do not restore the last scratch buffer.
 If PROJECT-P is non-nil, open a persistent scratch buffer associated with the
   current project."
   (interactive "P")
-  (let (projectile-enable-caching)
-    (funcall
-     (if same-window-p
-         #'switch-to-buffer
-       #'pop-to-buffer)
-     (doom-scratch-buffer
-      arg
-      (doom--scratch-buffer-initial-mode)
-      default-directory
-      (when project-p
-        (doom-project-name))))))
+  (funcall
+   (if same-window-p
+       #'switch-to-buffer
+     #'pop-to-buffer)
+   (doom-scratch-buffer
+    arg
+    (doom--scratch-buffer-initial-mode)
+    default-directory
+    (when project-p
+      (doom-project-name)))))
 
 ;;;###autoload
 (defun doom/switch-to-scratch-buffer (&optional arg project-p)

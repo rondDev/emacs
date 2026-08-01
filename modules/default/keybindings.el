@@ -87,13 +87,13 @@
   (var! rond/helpful-map (make-sparse-keymap) "Custom keymap for helpful")
   (var! rond/lsp-map (make-sparse-keymap) "Custom keymap for all things lsp")
   (var! rond/open-map (make-sparse-keymap) "Custom keymap to open stuff")
-  (var! rond/projectile-map (make-sparse-keymap) "Custom keymap for projectile")
+  (var! rond/project-map (make-sparse-keymap) "Custom keymap for project")
   (var! rond/search-map (make-sparse-keymap) "Custom keymap for search")
   (var! rond/update-map (make-sparse-keymap) "Custom keymap for changing/updating stuff")
 
   ;; NOTE: Might want to change capitalization of the which-key labels
   (general-spc
-    "SPC" #'projectile-find-file
+    "SPC" #'project-find-file
     "TAB" #'execute-extended-command
     "b" '(:keymap rond/buffer-map :wk "buffer")
     "c" '(:keymap rond/code-map :wk "code map")
@@ -103,12 +103,12 @@
     "g" '(:keymap rond/git-map :wk "git")
     "h" '(:keymap rond/helpful-map :wk "helpful")
     "o" '(:keymap rond/open-map :wk "open")
-    "p" '(:keymap rond/projectile-map :wk "projectile")
+    "p" '(:keymap rond/project-map :wk "project")
     "s" '(:keymap rond/search-map :wk "search")
     "u" '(:keymap rond/update-map :wk "update/change")
     "w" '(:keymap evil-window-map :package evil :wk "window")
     "v" #'doom/toggle-scratch-buffer
-    "/" #'projectile-run-vterm
+    "/" #'ghostel-project
     "," #'consult-buffer
     "." #'dired-jump)
 
@@ -255,20 +255,13 @@
     "C-l" #'vertico-next-group
     "C-w" #'evil-window-map)
 
-  (def!
-    :keymaps 'rond/projectile-map
-    "&" #'projectile-run-async-shell-command-in-root
-    "!" #'projectile-run-shell-command-in-root
-    "a" #'projectile-add-known-project
-    "b" #'projectile-switch-to-buffer
-    "C" #'projectile-repeat-last-command
-    "d" #'projectile-remove-known-project
-    "D" #'projectile-discover-projects-in-search-path
-    "i" #'projectile-ibuffer
-    "p" #'projectile-switch-project
-    "x" #'doom/toggle-project-scratch-buffer)
-
-
 
   (def!
-    :keymaps 'override))
+    :keymaps 'rond/project-map
+    "&" #'project-async-shell-command
+    ;; "a" #'project-add-known-project
+    "b" #'project-switch-to-buffer
+    ;; "D" #'project-discover-projects-in-search-path
+    "i" '(lambda () (interactive) (project-list-buffers-ibuffer (project-current)))
+    "p" #'project-switch-project
+    "x" #'doom/toggle-project-scratch-buffer))
