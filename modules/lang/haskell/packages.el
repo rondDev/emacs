@@ -1,1 +1,2 @@
-(package! haskell-ts-mode)
+(package! haskell-ts-mode
+  :mode "\\.hs\\'")
