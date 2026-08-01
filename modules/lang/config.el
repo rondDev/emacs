@@ -3,7 +3,7 @@
 ;; Copyright (C) 2026
 
 ;; Author:  <rond@oizys>
-;; Keywords: 
+;; Keywords:
 
 (after! apheleia
   ;; NOTE: THERE HAS TO BE A BETTER WAY TO DO THIS
@@ -43,13 +43,14 @@
   (def!
     :keymaps 'rond/code-map
     "l" #'devdocs-lookup)
-  (eval-when-compile
-    (defun devdocs-ensure (&rest slugs)
-      "Ensure that all documents listed in SLUGS are installed."
-      (dolist (slug slugs)
-        (unless (file-exists-p (expand-file-name (format "devdocs/%s/metadata" slug)
-                                 user-emacs-directory)) ;; This assumes you didn't customize `devdocs-data-dir'.
-          (devdocs-install slug))))
+  (defun devdocs-ensure (&rest slugs)
+    "Ensure that all documents listed in SLUGS are installed."
+    (dolist (slug slugs)
+      (unless (file-exists-p (expand-file-name (format "devdocs/%s/metadata" slug)
+                               user-emacs-directory)) ;; This assumes you didn't customize `devdocs-data-dir'.
+        (devdocs-install slug))))
+  (defun r/devdocs-install ()
+    (interactive)
     (apply #'devdocs-ensure '(astro bun c cpp css elisp git go haxe html http nix php rust sass vite zig zsh)))
 
   (add-hook 'typescript-mode-hook (lambda () (setq-local devdocs-current-docs '("typescript" "javascript" "node"))))
