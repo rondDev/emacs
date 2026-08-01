@@ -1,9 +1,4 @@
 ;;; -*- lexical-binding: t -*-
-(package! lsp-tailwindcss
-  :after lsp-bridge
-  :init
-  (setq lsp-tailwindcss-add-on-mode t))
-
 (package! web-mode
   :defer t)
 
