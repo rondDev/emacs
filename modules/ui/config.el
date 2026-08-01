@@ -19,8 +19,6 @@
                   (font-spec :family "Noto Color Emoji") nil 'append)
 
 
-(setq-default show-trailing-whitespace t)
-
 (after! anzu
   (global-anzu-mode +1))
 
