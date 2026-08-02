@@ -63,7 +63,8 @@
     (def!
       :states '(normal motion)
       :override t
-      "K" 'eldoc-box-help-at-point))
+      "K" 'eldoc-box-help-at-point
+      "C-k" '+evil-lookup-elisp-symbol))
 
   (def!
     :package 'corfu

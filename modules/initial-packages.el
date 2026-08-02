@@ -47,12 +47,12 @@
 
   :config
   ;; stolen from progfolio
-  ;; TODO: bind this
   (defun +evil-lookup-elisp-symbol ()
     "Lookup elisp symbol at point."
+    (interactive)
     (if-let* ((symbol (thing-at-point 'symbol)))
       (describe-symbol (intern symbol))
-      (user-error "No symbol at point")))
+      (message "No symbol at point")))
   ;; Place the cursor in the new window after a horizontal split
   ;; Place the cursor in the new window after a vertical split
   (setq evil-split-window-below t
