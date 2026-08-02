@@ -9,8 +9,6 @@
 
 (package! compat)
 
-(package! eldoc-box)
-
 (package! embark)
 (package! embark-consult)
 

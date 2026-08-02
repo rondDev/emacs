@@ -51,10 +51,10 @@
 
 
 (after! eldoc
-  (add-to-list 'display-buffer-alist
-    '("^\\*eldoc" ; Match the buffer name, which changes based on context
-       display-buffer-at-bottom
-       (window-height . 6))) ; Optionally set width (as a fraction of frame or specific number of columns))
+  ; (add-to-list 'display-buffer-alist
+  ;   '("^\\*eldoc" ; Match the buffer name, which changes based on context
+  ;      display-buffer-pop-up-window
+  ;      (window-height . 6))) ; Optionally set width (as a fraction of frame or specific number of columns))
 
 
  (after! eldoc-box
