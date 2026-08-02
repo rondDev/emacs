@@ -58,11 +58,12 @@
     "C-S-v" #'yank)
 
 
-  ;; (after! eldoc
-  ;;   (def!
-  ;;     :keymaps 'override
-  ;;     :states '(normal motion)
-  ;;     "K" 'eldoc-box-help-at-point))
+  (after! eldoc-box
+    (def!
+      :keymaps '(override)
+      :states '(normal motion)
+      "K" 'eldoc-box-help-at-point))
+
   (def!
     :package 'corfu
     :states 'insert

@@ -49,6 +49,25 @@
 (after! editorconfig
   (editorconfig-mode 1))
 
+(after! eldoc-box
+  ;; override the function to focus frame to support evil mode.
+  ;; this is a really stupid way to do it, but it beats having to mess around
+  ;; with hooks.
+  (defun eldoc-box-focus-frame ()
+   "Switch focus to the childframe."
+   (interactive)
+   (when (eldoc-box--frame-visible-p)
+     (setq eldoc-box--main-frame (selected-frame))
+     (set-frame-parameter eldoc-box--frame 'no-accept-focus nil)
+     (set-frame-parameter eldoc-box--frame 'no-focus-on-map nil)
+     (select-frame-set-input-focus eldoc-box--frame)
+     (setq cursor-type 'bar)
+     (def!
+       :states '(normal visual motion)
+       :keymaps 'local
+       :override t
+       "q" #'eldoc-box-quit-frame))))
+
 (after! evil-collection
   (setq evil-collection-magit-use-z-for-folds t
     evil-collection-magit-use-y-for-yank t)
