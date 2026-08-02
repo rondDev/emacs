@@ -1,47 +1,49 @@
 
 # Table of Contents
 
-1.  [<code>[1/5]</code> <code>[20%]</code>](#org4ae7859)
-    1.  [Fix web-mode](#org9da52a3)
-    2.  [Add more support for languages](#org3205935)
-    3.  [Figure out new color scheme](#org855006b)
-    4.  [Evil](#org76b73cb)
-        1.  [Fix org mode keybind <RET> -> follow at point](#org4c0ced0)
-    5.  [Figure out \`j\` keybind when hovered over flyover error line](#org6ecdbdc)
+1.  [<code>[4/4]</code> <code>[100%]</code>](#org6b79f5c)
+    1.  [Fix web-mode](#org3ac60d7)
+    2.  [Add more support for languages](#orgeaa212b)
+    3.  [Figure out new color scheme](#orgd27d262)
+    4.  [Evil](#org71916a3)
+        1.  [Fix org mode keybind <RET> -> follow at point](#org9641971)
+    5.  [Figure out \`j\` keybind when hovered over flyover error line](#org457edd9)
 
 
 
-<a id="org4ae7859"></a>
+<a id="org6b79f5c"></a>
 
-# TODO <code>[1/5]</code> <code>[20%]</code>
-
-
-<a id="org9da52a3"></a>
-
-## TODO Fix web-mode
+# DONE <code>[4/4]</code> <code>[100%]</code>
 
 
-<a id="org3205935"></a>
+<a id="org3ac60d7"></a>
 
-## TODO Add more support for languages
-
-
-<a id="org855006b"></a>
-
-## TODO Figure out new color scheme
+## DONE Fix web-mode
 
 
-<a id="org76b73cb"></a>
+<a id="orgeaa212b"></a>
 
-## TODO Evil
-
-
-<a id="org4c0ced0"></a>
-
-### TODO Fix org mode keybind <RET> -> follow at point
+## DONE Add more support for languages
 
 
-<a id="org6ecdbdc"></a>
+<a id="orgd27d262"></a>
+
+## DONE Figure out new color scheme
+
+
+<a id="org71916a3"></a>
+
+## DONE Evil
+
+
+<a id="org9641971"></a>
+
+### DONE Fix org mode keybind <RET> -> follow at point
+
+-   State "DONE"       from "TODO"       <span class="timestamp-wrapper"><span class="timestamp">[2026-08-02 Sun 04:09]</span></span>
+
+
+<a id="org457edd9"></a>
 
 ## KILL Figure out \`j\` keybind when hovered over flyover error line
 
