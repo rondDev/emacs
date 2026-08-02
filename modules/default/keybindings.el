@@ -248,8 +248,10 @@
     :keymaps '(magit-status-mode)
     :states '(normal visual motion)
     :override t
+    "zb" #'evil-scroll-line-to-bottom
     "zm" #'evil-close-folds
     "zr" #'evil-open-folds
+    "zt" #'evil-scroll-line-to-top
     "zz" #'evil-scroll-line-to-center)
 
   (def!
