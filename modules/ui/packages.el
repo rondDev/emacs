@@ -3,6 +3,9 @@
 (package! anzu
   :defer 10)
 
+(package! beacon
+  :hook (prog-mode text-mode))
+
 (package! colorful-mode
   ;; :diminish
   ;; :ensure t ; Optional
@@ -94,6 +97,7 @@
   :hook (emacs-startup . global-page-break-lines-mode))
 
 (package! pulsar
+  :disabled t
   :hook (elpaca-after-init . pulsar-global-mode))
 
 (package! rainbow-delimiters)

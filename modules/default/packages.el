@@ -37,7 +37,9 @@
   :after evil)
 
 (package! evil-goggles
-  :after (evil))
+  :after (evil)
+  :hook (prog-mode text-mode))
+
 
 (package! evil-nerd-commenter
   :after (evil)
