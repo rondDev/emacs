@@ -7,9 +7,6 @@
 
 (package! flymake)
 
-(package! parinfer-rust-mode
-  :hook emacs-lisp-mode)
-
 (package! jsonrpc
   :defer 3)
 

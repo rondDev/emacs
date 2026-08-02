@@ -99,9 +99,7 @@
       ;; Show all eldoc feedback.
       (setq eldoc-documentation-strategy #'eldoc-documentation-compose))))
 
-(after! parinfer-rust-mode
-  (setq parinfer-rust-check-before-enable nil
-    parinfer-rust-preferred-mode "smart"))
+
 
 ;; (after! tempel
 ;;         (setq tempel-path (expand-file-name "templates" user-emacs-directory))
