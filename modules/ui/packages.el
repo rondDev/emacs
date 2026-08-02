@@ -3,8 +3,8 @@
 (package! anzu
   :defer 10)
 
-(package! beacon
-  :hook (prog-mode text-mode))
+;; (package! beacon
+;;   :hook (prog-mode text-mode))
 
 (package! colorful-mode
   ;; :diminish
