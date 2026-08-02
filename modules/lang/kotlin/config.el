@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (add-to-list 'interpreter-mode-alist '("kscript" . kotlin-mode))
 ;; (setenv "JDK_JAVA_OPTIONS" "--sun-misc-unsafe-memory-access=allow")
 
@@ -16,4 +17,3 @@
   ;;                               "JAVA_HOME=/home/rond/.sdkman/candidates/java/current"
   ;;                               "JDK_JAVA_OPTIONS=--add-opens=java.base/java.lang=ALL-UNNAMED"
   ;;                               "kmp-lsp"))))
-

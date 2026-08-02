@@ -1,4 +1,4 @@
-;;; package --- A beutiful theme
+;;; package --- A beutiful theme  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;; oxocarbon based theme
 
@@ -99,12 +99,12 @@
   (font-lock-warning-face               (:foreground gold))
   (font-lock-constant-face              (:foreground gold :bold t))
   (font-lock-regexp-grouping-backslash  (:foreground green :weight 'semi-bold))
-  
-  (font-lock-reference-face				(:foreground foam))
+
+  (font-lock-reference-face                				(:foreground foam))
   (font-lock-negation-char-face         (:foreground love))
   (font-lock-doc-markup-face            (:foreground muted))
-  (font-lock-preprocessor-face	   		(:foreground muted))
-  
+  (font-lock-preprocessor-face    	           		(:foreground muted))
+
   (elisp-shorthand-font-lock-face       (:foreground gold))
 
   (highlight-operators-face             (:foreground love))
@@ -121,7 +121,7 @@
 
   (iedit-occurrence                     (:background foam :foreground base))
   (iedit-read-only-occurrence           (:background pine :foreground base))
-  
+
   (trailing-rosewaterspace              (:background overlay))
 
   ;; ;; Battery colors
@@ -176,21 +176,21 @@
   (message-header-cc                    (:foreground pine))
   (message-header-xheader               (:foreground rose))
   (custom-link                          (:foreground foam :underline t))
-  
+
   ;; org-mode
   (org-done                             (:foreground muted))
   (org-code                             (:background base))
   (org-meta-line                        (:background overlay :foreground foam))
   (org-block                            (:background base))
   (org-block-begin-line                 (:background base :foreground muted))
-  (org-block-end-line	                (:background base :foreground muted))
+  (org-block-end-line    	                (:background base :foreground muted))
   (org-headline-done                    (:foreground muted :strike-through t))
   (org-todo                             (:foreground pine :bold t))
   (org-headline-todo                    (:foreground surface))
   (org-upcoming-deadline                (:foreground love))
   (org-footnote                         (:foreground pine))
   (org-indent                           (:foreground surface))
-  (org-hide	                            (:foreground surface))
+  (org-hide    	                            (:foreground surface))
   (org-date                             (:foreground muted))
   (org-ellipsis                         (:foreground muted :bold t))
   (org-level-1                          (:foreground love :height 1.3 :bold t))
@@ -204,12 +204,12 @@
 
   ;; which-key
   (which-key-key-face                   (:inherit 'font-lock-variable-name-face))
-  (which-func							(:inherit 'font-lock-function-name-face :bold t))
+  (which-func                            							(:inherit 'font-lock-function-name-face :bold t))
   (which-key-group-description-face     (:foreground love))
   (which-key-command-description-face   (:foreground foam))
   (which-key-local-map-description-face (:foreground gold))
-  (which-key-posframe					(:background base))
-  (which-key-posframe-border			(:background base))
+  (which-key-posframe                    					(:background base))
+  (which-key-posframe-border            			(:background base))
 
   ;; swiper
   (swiper-line-face                     (:foreground gold))
@@ -217,15 +217,15 @@
   (swiper-background-match-face-2       (:background foam :foreground base))
   (swiper-background-match-face-3       (:background rose :foreground base))
   (swiper-background-match-face-4       (:background love :foreground base))
-  (swiper-match-face-1					(:inherit 'swiper-background-match-face-1))
-  (swiper-match-face-2					(:inherit 'swiper-background-match-face-2))
-  (swiper-match-face-3					(:inherit 'swiper-background-match-face-3))
-  (swiper-match-face-4					(:inherit 'swiper-background-match-face-4))
+  (swiper-match-face-1                    					(:inherit 'swiper-background-match-face-1))
+  (swiper-match-face-2                    					(:inherit 'swiper-background-match-face-2))
+  (swiper-match-face-3                    					(:inherit 'swiper-background-match-face-3))
+  (swiper-match-face-4                    					(:inherit 'swiper-background-match-face-4))
 
   (counsel-outline-default              (:foreground gold))
   (info-header-xref                     (:foreground gold))
   (xref-file-header                     (:foreground gold))
-  (xref-match		                    (:foreground gold))
+  (xref-match        		                    (:foreground gold))
 
   ;; rainbow delimiter
   (rainbow-delimiters-mismatched-face   (:foreground base :background love))
@@ -245,9 +245,9 @@
   (rainbow-delimiters-depth-9-face      (:foreground iris))
 
   ;; show-paren
-  (show-paren-match						(:background rose :foreground base :bold t))
-  (show-paren-match-expression			(:background rose :foreground base :bold t))
-  (show-paren-mismatch					(:background love))
+  (show-paren-match                        						(:background rose :foreground base :bold t))
+  (show-paren-match-expression            			(:background rose :foreground base :bold t))
+  (show-paren-mismatch                    					(:background love))
 
   (company-tooltip                          (:background overlay :foreground text))
   (company-tooltip-common                   (:foreground gold :distant-foreground base :bold t))
@@ -276,14 +276,14 @@
   (flycheck-posframe-error-face         (:foreground "#FFF" :background "#2D1E28" :height 160 :weight 'semi-light))
   (flycheck-fringe-warning              (:inherit 'warning))
   (flycheck-fringe-error                (:inherit 'error))
-  (flycheck-fringe-info                 (:inherit 'info ))
+  (flycheck-fringe-info                 (:inherit 'info))
   (flycheck-error-list-warning          (:inherit 'warning :bold t))
   (flycheck-error-list-error            (:inheirt 'error :bold t))
   (flycheck-error-list-info             (:foreground foam :bold t))
   (flycheck-inline-error                (:background love :foreground love :height 128))
   (flycheck-inline-info                 (:background foam :foreground foam :height 128))
   (flycheck-inline-warning              (:background gold :foreground gold :height 128))
-  
+
   ;; indent dots
   (highlight-indent-guides-character-face       (:foreground love :background love))
   (highlight-indent-guides-stack-character-face (:foreground love :background love))
@@ -320,7 +320,7 @@
   (corfu-bar                                    (:background gold))
   (corfu-default                                (:background base :foreground unmuted))
   (corfu-popupinfo                              (:background overlay :foreground text :weight 'light :italic t))
-  
+
   ;; posframe's
   (ivy-posframe                                 (:background muted))
   (ivy-posframe-border                          (:inherit 'ivy-posframe))
@@ -343,18 +343,18 @@
 
   (diff-added (:background pine :foreground text))
   (diff-changed (:background gold :foreground base))
-  
-  (treemacs-directory-collapsed-face			(:foreground muted))
-  (treemacs-directory-face						(:foreground subtle))
-  (treemacs-file-face							(:foreground subtle))
+
+  (treemacs-directory-collapsed-face            			(:foreground muted))
+  (treemacs-directory-face                        						(:foreground subtle))
+  (treemacs-file-face                            							(:foreground subtle))
   (treemacs-fringe-indicator-face               (:foreground love))
 
-  (treemacs-git-added-face						(:foreground gold))
-  (treemacs-git-renamed-face				   	(:foreground rose))
-  (treemacs-git-ignored-face				   	(:foreground muted))
-  (treemacs-git-unmodified-face		   			(:foreground text))
-  (treemacs-git-renamed-face		   			(:foreground text))
-  (treemacs-git-modified-face		   			(:foreground rose))
+  (treemacs-git-added-face                        						(:foreground gold))
+  (treemacs-git-renamed-face                				       	(:foreground rose))
+  (treemacs-git-ignored-face                				       	(:foreground muted))
+  (treemacs-git-unmodified-face        		               			(:foreground text))
+  (treemacs-git-renamed-face        		               			(:foreground text))
+  (treemacs-git-modified-face        		               			(:foreground rose))
 
   ;; lets support solaire mode
   (solaire-default-face (:background base))
@@ -362,32 +362,32 @@
   (lsp-headerline-breadcrumb-path-error-face (:underline (:color rose :style 'wave)
                                                          :foreground muted :background base))
 
-  (lsp-headerline-breadcrumb-path-face				(:background muted))
-  (lsp-headerline-breadcrumb-path-hint-face	   		(:background base))
-  (lsp-headerline-breadcrumb-path-info-face	   		(:background muted))
-  (lsp-headerline-breadcrumb-separator-face			(:background muted))
-  (lsp-headerline-breadcrumb-symbols-face			(:background foam))
-  (lsp-headerline-breadcrumb-project-prefix-face	(:background gold))
+  (lsp-headerline-breadcrumb-path-face                				(:background muted))
+  (lsp-headerline-breadcrumb-path-hint-face    	           		(:background base))
+  (lsp-headerline-breadcrumb-path-info-face    	           		(:background muted))
+  (lsp-headerline-breadcrumb-separator-face            			(:background muted))
+  (lsp-headerline-breadcrumb-symbols-face            			(:background foam))
+  (lsp-headerline-breadcrumb-project-prefix-face    	(:background gold))
   (lsp-headerline-breadcrumb-symbols-error-face     (:foreground love))
 
-  (lsp-ui-doc-background							(:background base :foreground love))
-  (lsp-ui-doc-header								(:background base :foreground love))
-  (lsp-ui-peek-filename								(:foreground foam))
-  (lsp-ui-sideline-code-action			   			(:foreground gold))
-  (lsp-ui-sideline-current-symbol					(:foreground foam))
-  (lsp-ui-sideline-symbol							(:foreground muted))
+  (lsp-ui-doc-background                            							(:background base :foreground love))
+  (lsp-ui-doc-header                                								(:background base :foreground love))
+  (lsp-ui-peek-filename                                								(:foreground foam))
+  (lsp-ui-sideline-code-action            			               			(:foreground gold))
+  (lsp-ui-sideline-current-symbol                    					(:foreground foam))
+  (lsp-ui-sideline-symbol                            							(:foreground muted))
 
   ;; dashboard
-  (dashboard-items-face								(:weight 'light :height 150))
-  (dashboard-banner-logo-title						(:weight 'thin :height 320))
-  (dashboard-heading								(:foreground subtle :weight 'thin :height 170))
-  (dashboard-no-items-face							(:foreground muted))
+  (dashboard-items-face                                								(:weight 'light :height 150))
+  (dashboard-banner-logo-title                        						(:weight 'thin :height 320))
+  (dashboard-heading                                								(:foreground subtle :weight 'thin :height 170))
+  (dashboard-no-items-face                            							(:foreground muted))
 
   ;; all-the-icons
-  (all-the-icons-dgreen							(:foreground pine))
-  (all-the-icons-green							(:foreground pine))
-  (all-the-icons-dpurple						(:foreground iris))
-  (all-the-icons-purple							(:foreground iris))
+  (all-the-icons-dgreen                            							(:foreground pine))
+  (all-the-icons-green                            							(:foreground pine))
+  (all-the-icons-dpurple                        						(:foreground iris))
+  (all-the-icons-purple                            							(:foreground iris))
 
   ;; evil
   (evil-ex-lazy-highlight           (:foreground base :background gold :bold t))
@@ -443,37 +443,37 @@
   (anzu-match-2 (:foreground gold :background base))
   (anzu-match-3 (:foreground foam :background base))
 
-  (anzu-mode-line		(:foreground base :background iris))
-  (anzu-mode-no-match	(:foreground text :background love))
-  (anzu-replace-to		(:foreground gold :background muted))
+  (anzu-mode-line        		(:foreground base :background iris))
+  (anzu-mode-no-match    	(:foreground text :background love))
+  (anzu-replace-to        		(:foreground gold :background muted))
 
   (ace-jump-face-background (:foreground muted))
   (ace-jump-face-foreground (:foreground love :background base :bold t))
 
-  (hydra-face-amaranth		(:foreground iris))
-  (hydra-face-blue			(:foreground foam))
-  (hydra-face-pink			(:foreground love))
-  (hydra-face-red			(:foreground love))
-  (hydra-face-teal			(:foreground foam))
+  (hydra-face-amaranth        		(:foreground iris))
+  (hydra-face-blue            			(:foreground foam))
+  (hydra-face-pink            			(:foreground love))
+  (hydra-face-red            			(:foreground love))
+  (hydra-face-teal            			(:foreground foam))
 
   ;; Bookmarks
   (bm-fringe-face                           (:background love :foreground base))
   (bm-fringe-persistent-face                (:background love :foreground base))
 
-  (centaur-tabs-active-bar-face				(:background base :foreground text))
-  (centaur-tabs-selected					(:background base :foreground text :bold t))
-  (centaur-tabs-selected-modified			(:background base :foreground text))
-  (centaur-tabs-modified-marker-selected	(:background base :foreground text))
-  (centaur-tabs-close-selected				(:inherit 'centaur-tabs-selected))
+  (centaur-tabs-active-bar-face                				(:background base :foreground text))
+  (centaur-tabs-selected                    					(:background base :foreground text :bold t))
+  (centaur-tabs-selected-modified            			(:background base :foreground text))
+  (centaur-tabs-modified-marker-selected    	(:background base :foreground text))
+  (centaur-tabs-close-selected                				(:inherit 'centaur-tabs-selected))
 
-  (centaur-tabs-unselected					(:background base :foreground muted))
-  (centaur-tabs-unselected-modified			(:background base :foreground iris))
-  (centaur-tabs-modified-marker-unselected	(:background base :foreground muted))
-  (centaur-tabs-close-unselected			(:background base :foreground muted))
+  (centaur-tabs-unselected                    					(:background base :foreground muted))
+  (centaur-tabs-unselected-modified            			(:background base :foreground iris))
+  (centaur-tabs-modified-marker-unselected    	(:background base :foreground muted))
+  (centaur-tabs-close-unselected            			(:background base :foreground muted))
 
-  (centaur-tabs-close-mouse-face			(:foreground love))
-  (centaur-tabs-default						(:background base))
-  (centaur-tabs-name-mouse-face				(:foreground foam :bold t))
+  (centaur-tabs-close-mouse-face            			(:foreground love))
+  (centaur-tabs-default                        						(:background base))
+  (centaur-tabs-name-mouse-face                				(:foreground foam :bold t))
 
   (git-gutter:added                              (:foreground pine))
   (git-gutter:deleted                            (:foreground love))
@@ -482,7 +482,7 @@
   (goggles-added (:background pine))
   (goggles-changed (:background foam))
   (goggles-removed (:background love))
-  
+
   ;; Tree sitter highlightning
   (tree-sitter-hl-face:function                  (:inherit 'font-lock-function-name-face))
   (tree-sitter-hl-face:function.call             (:inherit 'tree-sitter-hl-face:function))
@@ -504,7 +504,7 @@
   (tree-sitter-hl-face:variable                  (:inherit 'font-lock-variable-name-face))
   (tree-sitter-hl-face:variable.parameter        (:inherit 'tree-sitter-hl-face:type.parameter :weight 'semi-bold))
   (tree-sitter-hl-face:variable.builtin          (:foreground foam :italic t))
-  
+
   (tree-sitter-hl-face:variable.special          (:foreground iris :italic t))
   (tree-sitter-hl-face:variable.synthesized      (:foreground love :italic t))
   (tree-sitter-hl-face:property                  (:foreground rose))
@@ -555,16 +555,16 @@
   (periphery-todo-face-full (:foreground dark-foam :background foam :bold t))
   (periphery-hack-face-full (:foreground dark-love :background love :bold t))
   (periphery-warning-face-full (:foreground gold :background dark-gold :bold t))
-  
+
   (periphery-error-face-full (:inherit 'periphery-hack-face-full))
   (periphery-error-face (:foreground love))
 
   (periphery-performance-face-full (:foreground dark-iris :background iris :bold t))
-  (periphery-note-face-full (:foreground text :background green :bold t))
+  (periphery-note-face-full (:foreground text :background green :bold t))))
   ;; (localizeable-variable-face (:inherit font-lock-string-face))
   ;; (localizeable-value-face (:inherit font-lock-keyword-face))
 
-  ))
+
 
 ;;;###autoload
 (and load-file-name

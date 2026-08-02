@@ -1,4 +1,4 @@
-;;; Tramp
+;;; Tramp  -*- lexical-binding: t; -*-
 ;; TRAMP performance settings
 (setq tramp-use-ssh-controlmaster-options nil) ; Use your SSH config instead
 (setq tramp-default-method "ssh")             ; Force SSH method

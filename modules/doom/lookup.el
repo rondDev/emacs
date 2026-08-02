@@ -1,4 +1,4 @@
-;;;###autoload
+;;;###autoload  -*- lexical-binding: t; -*-
 (defun doom-thing-at-point-or-region (&optional thing prompt)
   "Grab the current selection, THING at point, or xref identifier at point.
 

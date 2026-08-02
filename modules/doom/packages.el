@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (package! better-jumper
   :hook (doom-first-input . better-jumper-mode)
   :commands doom-set-jump-a doom-set-jump-maybe-a doom-set-jump-h

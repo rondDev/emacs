@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 
 (after! qml-ts-mode
   ;; (add-to-list 'lsp-language-id-configuration '(qml-ts-mode . "qml-ts"))
@@ -6,4 +7,3 @@
   (add-hook 'qml-ts-mode-hook (lambda ()
                                 (setq-local electric-indent-chars '(?\n ?\( ?\) ?{ ?} ?\[ ?\] ?\; ?,))
                                 (eglot-ensure))))
-
