@@ -251,5 +251,9 @@
         (delete-frame)))))
 
 
+(defvar r/elpaca-dir (expand-file-name "elpaca" user-emacs-directory))
+(defvar r/first-run-p
+  (not (file-directory-p r/elpaca-dir)))   ; if directory doesn't exist, it's first run
+
 
 (provide 'r/util)

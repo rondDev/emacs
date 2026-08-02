@@ -121,16 +121,17 @@ information.")
 
 ;;
 ;;; Library
+(defvar r/user-dir "/home/rond/.config/emacs.2025/")
 
 (defun +file-templates-in-emacs-dirs-p (file)
   "Returns t if FILE is in Doom or your private directory."
-  (or (file-in-directory-p file doom-user-dir)
-    (file-in-directory-p file doom-emacs-dir)))
+  (file-in-directory-p file r/user-dir)
+    (file-in-directory-p file doom-emacs-dir))
 
 (defun +file-template-p (rule)
   "Return t if RULE applies to the current buffer."
   (let ((pred (car rule))
-         (plist (cdr rule)))
+        (plist (cdr rule)))
     (and (or (and (symbolp pred)
                (or (eq major-mode pred)
                  (memq pred (get major-mode 'derived-mode-extra-parents))))
