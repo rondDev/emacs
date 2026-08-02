@@ -6,7 +6,7 @@
 
   (general-create-definer general-spc
     :states '(normal visual)
-    :keymaps 'override
+    :override t
     :prefix "SPC")
 
   ;; (general-create-definer general-cc
@@ -17,7 +17,7 @@
 
   (general-create-definer general-t
     :states 'normal
-    :keymaps 'override
+    :override t
     :prefix "t")
 
   (general-create-definer general-r
@@ -27,7 +27,7 @@
   ;; TODO rename to something else
   (general-create-definer general-s
     :keymaps '(insert normal)
-    :keymaps 'override
+    :override t
     :prefix "C-t")
 
   (general-create-definer general-m
@@ -54,14 +54,15 @@
     "gc" #'evilnc-comment-or-uncomment-lines)
 
   (def!
-    :states '(insert override)
+    :states '(insert)
+    :override t
     "C-S-v" #'yank)
 
 
   (after! eldoc-box
     (def!
-      :keymaps '(override)
       :states '(normal motion)
+      :override t
       "K" 'eldoc-box-help-at-point))
 
   (def!
@@ -114,7 +115,7 @@
     "." #'dired-jump)
 
   (def!
-    :keymaps 'override
+    :override t
     "C-/" #'term-toggle-vterm)
 
   (def!
@@ -216,7 +217,8 @@
   (def!
     :states '(normal visual motion)
     :package 'eglot
-    :keymaps '(eglot-mode-map override))
+    :keymaps '(eglot-mode-map)
+    :override t)
     ;; "K" #'eldoc-box-help-at-point)
 
   (general-spc
@@ -243,8 +245,9 @@
   ;; HACK: this has to be set explicitly even when
   ;;       `evil-collection-magit-use-z-for-folds' is set.
   (def!
-    :keymaps '(magit-status-mode override)
+    :keymaps '(magit-status-mode)
     :states '(normal visual motion)
+    :override t
     "zm" #'evil-close-folds
     "zr" #'evil-open-folds
     "zz" #'evil-scroll-line-to-center)
