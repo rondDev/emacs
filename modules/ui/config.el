@@ -129,7 +129,7 @@
   (setq flymake-popon-delay nil)
 
   ;; 2. Create an on-demand popup command
-  (defun my/flymake-popon-trigger ()
+  (defun r/flymake-popon-trigger ()
     "Manually trigger the flymake-popon popup at point."
     (interactive)
     (if (flymake-diagnostics (point))
@@ -141,7 +141,7 @@
 
 ;; 4. Bind capital 'K' within Eglot to fire the diagnostic popup
 ;; (with-eval-after-load 'eglot
-;;   (keymap-set eglot-mode-map "K" #'my/flymake-popon-trigger))
+;;   (keymap-set eglot-mode-map "K" #'r/flymake-popon-trigger))
 
 
 (after! git-gutter)
