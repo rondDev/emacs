@@ -163,6 +163,7 @@
     "k" #'helpful-key
     "m" #'describe-mode
     "p" #'helpful-at-point
+    "s" #'helpful-symbol
     ;; Easy to remember since you start macro with q
     "q" #'helpful-macro
     "v" #'helpful-variable)
